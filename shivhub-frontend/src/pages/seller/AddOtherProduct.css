@@ -1,0 +1,385 @@
+/* ==========================================================================
+   Base Layout & Animations
+   ========================================================================== */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0);
+  }
+}
+
+.add-other-product {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+  color: #0f172a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+  animation: pageFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   Header Section
+   ========================================================================== */
+.add-other-product header {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.add-other-product header span {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.add-other-product h1 {
+  margin: 0 0 6px 0;
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.add-other-product header p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Card Sections
+   ========================================================================== */
+.add-other-product form > section {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 26px 28px;
+  margin: 20px 0;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.add-other-product form > section:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 26px -4px rgba(15, 23, 42, 0.07);
+}
+
+.add-other-product h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.add-other-product section > p {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+/* ==========================================================================
+   Grid & Form Inputs
+   ========================================================================== */
+.add-other-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 16px;
+}
+
+.add-other-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.add-other-grid input,
+.add-other-grid select,
+.add-other-grid textarea,
+.add-other-custom-spec input,
+.add-other-images input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9px;
+  padding: 10px 14px;
+  font: inherit;
+  color: #0f172a;
+  background-color: #f8fafc;
+  transition: all 0.2s ease;
+}
+
+.add-other-grid input:hover,
+.add-other-grid select:hover,
+.add-other-grid textarea:hover,
+.add-other-custom-spec input:hover {
+  background-color: #ffffff;
+  border-color: #cbd5e1;
+}
+
+.add-other-grid input:focus,
+.add-other-grid select:focus,
+.add-other-grid textarea:focus,
+.add-other-custom-spec input:focus {
+  outline: none;
+  background-color: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.add-other-grid input[readonly] {
+  background: #f1f5f9;
+  cursor: not-allowed;
+  color: #64748b;
+}
+
+.add-other-grid .full {
+  grid-column: 1 / -1;
+}
+
+/* Checkbox Style */
+.add-other-grid .checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 4px;
+}
+
+.add-other-grid .checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #2563eb;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.add-other-grid .checkbox:hover input[type="checkbox"] {
+  transform: scale(1.1);
+}
+
+/* ==========================================================================
+   Custom Specifications Rows
+   ========================================================================== */
+.add-other-custom-spec {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 12px;
+  margin-top: 12px;
+  align-items: center;
+  animation: pageFadeIn 0.25s ease forwards;
+}
+
+/* ==========================================================================
+   Buttons & Interactive Elements
+   ========================================================================== */
+.add-other-product header button,
+.add-other-product footer button,
+.add-other-product .secondary,
+.add-other-custom-spec button {
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #334155;
+  border-radius: 9px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.add-other-product header button:hover,
+.add-other-product .secondary:hover,
+.add-other-custom-spec button:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  transform: translateY(-1px);
+}
+
+.add-other-custom-spec button {
+  color: #ef4444;
+  border-color: #fee2e2;
+  background: #fef2f2;
+}
+
+.add-other-custom-spec button:hover:not(:disabled) {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+.add-other-custom-spec button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Footer Submit Button */
+.add-other-product footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.add-other-product footer button:last-child {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  border: 1px solid #1d4ed8;
+  font-weight: 600;
+  padding: 11px 24px;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+}
+
+.add-other-product footer button:last-child:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+
+.add-other-product footer button:last-child:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   Image Grid Layout
+   ========================================================================== */
+.add-other-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.add-other-images span {
+  font-size: 0.8rem;
+  color: #64748b;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Alerts & Notifications
+   ========================================================================== */
+.form-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: pageFadeIn 0.25s ease;
+}
+
+.form-success {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #15803d;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  animation: pageFadeIn 0.25s ease;
+}
+
+/* ==========================================================================
+   Specifications Preview Styles
+   ========================================================================== */
+section dl {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 0 0 16px;
+}
+
+section dl > div {
+  background: #f8fafc;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+section dt {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+section dd {
+  margin: 4px 0 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+@media (max-width: 860px) {
+  .add-other-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .add-other-product {
+    padding: 18px 12px 40px;
+  }
+  .add-other-grid {
+    grid-template-columns: 1fr;
+  }
+  .add-other-images {
+    grid-template-columns: 1fr;
+  }
+  .add-other-custom-spec {
+    grid-template-columns: 1fr;
+  }
+  .add-other-product header {
+    flex-direction: column;
+  }
+  .add-other-product footer {
+    flex-direction: column-reverse;
+  }
+  .add-other-product footer button {
+    width: 100%;
+  }
+}

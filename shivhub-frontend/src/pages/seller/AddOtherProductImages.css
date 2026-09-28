@@ -1,0 +1,120 @@
+.add-other-image-help {
+  margin: -5px 0 16px;
+  color: #55657d;
+  font-size: 0.9rem;
+}
+
+/* Card Styling */
+.add-other-image-card {
+  background: #ffffff;
+  border: 1px solid #dbe5f0 !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-other-image-card:focus-within {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.12);
+}
+
+.add-other-image-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.add-other-image-label strong {
+  font-size: 0.95rem;
+  color: #1e293b;
+}
+
+.add-other-image-source {
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #ecfdf5 !important;
+  color: #047857 !important;
+  border: 1px solid #a7f3d0;
+  font-size: 0.72rem !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* File Upload Button */
+.add-other-file-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #2563eb;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-other-file-input:hover {
+  background: #eff6ff;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+
+.add-other-file-input input {
+  position: absolute;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Image Preview Container */
+.add-other-image-preview {
+  width: 100%;
+  height: 200px; /* Preview ची उंची वाढवली आहे */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* Image Proper Fit & Full Visibility */
+.add-other-image-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain; /* इमेज न कापता पूर्ण स्पष्ट दिसेल */
+  display: block;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+}
+
+.add-other-image-preview:hover img {
+  transform: scale(1.03);
+}
+
+.add-other-image-preview p {
+  margin: 0;
+  padding: 12px;
+  color: #b91c1c;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  background: #fef2f2;
+  border-radius: 6px;
+  width: 100%;
+}

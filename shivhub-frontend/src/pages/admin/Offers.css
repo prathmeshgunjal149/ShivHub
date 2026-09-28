@@ -1,0 +1,1188 @@
+/* =========================================================
+   SHIVHUB ADMIN - OFFERS MANAGEMENT
+   Clean Professional Admin UI
+   ========================================================= */
+
+.offers-page {
+    min-height: 200vh;
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 32px 36px 50px;
+
+    background: #f5f7fa;
+    color: #18202f;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.offers-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+}
+
+.page-kicker {
+    margin: 0 0 7px;
+
+    color: #8a94a6;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+}
+
+.offers-header h1 {
+    margin: 0;
+
+    color: #151b28;
+
+    font-size: 31px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -0.7px;
+}
+
+.page-description {
+    margin: 8px 0 0;
+
+    color: #8993a4;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.primary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 43px;
+
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #151b28;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.primary-button:hover {
+    background: #252d3c;
+    transform: translateY(-1px);
+}
+
+.primary-button:active {
+    transform: translateY(0);
+}
+
+.secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 43px;
+
+    padding: 0 18px;
+
+    border: 1px solid #dfe4eb;
+    border-radius: 9px;
+
+    background: #ffffff;
+    color: #4c5668;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.secondary-button:hover {
+    background: #f5f6f8;
+    border-color: #cdd3dc;
+}
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.offer-message {
+    margin-bottom: 20px;
+
+    padding: 12px 15px;
+
+    border: 1px solid #cfe8d6;
+    border-radius: 9px;
+
+    background: #eef9f1;
+    color: #26743b;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.offer-stats {
+    display: grid;
+
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+
+    gap: 13px;
+
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 94px;
+
+    padding: 16px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e5e9ef;
+    border-radius: 13px;
+
+    background: #ffffff;
+
+    box-shadow: 0 3px 12px rgba(20, 30, 45, 0.035);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 7px 20px rgba(20, 30, 45, 0.07);
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #f0f2f5;
+    color: #3e4758;
+
+    font-size: 18px;
+}
+
+.stat-card span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #8993a4;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.stat-card strong {
+    display: block;
+
+    color: #171e2b;
+
+    font-size: 23px;
+    line-height: 1;
+
+    font-weight: 800;
+}
+
+
+/* individual stat colors */
+
+.stat-card.active .stat-icon {
+    background: #edf8f0;
+    color: #238143;
+}
+
+.stat-card.scheduled .stat-icon {
+    background: #eef2fa;
+    color: #526b9f;
+}
+
+.stat-card.expired .stat-icon {
+    background: #fff0f0;
+    color: #c34242;
+}
+
+.stat-card.customer .stat-icon {
+    background: #f0f2f8;
+    color: #536487;
+}
+
+.stat-card.seller .stat-icon {
+    background: #f5f1ec;
+    color: #80684f;
+}
+
+
+/* =========================================================
+   CREATE / EDIT CARD
+   ========================================================= */
+
+.offer-form-card {
+    margin-bottom: 22px;
+
+    padding: 24px;
+
+    border: 1px solid #e4e8ee;
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    box-shadow: 0 4px 16px rgba(20, 30, 45, 0.04);
+}
+
+.form-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.form-card-header h2 {
+    margin: 0;
+
+    color: #171e2b;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.form-card-header p {
+    margin: 6px 0 0;
+
+    color: #8c95a4;
+
+    font-size: 12px;
+}
+
+.close-button {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #e0e4ea;
+    border-radius: 8px;
+
+    background: #ffffff;
+    color: #677183;
+
+    font-size: 20px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.close-button:hover {
+    background: #f4f5f7;
+    color: #161d2b;
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 17px;
+}
+
+.form-group {
+    min-width: 0;
+}
+
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #455064;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 12px;
+
+    border: 1px solid #dfe4ea;
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #ffffff;
+    color: #202838;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input {
+    height: 42px;
+}
+
+.form-group select {
+    height: 42px;
+
+    cursor: pointer;
+}
+
+.form-group textarea {
+    min-height: 96px;
+
+    resize: vertical;
+
+    line-height: 1.5;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #a1a8b4;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #717b8d;
+
+    box-shadow:
+        0 0 0 3px rgba(30, 40, 55, 0.06);
+}
+
+
+/* =========================================================
+   EMAIL OPTION
+   ========================================================= */
+
+.email-option {
+    margin-top: 20px;
+
+    padding: 14px 16px;
+
+    border: 1px solid #e5e9ef;
+    border-radius: 10px;
+
+    background: #fafbfc;
+}
+
+.email-option label {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #465063;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.email-option input {
+    width: 16px;
+    height: 16px;
+
+    margin: 0;
+
+    accent-color: #151b28;
+
+    cursor: pointer;
+}
+
+.email-option small {
+    display: block;
+
+    margin-top: 6px;
+    margin-left: 25px;
+
+    color: #969eaa;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+   ========================================================= */
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+/* =========================================================
+   OFFER HISTORY CARD
+   ========================================================= */
+
+.offers-card {
+    overflow: hidden;
+
+    border: 1px solid #e4e8ee;
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    box-shadow: 0 4px 16px rgba(20, 30, 45, 0.04);
+}
+
+.offers-card-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 23px 24px 18px;
+}
+
+.offers-card-header h2 {
+    margin: 0;
+
+    color: #171e2b;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.offers-card-header p {
+    margin: 6px 0 0;
+
+    color: #9199a8;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.offer-search {
+    flex-shrink: 0;
+}
+
+.offer-search input {
+    width: 245px;
+    height: 38px;
+
+    box-sizing: border-box;
+
+    padding: 0 12px;
+
+    border: 1px solid #dfe4ea;
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #ffffff;
+    color: #202838;
+
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.offer-search input::placeholder {
+    color: #a0a7b3;
+}
+
+.offer-search input:focus {
+    border-color: #737d8e;
+
+    box-shadow:
+        0 0 0 3px rgba(30, 40, 55, 0.05);
+}
+
+
+/* =========================================================
+   TABS
+   ========================================================= */
+
+.offer-tabs {
+    display: flex;
+
+    gap: 3px;
+
+    padding: 0 24px;
+
+    border-bottom: 1px solid #edf0f4;
+}
+
+.tab {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 4px;
+
+    padding: 12px 14px;
+
+    border: none;
+
+    background: transparent;
+    color: #858e9d;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.tab span {
+    min-width: 17px;
+
+    padding: 2px 5px;
+
+    border-radius: 20px;
+
+    background: #f0f2f5;
+    color: #737c8b;
+
+    font-size: 9px;
+
+    text-align: center;
+}
+
+.tab:hover {
+    color: #252d3c;
+}
+
+.tab.active {
+    color: #151b28;
+}
+
+.tab.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 10px;
+    right: 10px;
+    bottom: -1px;
+
+    height: 2px;
+
+    border-radius: 2px;
+
+    background: #151b28;
+}
+
+.tab.active span {
+    background: #e9ebef;
+    color: #303949;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.offers-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.offers-table {
+    width: 100%;
+
+    min-width: 1050px;
+
+    border-collapse: collapse;
+
+    table-layout: auto;
+}
+
+.offers-table th {
+    padding: 13px 16px;
+
+    border-bottom: 1px solid #edf0f4;
+
+    background: #fafbfc;
+
+    color: #8992a1;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+
+    text-align: left;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+.offers-table td {
+    padding: 15px 16px;
+
+    border-bottom: 1px solid #f0f2f5;
+
+    color: #596375;
+
+    font-size: 11px;
+
+    vertical-align: middle;
+}
+
+.offers-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.offers-table tbody tr:hover {
+    background: #fafbfc;
+}
+
+.offers-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   OFFER TITLE
+   ========================================================= */
+
+.offer-title-cell {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    min-width: 230px;
+}
+
+.offer-small-icon {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #f1f3f6;
+
+    font-size: 17px;
+}
+
+.offer-title-cell strong {
+    display: block;
+
+    max-width: 240px;
+
+    overflow: hidden;
+
+    color: #222a3a;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.offer-title-cell small {
+    display: block;
+
+    max-width: 240px;
+
+    margin-top: 4px;
+
+    overflow: hidden;
+
+    color: #969eac;
+
+    font-size: 10px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   AUDIENCE
+   ========================================================= */
+
+.audience-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.audience-badge.customer {
+    background: #eef2fa;
+    color: #526b9d;
+}
+
+.audience-badge.seller {
+    background: #f5f1ec;
+    color: #80684f;
+}
+
+.audience-badge.all {
+    background: #f0f1f4;
+    color: #555e6e;
+}
+
+
+/* =========================================================
+   DISCOUNT
+   ========================================================= */
+
+.discount-value {
+    color: #171e2b;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   COUPON
+   ========================================================= */
+
+.coupon-code {
+    padding: 5px 8px;
+
+    border: 1px dashed #cbd1da;
+    border-radius: 6px;
+
+    background: #fafbfc;
+    color: #465063;
+
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.coupon-code:hover {
+    border-color: #777f8d;
+
+    background: #f2f3f5;
+}
+
+.no-coupon {
+    color: #a2a9b4;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   VALIDITY
+   ========================================================= */
+
+.validity {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: #6d7686;
+
+    font-size: 10px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 5px 8px;
+
+    border-radius: 20px;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.status-badge.active {
+    background: #eaf7ee;
+    color: #287e45;
+}
+
+.status-badge.scheduled {
+    background: #edf2fb;
+    color: #4e689a;
+}
+
+.status-badge.expired {
+    background: #fff0f0;
+    color: #c14343;
+}
+
+
+/* =========================================================
+   EMAIL
+   ========================================================= */
+
+.email-enabled {
+    color: #2c7d46;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+.email-disabled {
+    color: #a4aab4;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.action-buttons {
+    display: flex;
+
+    gap: 6px;
+}
+
+.edit-button,
+.delete-button {
+    width: 32px;
+    height: 32px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.edit-button {
+    border: 1px solid #dfe4ea;
+
+    background: #ffffff;
+    color: #596476;
+}
+
+.edit-button:hover {
+    background: #f1f3f6;
+    color: #151b28;
+}
+
+.delete-button {
+    border: 1px solid #eadede;
+
+    background: #ffffff;
+    color: #b35c5c;
+}
+
+.delete-button:hover {
+    border-color: #edcaca;
+
+    background: #fff1f1;
+    color: #c43d3d;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-offers {
+    padding: 70px 20px;
+
+    text-align: center;
+}
+
+.empty-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 13px;
+
+    border-radius: 15px;
+
+    background: #f1f3f6;
+
+    font-size: 25px;
+}
+
+.empty-offers h3 {
+    margin: 0;
+
+    color: #30394a;
+
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.empty-offers p {
+    margin: 7px 0 0;
+
+    color: #969eac;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   INFORMATION BOX
+   ========================================================= */
+
+.offer-info-box {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 13px;
+
+    margin-top: 20px;
+
+    padding: 17px 19px;
+
+    border: 1px solid #e4e8ee;
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    box-shadow: 0 3px 12px rgba(20, 30, 45, 0.025);
+}
+
+.info-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #f1f3f6;
+
+    font-size: 16px;
+}
+
+.offer-info-box h3 {
+    margin: 0;
+
+    color: #30394a;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.offer-info-box p {
+    margin: 5px 0 0;
+
+    color: #8b94a3;
+
+    font-size: 10px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1250px) {
+
+    .offer-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .offers-page {
+        padding: 25px 20px 40px;
+    }
+
+    .offers-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .offer-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .offers-card-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .offer-search {
+        width: 100%;
+    }
+
+    .offer-search input {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .offers-page {
+        padding: 20px 13px 35px;
+    }
+
+    .offers-header h1 {
+        font-size: 26px;
+    }
+
+    .offer-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+
+    .offer-tabs {
+        overflow-x: auto;
+    }
+
+    .tab {
+        flex-shrink: 0;
+    }
+
+}

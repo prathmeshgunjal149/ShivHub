@@ -1,0 +1,10 @@
+import api from "./api";
+const data = (request) => request.then((response) => response.data);
+export const listMarketing = (type) => data(api.get("/api/admin/marketing", { params: type ? { type } : {} }));
+export const getMarketing = (id) => data(api.get(`/api/admin/marketing/${id}`));
+export const createMarketing = (item) => data(api.post("/api/admin/marketing", item));
+export const updateMarketing = (id, item) => data(api.put(`/api/admin/marketing/${id}`, item));
+export const removeMarketing = (id) => data(api.delete(`/api/admin/marketing/${id}`));
+export const sendMarketingEmail = (id) => data(api.post(`/api/admin/marketing/${id}/send-email`));
+export const marketingHistory = (id) => data(api.get(`/api/admin/marketing/${id}/history`));
+export const getActiveOffers = (audience) => data(api.get("/api/marketing/offers", { params: { audience } }));

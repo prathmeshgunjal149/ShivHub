@@ -1,0 +1,2 @@
+package com.shivhub.backend.repository; import java.util.*; import org.springframework.data.jpa.repository.JpaRepository; import com.shivhub.backend.entity.MarketplaceAttributeDefinition;
+public interface MarketplaceAttributeDefinitionRepository extends JpaRepository<MarketplaceAttributeDefinition,Long>{ List<MarketplaceAttributeDefinition> findBySubcategoryIdAndActiveTrueOrderByDisplayOrderAsc(Long subcategoryId); }

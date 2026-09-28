@@ -1,0 +1,369 @@
+/* --- Main Layout Wrapper & Sidebar Fixes --- */
+.shop-operations-page {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f7fb;
+  box-sizing: border-box;
+  margin: 0;
+  font-family: inherit;
+}
+
+/* Sidebar Container (jar HTML madhye asel tar) */
+.shop-operations-page aside,
+.shop-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background: #0f1c2e;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* Main Content Area Container */
+.shop-operations-page .seller-data-main {
+  flex: 1;
+  max-width: calc(100% - 260px);
+  min-width: 0;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+/* --- Header Styles --- */
+.shop-operations-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.shop-operations-header > div > span, 
+.shop-eyebrow {
+  display: block;
+  color: #c65b05;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+.shop-operations-header h1 {
+  margin: 5px 0 9px;
+  color: #11233d;
+  font-size: 26px;
+}
+.shop-operations-header p {
+  max-width: 770px;
+  margin: 0;
+  color: #64748b;
+  line-height: 1.6;
+}
+.shop-operations-header label, 
+.shop-report-filters label {
+  display: grid;
+  gap: 6px;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 800;
+}
+.shop-operations-header input, 
+.shop-report-filters input, 
+.shop-entry-form input, 
+.shop-entry-form select, 
+.shop-entry-form textarea, 
+.instant-bill-form input, 
+.instant-bill-form select, 
+.instant-bill-form textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #d6e0ec;
+  border-radius: 9px;
+  padding: 10px 11px;
+  color: #172b45;
+  background: #fff;
+  font: inherit;
+}
+
+/* --- Messages --- */
+.shop-message {
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+.shop-message.error {
+  color: #b42318;
+  background: #fff1f2;
+}
+.shop-message.success {
+  color: #08734f;
+  background: #ecfdf5;
+}
+
+/* --- Summary Grid --- */
+.shop-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.shop-summary-grid article {
+  padding: 19px;
+  border-radius: 15px;
+  color: #fff;
+  background: #142845;
+  box-shadow: 0 11px 25px rgba(16, 34, 59, 0.09);
+}
+.shop-summary-grid article.green { background: #087b55; }
+.shop-summary-grid article.blue { background: #1e5bb5; }
+.shop-summary-grid article.red { background: #b45309; }
+.shop-summary-grid span, 
+.shop-summary-grid small {
+  display: block;
+  opacity: .78;
+  font-size: 12px;
+  font-weight: 700;
+}
+.shop-summary-grid strong {
+  display: block;
+  margin: 8px 0 2px;
+  font-size: 25px;
+}
+
+/* --- Split Grid & Cards --- */
+.shop-split-grid {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.shop-card {
+  margin-bottom: 16px;
+  padding: 20px;
+  border: 1px solid #dde6f0;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 9px 24px rgba(16, 34, 59, 0.04);
+}
+.shop-card h2 {
+  margin: 5px 0;
+  color: #172b45;
+  font-size: 21px;
+}
+.shop-card p {
+  color: #64748b;
+}
+
+/* --- Forms & Buttons --- */
+.opening-cash-form {
+  display: grid;
+  grid-template-columns: 1fr 220px auto;
+  gap: 16px;
+  align-items: end;
+}
+.opening-cash-form p { margin: 0; }
+.opening-cash-form label {
+  display: grid;
+  gap: 7px;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 800;
+}
+.opening-cash-form input {
+  border: 1px solid #d6e0ec;
+  border-radius: 9px;
+  padding: 10px;
+  font: inherit;
+}
+.opening-cash-form button, 
+.shop-primary {
+  border: 0;
+  border-radius: 9px;
+  padding: 11px 15px;
+  color: #fff;
+  background: #0c6c5a;
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+}
+.shop-breakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.shop-breakdown > .shop-eyebrow { grid-column: 1/-1; }
+.shop-breakdown div {
+  padding: 12px 0;
+  border-bottom: 1px solid #edf2f7;
+}
+.shop-breakdown div:nth-of-type(odd) { padding-right: 14px; }
+.shop-breakdown span, 
+.shop-breakdown strong { display: block; }
+.shop-breakdown span {
+  color: #64748b;
+  font-size: 12px;
+}
+.shop-breakdown strong {
+  margin-top: 4px;
+  color: #172b45;
+}
+.shop-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.shop-plain-button {
+  border: 1px solid #cbd9e7;
+  border-radius: 8px;
+  padding: 9px 12px;
+  color: #17477d;
+  background: #fff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+.shop-entry-form {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+}
+.shop-entry-form label, 
+.instant-bill-form label {
+  display: grid;
+  gap: 6px;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 800;
+}
+.shop-entry-form textarea, 
+.instant-bill-form textarea {
+  min-height: 74px;
+  resize: vertical;
+}
+.shop-wide, .wide { grid-column: 1/-1; }
+.shop-check {
+  display: flex !important;
+  grid-column: span 2;
+  align-items: center;
+  gap: 8px !important;
+}
+.shop-check input { width: auto !important; }
+.shop-entry-form .shop-primary { align-self: end; }
+
+/* --- Report Filters & Tables --- */
+.shop-report-filters {
+  display: grid;
+  grid-template-columns: 160px 160px minmax(220px, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.shop-table-wrap { overflow: auto; }
+.shop-table-wrap table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+.shop-table-wrap th, 
+.shop-table-wrap td {
+  padding: 12px 9px;
+  border-bottom: 1px solid #e8eef5;
+  text-align: left;
+  vertical-align: top;
+}
+.shop-table-wrap th {
+  color: #65758c;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.shop-table-wrap small {
+  display: block;
+  margin-top: 4px;
+  color: #708096;
+  font-size: 11px;
+}
+.shop-actions { display: flex; gap: 6px; }
+.shop-actions button {
+  border: 1px solid #cbd9e7;
+  border-radius: 7px;
+  padding: 7px 9px;
+  color: #1d4e82;
+  background: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.shop-actions .danger {
+  border-color: #fecaca;
+  color: #b42318;
+  background: #fff6f6;
+}
+.shop-audit {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 11px;
+  background: #f7fafc;
+}
+.shop-audit h3 { margin: 0 0 8px; font-size: 14px; }
+.shop-audit p { margin: 6px 0; font-size: 12px; }
+
+/* --- Instant Bill Form --- */
+.instant-bill-form { display: grid; gap: 16px; }
+.instant-bill-form fieldset {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 15px;
+  border: 1px solid #e1e8f0;
+  border-radius: 12px;
+}
+.instant-bill-form legend {
+  padding: 0 6px;
+  color: #172b45;
+  font-size: 13px;
+  font-weight: 900;
+}
+.instant-total { color: #08734f; font-size: 25px; }
+.instant-ready {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+.instant-ready p { margin: 0; }
+.bill-cancelled { color: #b42318 !important; font-weight: 900; }
+
+/* --- Responsive Media Queries --- */
+@media(max-width: 1024px) {
+  .shop-operations-page {
+    flex-direction: column;
+  }
+  .shop-operations-page aside,
+  .shop-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .shop-operations-page .seller-data-main {
+    max-width: 100%;
+    padding: 16px;
+  }
+}
+
+@media(max-width: 900px) {
+  .shop-summary-grid { grid-template-columns: repeat(2, 1fr); }
+  .shop-split-grid { grid-template-columns: 1fr; }
+  .opening-cash-form { grid-template-columns: 1fr; }
+  .shop-entry-form { grid-template-columns: repeat(2, 1fr); }
+  .instant-bill-form fieldset { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media(max-width: 620px) {
+  .shop-operations-header, .instant-ready { display: block; }
+  .shop-operations-header label { margin-top: 15px; }
+  .shop-summary-grid, .shop-entry-form, .instant-bill-form fieldset, .shop-report-filters { grid-template-columns: 1fr; }
+  .shop-check { grid-column: auto; }
+  .shop-entry-form .shop-primary { width: 100%; }
+  .shop-card { padding: 16px; }
+}

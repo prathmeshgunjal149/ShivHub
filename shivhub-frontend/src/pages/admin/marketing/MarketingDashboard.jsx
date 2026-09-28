@@ -1,0 +1,4 @@
+import { Link } from "react-router-dom";
+import "./MarketingDashboard.css";
+const links = [["Campaigns", "CAMPAIGN"], ["Offers", "OFFER"], ["Coupons", "COUPON"], ["Banners", "BANNER"], ["Greetings", "GREETING"], ["Referrals", "REFERRAL"], ["Notifications", "GREETING"], ["Customer Segments", "CUSTOMER"]];
+export default function MarketingDashboard() { return <main className="marketing"><p className="eyebrow">Growth centre</p><h1>Marketing</h1><p className="lead">Create audience-specific promotions, coupons and messages. Active offers appear automatically in the customer and seller panels.</p><div className="marketing-grid">{links.map(([label,type])=><Link key={label} to={`/admin/marketing/${type.toLowerCase()}s`}><strong>{label}</strong><span>Manage {label.toLowerCase()}</span></Link>)}</div><Link className="report-link" to="/admin/marketing/reports">View marketing reports →</Link></main>; }

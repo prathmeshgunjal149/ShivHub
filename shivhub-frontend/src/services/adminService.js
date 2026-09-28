@@ -1,0 +1,24 @@
+import api from "./api";
+
+const unwrap = (request) => request.then(({ data }) => data);
+export const getCustomers = () => unwrap(api.get("/api/admin/customers"));
+export const getSellers = () => unwrap(api.get("/api/admin/sellers"));
+export const getPendingSellers = () => unwrap(api.get("/api/admin/sellers/pending"));
+export const getSeller = (id) => unwrap(api.get(`/api/admin/sellers/${id}`));
+export const approveSeller = (id) => unwrap(api.put(`/api/admin/sellers/${id}/approve`));
+export const rejectSeller = (id, reason) => unwrap(api.put(`/api/admin/sellers/${id}/reject`, { reason }));
+export const getProducts = () => unwrap(api.get("/api/admin/products"));
+export const getProduct = (id) => unwrap(api.get(`/api/admin/products/${id}`));
+export const approveProduct = (id, review = "") => unwrap(api.put(`/api/admin/products/${id}/approve`, { review }));
+export const rejectProduct = (id, reason) => unwrap(api.put(`/api/admin/products/${id}/reject`, { reason }));
+export const updateProductOffer = (id, offerPercentage) => unwrap(api.put(`/api/admin/products/${id}/offer`, { offerPercentage }));
+export const getAdminOrders = () => unwrap(api.get("/api/admin/orders"));
+export const updateOrderPaymentStatus = (id, paymentStatus) => unwrap(api.put(`/api/admin/orders/${id}/payment-status`, { paymentStatus }));
+export const getAdminCategories = () => unwrap(api.get("/api/admin/categories"));
+export const createAdminCategory = (name) => unwrap(api.post("/api/admin/categories", { name }));
+export const updateAdminCategory = (id, changes) => unwrap(api.put(`/api/admin/categories/${id}`, changes));
+export const downloadAdminInvoice = (id) => api.get(`/api/admin/orders/${id}/invoice`, { responseType: "blob" });
+export const getWhatsAppDiagnostics = () => unwrap(api.get("/api/admin/whatsapp/diagnostics"));
+export const getWhatsAppEvents = () => unwrap(api.get("/api/admin/whatsapp/events"));
+export const updateWhatsAppCampaignMapping = (eventKey, mapping) => unwrap(api.put(`/api/admin/whatsapp/campaign-mappings/${eventKey}`, mapping));
+export const getWhatsAppDeliveryLogs = (page = 0, size = 30) => unwrap(api.get("/api/admin/whatsapp/delivery-logs", { params: { page, size } }));

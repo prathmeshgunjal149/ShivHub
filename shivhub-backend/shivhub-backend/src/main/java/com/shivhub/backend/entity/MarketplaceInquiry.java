@@ -1,0 +1,3 @@
+package com.shivhub.backend.entity;
+import java.time.LocalDateTime; import jakarta.persistence.*; import lombok.Data;
+@Entity @Table(name="marketplace_inquiries") @Data public class MarketplaceInquiry { @Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long id; @ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="listing_id",nullable=false) private MarketplaceListing listing; @ManyToOne(fetch=FetchType.LAZY) @JoinColumn(name="buyer_id",nullable=false) private User buyer; @Column(nullable=false,columnDefinition="TEXT") private String message; @Column(nullable=false) private String status="OPEN"; @Column(name="created_at",nullable=false) private LocalDateTime createdAt; @PrePersist void create(){createdAt=LocalDateTime.now();} }

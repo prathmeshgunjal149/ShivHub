@@ -1,0 +1,1317 @@
+/* Shared premium customer experience layer.  It deliberately sits after page
+   styles so it can unify older customer routes without changing their logic. */
+:root {
+  --cx-navy: #0b1f3a;
+  --cx-orange: #ff6b00;
+  --cx-blue: #e85d04;
+  --cx-green: #16a34a;
+  --cx-bg: #f5f8fc;
+  --cx-surface: #fff;
+  --cx-text: #10213b;
+  --cx-muted: #63738a;
+  --cx-line: #dce6f2;
+  --cx-radius: 16px;
+  --cx-shadow: 0 12px 34px rgba(20, 33, 61, .08);
+}
+
+/* Keep every route on the same calm canvas, even where its original stylesheet
+   pre-dates the marketplace design. */
+.customer-dashboard, .marketplace-page, .customer-orders-page, .cart-page,
+.checkout-page, .customer-addresses-page, .referral-page, .wishlist-page,
+.offers-page, .coupons-page, .after-sales-page, .customer-products-page,
+.order-details-page, .second-hand-market-page, .customer-profile-page {
+  color: var(--cx-text);
+  background: radial-gradient(circle at 0 0, rgba(22,119,255,.07), transparent 30rem), var(--cx-bg);
+}
+
+.marketplace-page--dark {
+  --cx-bg: #0b1220;
+  --cx-surface: #111c2f;
+  --cx-text: #f8fafc;
+  --cx-muted: #b7c4d8;
+  --cx-line: #273751;
+  background: radial-gradient(circle at 0 0, rgba(37,99,235,.20), transparent 32rem), #0b1220;
+}
+
+/* Customer header: no layout changes, only a durable glass/sticky finish. */
+.customer-header {
+  position: sticky !important;
+  top: 0;
+  z-index: 80;
+  border-bottom: 1px solid color-mix(in srgb, var(--cx-line) 88%, transparent) !important;
+  background: color-mix(in srgb, var(--cx-surface) 92%, transparent) !important;
+  box-shadow: 0 7px 22px rgba(20,33,61,.05);
+  backdrop-filter: blur(16px);
+}
+.customer-brand { letter-spacing: -.045em; }
+.customer-brand-mark { box-shadow: 0 8px 18px rgba(22,119,255,.23); }
+.customer-action-icon, .customer-search-icon, .customer-loyalty-badge-icon,
+.marketplace-command-icon, .marketplace-command-card b, .customer-product-rail-heading button,
+.market-category-card i, .market-card-actions button, .market-location, .footer-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.customer-action-icon svg, .customer-search-icon svg, .customer-loyalty-badge-icon svg,
+.marketplace-command-icon svg, .market-card-actions svg { flex: 0 0 auto; }
+
+/* Admin-configured dashboard hero: every active CUSTOMER_HERO banner rotates
+   in the existing component; the overlay preserves title readability. */
+.marketplace-hero { background-image: linear-gradient(90deg, rgba(7,18,40,.94) 0%, rgba(10,30,67,.78) 47%, rgba(8,25,58,.16) 100%), var(--hero-image) !important; background-position: center; background-size: cover; }
+.marketplace-hero-button { display: inline-flex; align-items: center; gap: 8px; }
+.marketplace-hero-arrow { position: absolute; z-index: 4; top: calc(50% - 20px); width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.32); border-radius: 50%; color: #fff; background: rgba(8,20,49,.46); backdrop-filter: blur(7px); cursor: pointer; opacity: .82; transition: transform .2s ease, opacity .2s ease; }
+.marketplace-hero-arrow:hover { opacity: 1; transform: scale(1.07); }.marketplace-hero-arrow.previous { right: 68px; }.marketplace-hero-arrow.next { right: 20px; }
+.marketplace-hero-dots { position: absolute; right: 25px; bottom: 20px; z-index: 4; display: flex; gap: 7px; }.marketplace-hero-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 999px; background: rgba(255,255,255,.52); cursor: pointer; }.marketplace-hero-dots button.active { width: 22px; background: #fff; }
+.customer-loyalty-badge { box-shadow: 0 6px 16px rgba(245,158,11,.14); animation: customerPointsGlow 3.2s ease-in-out infinite; }
+@keyframes customerPointsGlow { 50% { box-shadow: 0 8px 24px rgba(245,158,11,.30); transform: translateY(-1px); } }
+.marketplace-category-navigation { box-shadow: 0 8px 22px rgba(20,33,61,.045); }
+.marketplace-category-button { display: inline-flex; align-items: center; gap: 7px; min-height: 39px; }
+.marketplace-category-button > span:first-child { display: inline-flex; align-items: center; color: var(--cx-blue); }
+.marketplace-category-button.active > span:first-child { color: #fff; }
+.customer-search input, .customer-search-autocomplete, .customer-filter-panel {
+  box-shadow: 0 8px 24px rgba(20,33,61,.07);
+}
+.customer-search {
+  min-height: 54px !important;
+  height: auto !important;
+  gap: 8px;
+  padding: 5px 7px 5px 16px !important;
+  border: 1px solid #dbe5f3 !important;
+  border-radius: 15px !important;
+  background: linear-gradient(100deg, #f8fbff, #eef5ff) !important;
+  box-shadow: 0 8px 22px rgba(20,33,61,.06) !important;
+}
+.customer-search:focus-within { border-color: var(--cx-blue) !important; box-shadow: 0 0 0 4px rgba(22,119,255,.12), 0 10px 24px rgba(11,31,58,.09) !important; }
+.customer-search-autocomplete { min-width: 0; box-shadow: none !important; }
+.customer-search input { min-height: 40px; font-size: 14px !important; }
+.customer-search-submit, .customer-filter-toggle {
+  min-height: 40px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 15px !important;
+  border-radius: 10px !important;
+  font-weight: 800 !important;
+}
+.customer-search-submit { border: 0; color: #fff; background: var(--cx-navy); box-shadow: 0 7px 14px rgba(20,33,61,.18); cursor: pointer; }
+.customer-search-submit:hover { background: #223a68; transform: translateY(-1px); }
+.customer-filter-toggle { border-color: #dbe5f3 !important; color: var(--cx-navy) !important; background: #fff !important; }
+.customer-filter-toggle:hover, .customer-filter-toggle[aria-expanded="true"] { color: #fff !important; border-color: var(--cx-blue) !important; background: var(--cx-blue) !important; box-shadow: 0 7px 14px rgba(22,119,255,.2); }
+.customer-filter-panel {
+  position: relative;
+  z-index: 15;
+  margin-top: -3px !important;
+  padding: 20px !important;
+  border: 1px solid #dbe5f3 !important;
+  border-radius: 0 0 18px 18px !important;
+  background: linear-gradient(145deg, rgba(255,255,255,.99), rgba(245,249,255,.98)) !important;
+  box-shadow: 0 16px 34px rgba(20,33,61,.11) !important;
+  animation: customerFiltersEnter .28s cubic-bezier(.22,1,.36,1) both !important;
+}
+.customer-filter-panel::before { content: "Refine products"; grid-column: 1 / -1; color: var(--cx-navy); font-size: 12px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+.customer-filter-panel label { gap: 7px !important; color: #475569 !important; font-size: 11px !important; font-weight: 800 !important; }
+.customer-filter-panel select, .customer-filter-panel input { height: 45px !important; border-radius: 11px !important; border-color: #dbe5f3 !important; background: #fff !important; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+.customer-filter-panel select:hover, .customer-filter-panel input:hover { border-color: #93c5fd !important; }
+.customer-filter-panel > button { min-height: 45px; border-radius: 11px !important; color: #fff !important; background: var(--cx-blue) !important; }
+.customer-filter-panel > button:hover { background: #1d4ed8 !important; }
+@keyframes customerFiltersEnter { from { opacity: 0; transform: translateY(-12px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.customer-header-action, .customer-loyalty-badge, .customer-header-language,
+.customer-profile-button {
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.customer-header-action:hover, .customer-loyalty-badge:hover, .customer-profile-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 16px rgba(20,33,61,.12);
+}
+
+/* Dashboard, catalogue rails, listing cards and marketplace controls. */
+.marketplace-command-center, .marketplace-referral-offer, .customer-offer-carousel,
+.customer-category-showcase, .customer-product-rail-section, .marketplace-products {
+  border: 1px solid var(--cx-line) !important;
+  border-radius: var(--cx-radius) !important;
+  box-shadow: var(--cx-shadow);
+}
+.marketplace-command-card, .customer-category-card, .customer-rail-product-card,
+.marketplace-product-card, .public-product-card {
+  border-radius: 16px !important;
+  border: 1px solid var(--cx-line) !important;
+  overflow: hidden;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.marketplace-command-card:hover, .customer-category-card:hover, .customer-rail-product-card:hover,
+.marketplace-product-card:hover, .public-product-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--cx-blue) 45%, var(--cx-line)) !important;
+  box-shadow: 0 16px 34px rgba(20,33,61,.13);
+}
+.marketplace-product-card img, .customer-rail-product-card img, .public-product-card img {
+  transition: transform .35s ease;
+}
+.marketplace-product-card:hover img, .customer-rail-product-card:hover img, .public-product-card:hover img { transform: scale(1.045); }
+.marketplace-product-badge, .customer-rail-offer, .marketplace-offer-badge {
+  background: var(--cx-orange) !important;
+  color: #fff !important;
+}
+.marketplace-product-card button, .customer-rail-product-card button, .public-product-card .product-card-action,
+.customer-product-rail-heading button, .marketplace-refresh {
+  border-radius: 10px !important;
+}
+
+/* Paired dashboard promotions: artwork is optional and always comes from an
+   active Admin Marketing > Banners record, never from an external mock image. */
+.customer-journey-promos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 22px auto;
+}
+.journey-promo {
+  position: relative;
+  min-height: 270px;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 30px;
+  border: 1px solid #bfdbfe;
+  border-radius: 18px;
+  background: linear-gradient(115deg, #fff 0%, #eef8ff 100%);
+  box-shadow: var(--cx-shadow);
+}
+.journey-refer { border-color: #bbf7d0; background: linear-gradient(115deg, #fff 0%, #edfff3 100%); }
+.journey-promo-copy { position: relative; z-index: 2; max-width: 62%; }
+.journey-promo-copy > p { display: inline-flex; align-items: center; gap: 7px; margin: 0 0 10px; color: var(--cx-blue); font-size: 12px; font-weight: 900; letter-spacing: .05em; }
+.journey-refer .journey-promo-copy > p { color: #15803d; }
+.journey-promo h2 { max-width: 430px; margin: 0; color: var(--cx-navy); font-size: clamp(21px, 2vw, 30px); line-height: 1.1; letter-spacing: -.04em; }
+.journey-promo-copy > span { display: block; margin-top: 11px; color: #64748b; font-size: 14px; line-height: 1.55; }
+.journey-promo-copy > div { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 21px; }
+.journey-promo button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: var(--cx-blue); color: #fff; font-weight: 800; cursor: pointer; }
+.journey-refer button { background: var(--cx-green); }
+.journey-promo .journey-secondary { border: 1px solid currentColor; background: rgba(255,255,255,.80); color: var(--cx-blue); }
+.journey-refer .journey-secondary { color: #15803d; }
+.journey-promo-art { position: absolute; z-index: 1; right: 0; top: 0; width: 49%; height: 100%; object-fit: cover; object-position: center; mask-image: linear-gradient(90deg, transparent 0%, #000 24%); }
+.journey-promo-fallback { position: absolute; right: 8%; top: 27%; width: 110px; height: 110px; color: rgba(22,119,255,.17); transform: rotate(-11deg); }
+.journey-refer .journey-promo-fallback { color: rgba(22,163,74,.17); }
+.journey-code { width: 100%; max-width: 260px; margin-top: 16px; background: rgba(255,255,255,.86) !important; color: var(--cx-navy) !important; border: 1px dashed #86efac !important; justify-content: space-between !important; text-align: left; }
+.journey-code span { display: grid; gap: 1px; font-size: 10px; color: #64748b; }
+.journey-code strong { color: var(--cx-navy); font-size: 16px; letter-spacing: .04em; }
+.journey-code small { position: absolute; right: 10px; top: -20px; color: #15803d; }
+
+/* Shared card/form treatment catches address, profile, service, return, offers
+   and account screens without assuming their data model. */
+.customer-address-list > *, .customer-address-editor, .referral-code-card,
+.referral-invite-card, .referral-history, .orders-container, .order-card,
+.cart-item, .cart-summary, .checkout-card, .checkout-order-summary,
+.wishlist-item, .offer-card, .coupon-card, .customer-product-card,
+.after-sales-card, .second-hand-listing-card, .order-details-card {
+  border: 1px solid var(--cx-line) !important;
+  border-radius: var(--cx-radius) !important;
+  box-shadow: var(--cx-shadow);
+}
+
+.customer-address-editor, .referral-code-card, .referral-invite-card, .referral-history,
+.orders-container, .cart-item, .cart-summary, .checkout-card, .checkout-order-summary,
+.customer-product-card, .after-sales-card, .order-details-card {
+  background: var(--cx-surface) !important;
+  color: var(--cx-text);
+}
+.customer-addresses-page header, .orders-header, .checkout-header, .referral-topbar {
+  border-bottom: 1px solid var(--cx-line) !important;
+}
+
+/* Buttons and inputs retain their page actions but look consistent. */
+.customer-addresses-page button, .referral-page button, .customer-orders-page button,
+.cart-page button, .checkout-page button, .wishlist-page button, .offers-page button,
+.coupons-page button, .after-sales-page button, .customer-products-page button,
+.second-hand-market-page button {
+  border-radius: 10px;
+  transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+}
+.customer-addresses-page button:hover, .referral-page button:hover, .customer-orders-page button:hover,
+.cart-page button:hover, .checkout-page button:hover, .wishlist-page button:hover,
+.offers-page button:hover, .coupons-page button:hover, .after-sales-page button:hover,
+.customer-products-page button:hover, .second-hand-market-page button:hover {
+  transform: translateY(-1px);
+}
+.customer-addresses-page input, .customer-addresses-page select, .customer-addresses-page textarea,
+.referral-page input, .cart-page input, .checkout-page input, .checkout-page select,
+.checkout-page textarea, .second-hand-market-page input, .second-hand-market-page select,
+.second-hand-market-page textarea {
+  border: 1px solid var(--cx-line) !important;
+  border-radius: 10px !important;
+  background: color-mix(in srgb, var(--cx-surface) 96%, #f8fafc) !important;
+  color: var(--cx-text) !important;
+}
+.customer-addresses-page input:focus, .customer-addresses-page select:focus, .customer-addresses-page textarea:focus,
+.referral-page input:focus, .cart-page input:focus, .checkout-page input:focus, .checkout-page select:focus,
+.checkout-page textarea:focus, .second-hand-market-page input:focus, .second-hand-market-page select:focus,
+.second-hand-market-page textarea:focus {
+  outline: 3px solid rgba(22,119,255,.18) !important;
+  border-color: var(--cx-blue) !important;
+}
+
+/* Order / cart / checkout clarity. */
+.order-card, .cart-item, .checkout-card { overflow: hidden; }
+.order-card-header, .cart-item-header, .checkout-card-heading {
+  background: linear-gradient(100deg, rgba(22,119,255,.06), rgba(110,231,183,.10));
+}
+.order-status, .order-status-badge, .customer-rail-stock, .marketplace-product-badge {
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+.checkout-order-summary, .cart-summary { position: sticky; top: 96px; }
+.checkout-place-order, .cart-checkout-button {
+  background: linear-gradient(105deg, #1677ff, #4b9bff) !important;
+  box-shadow: 0 12px 23px rgba(22,119,255,.24) !important;
+}
+.checkout-place-order:hover, .cart-checkout-button:hover { filter: brightness(1.04); }
+
+/* Friendly reusable status / blank states. */
+.marketplace-message, .orders-empty, .address-empty, .referral-empty, .checkout-empty,
+.cart-empty, .wishlist-empty, .after-sales-empty {
+  border: 1px dashed color-mix(in srgb, var(--cx-blue) 34%, var(--cx-line)) !important;
+  border-radius: var(--cx-radius) !important;
+  background: color-mix(in srgb, var(--cx-surface) 92%, #eff6ff) !important;
+  color: var(--cx-text) !important;
+}
+.marketplace-message.error, .checkout-error { border-color: #fecaca !important; background: #fff7f7 !important; }
+
+/* Footer always uses configured links, but gains visual hierarchy and safer hit areas. */
+.site-footer:not(.seller) { clear: both; width: 100%; box-sizing: border-box; margin-top: 48px; margin-left: 0; }
+body.product-detail-route .site-footer:not(.seller) { margin-top: 18px; }
+.footer-socials a {
+  min-width: 38px;
+  min-height: 38px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 10px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  transition: transform .2s ease, background-color .2s ease;
+}
+.footer-socials a:hover { transform: translateY(-2px); background: rgba(255,255,255,.16); }
+
+/* Product catalogue, wishlist, account, reward and service pages. */
+.customer-products-header, .wishlist-header, .customer-profile-topbar,
+.customer-rewards-topbar, .order-details-header, .after-sales-page > header {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+.customer-product-card, .wishlist-card, .market-card, .details-card, .order-section,
+.order-top-card, .status-timeline-card, .customer-profile-card, .customer-rewards-history,
+.customer-rewards-cards, .after-sales-card, .after-sales-detail, .after-sales-estimate,
+.market-search-panel, .market-category-section, .market-farm-banner {
+  border: 1px solid var(--cx-line) !important;
+  border-radius: var(--cx-radius) !important;
+  box-shadow: var(--cx-shadow) !important;
+}
+.customer-product-card, .wishlist-card, .market-card, .details-card, .order-section,
+.order-top-card, .status-timeline-card, .customer-profile-card, .customer-rewards-history,
+.customer-rewards-cards, .after-sales-card, .after-sales-detail, .after-sales-estimate,
+.market-search-panel, .market-category-section, .market-farm-banner {
+  background: var(--cx-surface) !important;
+  color: var(--cx-text) !important;
+}
+.customer-product-card, .wishlist-card, .market-card { overflow: hidden; }
+.customer-product-card:hover, .wishlist-card:hover, .market-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 17px 38px rgba(20,33,61,.14) !important;
+}
+
+/* Real subcategories are derived from catalogue data and remain available on
+   every customer header after a category has been selected. */
+.customer-subcategory-nav { width: min(100% - 40px, 1440px); display: flex; align-items: center; gap: 9px; overflow-x: auto; margin: 0 auto; padding: 0 0 12px; scrollbar-width: none; }
+.customer-subcategory-nav > span { flex: 0 0 auto; color: var(--cx-blue); font-size: 11px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+.customer-subcategory-nav button { flex: 0 0 auto; min-height: 32px; padding: 0 13px; border: 1px solid #dbe5f3; border-radius: 999px; color: var(--cx-navy); background: #fff; font: inherit; font-size: 12px; font-weight: 750; cursor: pointer; transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease; }
+.customer-subcategory-nav button:hover,.customer-subcategory-nav button:focus-visible { border-color: var(--cx-blue); color: #fff; background: var(--cx-blue); outline: none; transform: translateY(-1px); }
+
+/* Dedicated category catalogue: one generic, real-data page for Mobiles and
+   every other category selected from the dashboard navigation. */
+.customer-products-page { display: flow-root; max-width: 1440px; margin: 0 auto; padding: 32px 24px 64px !important; }
+.category-product-showcase { display: grid; grid-template-columns: minmax(210px,.75fr) minmax(0,1.75fr); gap: 18px; padding: 23px; margin-bottom: 20px; border: 1px solid #dbeafe; border-radius: 18px; background: linear-gradient(120deg, #eff6ff, #fff); box-shadow: var(--cx-shadow); }
+.category-admin-banner { position: relative; min-height: 210px; display: flex; align-items: end; overflow: hidden; padding: 28px; margin-bottom: 20px; border-radius: 18px; color: #fff; background: var(--cx-navy); box-shadow: var(--cx-shadow); }.category-admin-banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }.category-admin-banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,22,48,.88), rgba(8,22,48,.15)); }.category-admin-banner > div { position: relative; z-index: 1; max-width: 55%; }.category-admin-banner span { color: #bfdbfe; font-size: 11px; font-weight: 900; letter-spacing: .09em; }.category-admin-banner h2 { margin: 7px 0; font-size: 28px; }.category-admin-banner p { margin: 0; color: #dbeafe; }
+.category-product-showcase p, .category-trending-rail > div:first-child > span { display: inline-flex; align-items: center; gap: 6px; margin: 0; color: var(--cx-blue); font-size: 11px; font-weight: 900; letter-spacing: .08em; }.category-product-showcase h2,.category-trending-rail h2 { margin: 8px 0; color: var(--cx-navy); font-size: 23px; letter-spacing: -.04em; }.category-product-showcase > div:first-child > span { color: #64748b; font-size: 13px; line-height: 1.5; }
+.category-spotlight-rail,.category-trending-rail > div:last-child { display: flex; gap: 11px; overflow-x: auto; padding: 2px; scrollbar-width: none; }.category-spotlight-rail button { min-width: 170px; display: grid; gap: 5px; padding: 11px; border: 1px solid #dbe5f3; border-radius: 13px; color: var(--cx-navy); background: #fff; text-align: left; cursor: pointer; }.category-spotlight-rail img { width: 100%; height: 86px; object-fit: contain; }.category-spotlight-rail span { color: #64748b; font-size: 9px; font-weight: 800; text-transform: uppercase; }.category-spotlight-rail strong { overflow: hidden; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }.category-spotlight-rail b { color: var(--cx-navy); font-size: 14px; }
+.category-trending-rail { padding: 20px 0; margin-bottom: 14px; }.category-trending-rail > div:first-child { display: flex; align-items: end; justify-content: space-between; }.category-trending-rail > div:last-child { margin-top: 14px; }.category-trending-rail button { min-width: 155px; display: grid; gap: 5px; padding: 9px; border: 1px solid var(--cx-line); border-radius: 12px; color: var(--cx-navy); background: var(--cx-surface); text-align: left; cursor: pointer; }.category-trending-rail img { width: 100%; height: 85px; object-fit: contain; }.category-trending-rail strong { overflow: hidden; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }.category-trending-rail small { color: var(--cx-green); font-weight: 800; }
+.category-assurance-row { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin: 6px 0 24px; }.category-assurance-row article { display: flex; align-items: center; gap: 10px; padding: 14px; border: 1px solid var(--cx-line); border-radius: 13px; background: var(--cx-surface); box-shadow: 0 6px 16px rgba(20,33,61,.05); }.category-assurance-row svg { color: var(--cx-blue); }.category-assurance-row span { display: grid; gap: 2px; }.category-assurance-row strong { color: var(--cx-navy); font-size: 12px; }.category-assurance-row small { color: #64748b; font-size: 10px; }
+.category-filter-sidebar { float: left; width: 250px; display: grid; gap: 12px; padding: 18px; margin: 0 22px 30px 0; border: 1px solid var(--cx-line); border-radius: 16px; background: var(--cx-surface); box-shadow: var(--cx-shadow); }.category-filter-sidebar > div { display: flex; align-items: center; gap: 8px; color: var(--cx-navy); }.category-filter-sidebar h2 { margin: 0; font-size: 20px; }.category-filter-sidebar label { display: grid; gap: 6px; color: #475569; font-size: 11px; font-weight: 800; }.category-filter-sidebar label > svg { color: var(--cx-blue); }.category-filter-sidebar input,.category-filter-sidebar select { width: 100%; height: 40px; border: 1px solid var(--cx-line); border-radius: 9px; padding: 0 10px; color: var(--cx-text); background: #fff; font: inherit; }.category-filter-sidebar button { min-height: 40px; border: 0; border-radius: 9px; color: var(--cx-blue); background: #eff6ff; font-weight: 800; cursor: pointer; }
+.category-filter-sidebar details { border-top: 1px solid var(--cx-line); padding-top: 12px; }.category-filter-sidebar summary { cursor: pointer; color: var(--cx-navy); font-size: 12px; font-weight: 900; text-transform: uppercase; }.category-checkbox-list { display: grid; gap: 8px; padding: 10px 0 2px; }.category-checkbox-list label { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 650; cursor: pointer; }.category-checkbox-list input { width: 17px; height: 17px; accent-color: var(--cx-blue); }
+.category-catalogue-results { min-height: 480px; }.category-results-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }.category-results-heading span { color: var(--cx-navy); font-size: 18px; font-weight: 900; }.category-results-heading p { margin: 0; color: #64748b; font-size: 12px; }
+
+/* Category-specific marketing slots. Admin can add up to five rotating hero
+   banners and four individual launch / offer tiles for every category. */
+.category-banner-slider { min-height: 260px; padding: 0; align-items: stretch; }
+.category-banner-slider article { position: absolute; inset: 0; display: flex; align-items: end; padding: 28px; opacity: 0; pointer-events: none; transition: opacity .45s ease; }
+.category-banner-slider article.is-active { opacity: 1; pointer-events: auto; }
+.category-banner-slider article img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.category-banner-slider article::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(8,22,48,.9), rgba(8,22,48,.34) 54%, rgba(8,22,48,.08)); }
+.category-banner-slider article > div { position: relative; z-index: 1; max-width: 54%; }
+.category-banner-dots { position: absolute; z-index: 3; right: 22px; bottom: 18px; display: flex; gap: 7px; }
+.category-banner-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 99px; background: rgba(255,255,255,.52); cursor: pointer; transition: width .2s ease, background .2s ease; }
+.category-banner-dots button.active { width: 24px; background: #fff; }
+.category-admin-tile { position: relative; min-width: 170px; min-height: 205px; display: grid; align-content: end; gap: 5px; overflow: hidden; padding: 12px; border: 1px solid #dbe5f3; border-radius: 13px; color: #fff; background: var(--cx-navy); }
+.category-admin-tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.category-admin-tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 22%, rgba(8,22,48,.88)); }
+.category-admin-tile span,.category-admin-tile strong,.category-admin-tile small { position: relative; z-index: 1; }.category-admin-tile span { color: #bfdbfe; font-size: 9px; font-weight: 900; letter-spacing: .06em; }.category-admin-tile strong { font-size: 13px; }.category-admin-tile small { color: #e2e8f0; font-size: 10px; line-height: 1.35; }
+.category-product-showcase { display: block; }.category-showcase-heading { margin-bottom: 15px; }.category-spotlight-rail { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: visible; }.category-spotlight-rail button,.category-admin-tile { min-width: 0; }
+
+/* Selected-category products read as a quick, horizontal catalogue. */
+.category-product-list { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.category-product-list .customer-product-card { display: grid !important; grid-template-columns: minmax(230px, 285px) minmax(0, 1fr) !important; flex-direction: unset !important; min-height: 230px; border-radius: 16px; }
+.category-product-list .customer-product-image { width: auto !important; height: 100% !important; min-height: 230px !important; flex: none !important; }.category-product-list .customer-product-image img { padding: 14px; }
+.category-product-list .customer-product-details { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto 1fr auto; column-gap: 20px; padding: 18px 22px; }
+.category-product-list .customer-product-top,.category-product-list .customer-product-details h2,.category-product-list .customer-product-description,.category-product-list .category-product-specs { grid-column: 1; }.category-product-specs { display: grid; gap: 4px; margin: 8px 0; padding-left: 18px; color: #475569; font-size: 13px; line-height: 1.35; }.category-product-specs li::marker { color: var(--cx-blue); }.category-product-specs span { color: var(--cx-navy); font-weight: 800; }.category-product-list .customer-product-bottom { grid-column: 2; grid-row: 2 / span 2; min-width: 135px; align-self: center; display: grid; gap: 9px; margin: 0; text-align: right; }.category-product-list .customer-product-bottom strong { font-size: 23px; }.category-product-list .customer-product-actions { grid-column: 1 / -1; display: grid !important; grid-template-columns: repeat(4, minmax(118px, 1fr)); flex-direction: unset !important; gap: 9px; width: 100%; margin-top: 12px; }.category-product-list .customer-product-actions button { width: 100% !important; min-width: 0; min-height: 42px; padding: 0 12px; border-radius: 10px; font-size: 12px; white-space: nowrap; }.category-product-list .customer-view-product { border: 1px solid #cbd5e1 !important; color: var(--cx-navy) !important; background: #fff !important; }.category-product-list .customer-cart-action { box-shadow: 0 7px 15px rgba(22,119,255,.18); }.customer-compare-action { border: 1px solid #bfdbfe !important; border-radius: 10px !important; color: var(--cx-blue) !important; background: #eff6ff !important; font-weight: 800 !important; cursor: pointer; }
+.customer-product-image img, .wishlist-product-image, .market-photo img {
+  transition: transform .35s ease;
+}
+.customer-product-card:hover .customer-product-image img, .wishlist-card:hover .wishlist-product-image,
+.market-card:hover .market-photo img { transform: scale(1.045); }
+.customer-product-category, .market-card-category, .order-eyebrow, .after-sales-eyebrow,
+.customer-profile-card-header > span, .customer-rewards-page .eyebrow {
+  color: var(--cx-blue) !important;
+  font-weight: 800;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+.customer-product-actions, .wishlist-actions, .market-card-actions { gap: 9px; }
+.customer-view-product, .wishlist-view-btn, .market-primary, .market-link,
+.download-invoice-button, .order-shopping-button, .customer-cart-header-button {
+  border-radius: 10px !important;
+}
+
+/* Account and warranty panels: compact sections that retain real profile data. */
+.customer-profile-hero, .customer-rewards-cards, .order-details-hero {
+  border-radius: 18px !important;
+  background: linear-gradient(120deg, var(--cx-navy), #1d4ed8) !important;
+  box-shadow: 0 18px 38px rgba(20,33,61,.20);
+}
+.customer-profile-hero *, .order-details-hero *, .customer-rewards-cards * { color: #fff; }
+.customer-profile-device-grid > *, .customer-profile-repair-list > * {
+  border: 1px solid var(--cx-line);
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--cx-surface) 96%, #eff6ff);
+}
+.customer-profile-alert, .after-sales-alert, .market-alert { border-radius: 12px !important; }
+.customer-profile-form input, .customer-profile-form select, .customer-profile-form textarea,
+.after-sales-form input, .after-sales-form select, .after-sales-form textarea,
+.market-page input, .market-page select, .market-page textarea {
+  border-radius: 10px !important;
+  border-color: var(--cx-line) !important;
+}
+
+/* Returns and orders get distinct readable timelines and status chips. */
+.status-timeline, .order-timeline, .after-sales-timeline {
+  border-left-color: color-mix(in srgb, var(--cx-blue) 38%, var(--cx-line)) !important;
+}
+.timeline-dot, .timeline-marker, .after-sales-timeline .active {
+  box-shadow: 0 0 0 5px rgba(22,119,255,.12);
+}
+.after-sales-table, .customer-rewards-table-wrap { border-radius: 13px; overflow: auto; border: 1px solid var(--cx-line); }
+.after-sales-table th, .customer-rewards-table-wrap th { background: #f1f5f9; color: var(--cx-navy); }
+.market-page { background: radial-gradient(circle at 95% 0, rgba(110,231,183,.16), transparent 24rem), var(--cx-bg); }
+.market-hero { border-radius: 0 0 24px 24px; }
+.market-customer-navbar { box-shadow: 0 6px 22px rgba(20,33,61,.07); }
+.market-category-card, .market-card { transition: transform .22s ease, box-shadow .22s ease; }
+.market-category-card:hover { transform: translateY(-3px); box-shadow: 0 13px 26px rgba(20,33,61,.11); }
+
+/* The generic product-detail route is intentionally data-agnostic: it styles
+   only layout containers and leaves variant, stock, cart and price logic intact. */
+.product-details-page, .product-detail-page, .product-details-container {
+  color: var(--cx-text);
+  background: var(--cx-bg);
+}
+.product-detail-card, .product-info-card, .product-specifications, .product-warranty,
+.product-delivery, .product-seller, .product-reviews, .product-description {
+  border: 1px solid var(--cx-line);
+  border-radius: var(--cx-radius);
+  box-shadow: var(--cx-shadow);
+}
+
+@media (max-width: 1023px) {
+  .checkout-order-summary, .cart-summary { position: static; }
+  .marketplace-command-card:hover, .customer-category-card:hover, .customer-rail-product-card:hover,
+  .marketplace-product-card:hover, .public-product-card:hover { transform: translateY(-2px); }
+}
+@media (max-width: 640px) {
+  .customer-header { backdrop-filter: blur(10px); }
+  .marketplace-command-center, .marketplace-referral-offer, .customer-offer-carousel,
+  .customer-category-showcase, .customer-product-rail-section, .marketplace-products,
+  .orders-container, .checkout-card, .checkout-order-summary, .cart-item, .cart-summary {
+    border-radius: 13px !important;
+  }
+  .customer-header-action, .customer-loyalty-badge { min-height: 40px; }
+  .footer-socials { gap: 8px; }
+  .customer-product-card:hover, .wishlist-card:hover, .market-card:hover { transform: translateY(-2px); }
+  .customer-journey-promos { grid-template-columns: 1fr; gap: 13px; margin-inline: 0; }
+  .journey-promo { min-height: 250px; padding: 23px; }
+  .journey-promo-copy { max-width: 69%; }
+  .journey-promo-art { width: 54%; opacity: .78; }
+  .marketplace-hero-arrow { display: none; }
+  .marketplace-hero-dots { right: 17px; bottom: 15px; }
+  .customer-search { min-height: 50px !important; padding-left: 12px !important; gap: 5px; }
+  .customer-search-submit span { display: none; }
+  .customer-search-submit, .customer-filter-toggle { min-width: 40px; padding: 0 10px !important; }
+  .customer-subcategory-nav { width: calc(100% - 28px); padding-bottom: 10px; }.customer-subcategory-nav > span { display: none; }
+  .customer-filter-toggle span { display: none; }
+  .customer-filter-panel { width: min(100% - 24px, 1440px) !important; padding: 15px !important; grid-template-columns: 1fr !important; }
+  .customer-products-page { padding: 22px 14px 48px !important; }.category-product-showcase { padding: 16px; }.category-spotlight-rail { display: flex; overflow-x: auto; }.category-spotlight-rail button,.category-admin-tile { min-width: 170px; }.category-filter-sidebar { float: none; width: auto; margin: 0 0 18px; grid-template-columns: repeat(2, minmax(0,1fr)); }.category-filter-sidebar > div,.category-filter-sidebar button { grid-column: 1 / -1; }
+  .category-admin-banner { min-height: 180px; padding: 19px; }.category-admin-banner > div { max-width: 85%; }.category-admin-banner h2 { font-size: 22px; }.category-banner-slider article { padding: 19px; }.category-banner-slider article > div { max-width: 86%; }.category-banner-dots { right: 16px; bottom: 13px; }.category-product-list .customer-product-card { grid-template-columns: 115px minmax(0,1fr) !important; min-height: 165px; }.category-product-list .customer-product-image { min-height: 165px !important; }.category-product-list .customer-product-details { display: block; padding: 14px; }.category-product-list .customer-product-details h2 { font-size: 16px; }.category-product-specs { max-height: 37px; overflow: hidden; margin: 5px 0; font-size: 11px; }.category-product-list .customer-product-description { min-height: 0; margin: 7px 0; -webkit-line-clamp: 1; }.category-product-list .customer-product-bottom { display: flex; min-width: 0; margin: 8px 0; text-align: left; }.category-product-list .customer-product-bottom strong { font-size: 18px; }.category-product-list .customer-product-actions { display: grid !important; grid-template-columns: repeat(2, minmax(0,1fr)); margin-top: 9px; }.category-product-list .customer-product-actions button { min-width: 0; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .customer-header-action, .customer-loyalty-badge, .customer-profile-button,
+  .marketplace-command-card, .customer-category-card, .customer-rail-product-card,
+    .marketplace-product-card, .public-product-card, .marketplace-product-card img,
+  .customer-rail-product-card img, .public-product-card img, .footer-socials a {
+    transition: none !important;
+    animation: none !important;
+  }
+  .customer-loyalty-badge { animation: none !important; }
+}
+
+/* ========================================================================
+   CUSTOMER THEME V2
+   This is intentionally route-scoped by AppRoutes. It re-themes every
+   public and customer-account screen without leaking into seller/admin.
+   ======================================================================== */
+body.customer-theme-v2 {
+  --primary: #0b1f3a;
+  --primary-dark: #07182f;
+  --primary-light: #eaf2ff;
+  --primary-soft: #f4f8ff;
+  --accent: #ff6b00;
+  --accent-dark: #df5700;
+  --accent-light: #fff0e5;
+  --success: #16a34a;
+  --success-light: #eaf8ef;
+  --danger: #e5484d;
+  --danger-light: #fff1f2;
+  --text: #10213b;
+  --text-secondary: #4e6079;
+  --muted: #70819a;
+  --light-text: #95a4b8;
+  --background: #f5f8fc;
+  --surface: #ffffff;
+  --border: #dce6f2;
+  --cx-navy: #0b1f3a;
+  --cx-orange: #ff6b00;
+  --cx-blue: #2563eb;
+  --cx-green: #16a34a;
+  --cx-bg: #f5f8fc;
+  --cx-surface: #ffffff;
+  --cx-text: #10213b;
+  --cx-muted: #63738a;
+  --cx-line: #dce6f2;
+  --cx-shadow: 0 14px 38px rgba(11, 31, 58, .08);
+  --sh-midnight: #07182f;
+  --sh-navy: #0b1f3a;
+  --sh-navy-2: #173d72;
+  --sh-ink: #10213b;
+  --sh-muted: #63738a;
+  --sh-line: #dce6f2;
+  --sh-blue: #2563eb;
+  --sh-cyan: #57c7ff;
+  --sh-orange: #ff6b00;
+  --sh-orange-soft: #fff0e5;
+  --sh-surface: #ffffff;
+  --sh-soft: #f5f8fc;
+  --sh-shadow: 0 18px 48px rgba(11, 31, 58, .09);
+  --sh-shadow-strong: 0 28px 72px rgba(11, 31, 58, .18);
+  background:
+    radial-gradient(circle at 6% -4%, rgba(22, 119, 255, .12), transparent 28%),
+    radial-gradient(circle at 97% 5%, rgba(255, 107, 0, .13), transparent 30%),
+    linear-gradient(180deg, #f5f8fc 0%, #eef5fb 48%, #f9fcff 100%);
+  color: var(--cx-text);
+}
+
+body.customer-theme-v2::before {
+  opacity: .18;
+  background-image:
+    linear-gradient(rgba(22, 119, 255, .07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 119, 255, .07) 1px, transparent 1px);
+}
+
+body.customer-theme-v2 .customer-dashboard,
+body.customer-theme-v2 .cart-page,
+body.customer-theme-v2 .checkout-page,
+body.customer-theme-v2 .orders-page,
+body.customer-theme-v2 .wishlist-page,
+body.customer-theme-v2 .customer-products-page,
+body.customer-theme-v2 .customer-profile-page,
+body.customer-theme-v2 .customer-addresses-page,
+body.customer-theme-v2 .customer-rewards-page,
+body.customer-theme-v2 .after-sales-page,
+body.customer-theme-v2 .second-hand-market-page,
+body.customer-theme-v2 .market-page,
+body.customer-theme-v2 .policy-page,
+body.customer-theme-v2 .public-home-page,
+body.customer-theme-v2 .product-details-page,
+body.customer-theme-v2 .product-detail-page,
+body.customer-theme-v2 .auth-page,
+body.customer-theme-v2 .login-page,
+body.customer-theme-v2 .register-page {
+  background:
+    radial-gradient(circle at 100% 0, rgba(255, 107, 0, .10), transparent 27rem),
+    radial-gradient(circle at 0 0, rgba(22, 119, 255, .09), transparent 30rem),
+    var(--cx-bg) !important;
+  color: var(--cx-text);
+}
+
+body.customer-theme-v2 :where(button, input, select, textarea):focus-visible,
+body.customer-theme-v2 :where(a):focus-visible {
+  outline: 3px solid rgba(22, 119, 255, .28) !important;
+  outline-offset: 3px;
+}
+
+body.customer-theme-v2 :where(input, select, textarea) {
+  border-color: var(--cx-line);
+  color: var(--cx-text);
+}
+
+body.customer-theme-v2 :where(input, select, textarea):focus {
+  border-color: var(--cx-blue) !important;
+  box-shadow: 0 0 0 4px rgba(22, 119, 255, .12) !important;
+}
+
+body.customer-theme-v2 .customer-public-header {
+  background: linear-gradient(108deg, #061321, #09233d 64%, #07182f) !important;
+  box-shadow: 0 10px 28px rgba(7, 24, 47, .20);
+}
+body.customer-theme-v2 .customer-public-brand-mark,
+body.customer-theme-v2 .customer-public-brand b { border-color: var(--cx-orange); color: var(--cx-orange); }
+body.customer-theme-v2 .customer-public-search { border: 1px solid rgba(255, 143, 59, .30); box-shadow: 0 8px 22px rgba(3,20,40,.17); }
+body.customer-theme-v2 .customer-public-search button { background: linear-gradient(135deg, #ff8516, #ff4810); }
+body.customer-theme-v2 .customer-public-header nav { background-color: #0b2a51; }
+
+body.customer-theme-v2 .site-footer:not(.seller) {
+  --orange: #ff8a1f;
+  --blue: #2878ff;
+  --cyan: #57c7ff;
+  --midnight: #07182f;
+  --navy: #0b2a51;
+  --line: rgba(151, 207, 255, .18);
+  --text: #e7f0fb;
+  --muted: #aebfd4;
+}
+
+body.customer-theme-v2 :is(.checkout-place-order, .cart-checkout-button, .market-primary, .market-link, .customer-cart-action, .customer-search-submit) {
+  background: linear-gradient(105deg, #ff7918, #ff4618) !important;
+  box-shadow: 0 11px 24px rgba(255,107,0,.24) !important;
+}
+body.customer-theme-v2 :is(.checkout-place-order, .cart-checkout-button, .market-primary, .market-link, .customer-cart-action, .customer-search-submit):hover {
+  filter: brightness(1.05) saturate(1.04);
+}
+
+body.customer-theme-v2 :is(.customer-profile-hero, .customer-rewards-cards, .order-details-hero) {
+  background: linear-gradient(122deg, #0b1f3a, #15549a) !important;
+  box-shadow: 0 20px 42px rgba(11,31,58,.20) !important;
+}
+
+body.customer-theme-v2 :is(.customer-product-card, .wishlist-card, .market-card, .details-card, .order-section, .order-top-card, .status-timeline-card, .customer-profile-card, .customer-rewards-history, .customer-rewards-cards, .after-sales-card, .after-sales-detail, .after-sales-estimate, .market-search-panel, .market-category-section, .market-farm-banner, .checkout-card, .checkout-order-summary, .cart-item, .cart-summary) {
+  border-color: var(--cx-line) !important;
+  box-shadow: 0 14px 36px rgba(11,31,58,.075) !important;
+}
+
+body.customer-theme-v2 :is(.customer-product-card:hover, .wishlist-card:hover, .market-card:hover, .cart-item:hover, .order-card:hover) {
+  box-shadow: 0 20px 44px rgba(11,31,58,.14) !important;
+}
+
+body.customer-theme-v2 :is(.customer-product-category, .market-card-category, .order-eyebrow, .after-sales-eyebrow, .customer-profile-card-header > span, .customer-rewards-page .eyebrow) {
+  color: #1677ff !important;
+}
+
+body.customer-theme-v2 :is(.status-success, .delivered, .in-stock, .success, .order-status-delivered) { color: #138a54 !important; }
+body.customer-theme-v2 :is(.status-warning, .pending, .warning) { color: #b7791f !important; }
+body.customer-theme-v2 :is(.status-danger, .cancelled, .error) { color: #cf3d45 !important; }
+
+body.customer-theme-v2 .market-page { background: radial-gradient(circle at 95% 0, rgba(255,107,0,.12), transparent 24rem), var(--cx-bg) !important; }
+body.customer-theme-v2 .order-card-header,
+body.customer-theme-v2 .cart-item-header,
+body.customer-theme-v2 .checkout-card-heading { background: linear-gradient(100deg, rgba(37,99,235,.07), rgba(255,107,0,.09)) !important; }
+body.customer-theme-v2 .marketplace-message.error,
+body.customer-theme-v2 .checkout-error { border-color: #fecdd3 !important; background: #fff6f7 !important; }
+
+/* Shared ShivHub dark navigation, matching the support-dashboard reference. */
+body.customer-theme-v2 :is(.cart-navigation, .customer-orders-nav, .checkout-header) {
+  border-color: rgba(255,255,255,.10) !important;
+  background: linear-gradient(104deg, #061321 0%, #09233d 63%, #07182f 100%) !important;
+  box-shadow: 0 10px 28px rgba(5,20,37,.18) !important;
+}
+body.customer-theme-v2 :is(.cart-brand, .customer-orders-brand, .checkout-brand) { color: #fff !important; }
+body.customer-theme-v2 :is(.cart-brand em, .customer-orders-brand em, .checkout-brand strong span) { color: #ff7a18 !important; }
+body.customer-theme-v2 :is(.cart-brand span, .customer-orders-brand span) { color: #ff7a18 !important; background: #fff !important; }
+body.customer-theme-v2 :is(.cart-navigation > div button, .customer-orders-nav > div button, .checkout-header-actions a) { color: #c9d8e8 !important; }
+body.customer-theme-v2 :is(.cart-navigation > div button:hover, .cart-navigation > div button.active, .customer-orders-nav > div button:hover, .customer-orders-nav > div button.active, .checkout-header-actions a:hover, .checkout-header-actions a.active) { color: #fff !important; background: rgba(255,255,255,.10) !important; }
+body.customer-theme-v2 :is(.checkout-header-search, .customer-public-search) { border: 1px solid rgba(255,138,31,.36) !important; background: #fff !important; }
+body.customer-theme-v2 :is(.checkout-header-search button, .customer-public-search button) { background: linear-gradient(135deg, #ff8516, #ff4810) !important; }
+body.customer-theme-v2 :is(.cart-benefits, .footer-assurance) { border-color: rgba(255,138,31,.28) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  body.customer-theme-v2 *, body.customer-theme-v2 *::before, body.customer-theme-v2 *::after { transition: none !important; animation: none !important; }
+}
+
+/* Dashboard command header: the marketplace has its own header component,
+   so it needs an explicit final layer instead of inheriting public-header CSS. */
+body.customer-theme-v2 .marketplace-page .customer-header {
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.10) !important;
+  background: linear-gradient(104deg, #061321 0%, #09233d 60%, #07182f 100%) !important;
+  box-shadow: 0 10px 28px rgba(3,14,29,.20) !important;
+  backdrop-filter: blur(18px);
+}
+
+body.customer-theme-v2 .marketplace-page .customer-header-inner {
+  width: min(100% - 48px, 1510px);
+  min-height: 76px;
+  flex-wrap: nowrap;
+  gap: clamp(12px, 1.65vw, 26px);
+  padding: 10px 0;
+}
+
+body.customer-theme-v2 .marketplace-page .customer-brand {
+  flex: 0 0 auto;
+  gap: 8px;
+  color: #fff;
+}
+
+body.customer-theme-v2 .marketplace-page .customer-brand-mark {
+  width: 33px;
+  height: 33px;
+  border: 0;
+  border-radius: 0;
+  color: #ff7a18;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.customer-theme-v2 .marketplace-page .customer-brand:hover .customer-brand-mark {
+  color: #ff9f4a;
+  background: transparent;
+  transform: rotate(-7deg) scale(1.08);
+}
+
+body.customer-theme-v2 .marketplace-page .customer-brand-name {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -.075em;
+}
+
+body.customer-theme-v2 .marketplace-page .customer-brand-name span { color: #ff7a18; }
+
+body.customer-theme-v2 .marketplace-page .customer-search {
+  order: initial;
+  flex: 1 1 360px;
+  min-width: 180px;
+  max-width: 590px;
+  min-height: 43px !important;
+  height: 43px !important;
+  padding: 3px 3px 3px 14px !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,.16) !important;
+}
+
+body.customer-theme-v2 .marketplace-page .customer-search:focus-within {
+  border-color: #ff8b2e !important;
+  box-shadow: 0 0 0 3px rgba(255,107,0,.20), 0 8px 18px rgba(0,0,0,.16) !important;
+  transform: none;
+}
+
+body.customer-theme-v2 .marketplace-page .customer-search-icon { margin-right: 3px; color: #64748b; }
+body.customer-theme-v2 .marketplace-page .customer-search input { color: #10213b !important; }
+body.customer-theme-v2 .marketplace-page .customer-search-submit {
+  min-height: 37px;
+  padding-inline: 15px !important;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #ff8516, #ff4810) !important;
+  box-shadow: none !important;
+}
+body.customer-theme-v2 .marketplace-page .customer-search-submit:hover { background: linear-gradient(135deg, #ff9a39, #ff5a23) !important; }
+body.customer-theme-v2 .marketplace-page .customer-filter-toggle {
+  min-height: 37px;
+  border-color: #dce6f2 !important;
+  border-radius: 8px !important;
+  color: #10213b !important;
+  background: #f8fbff !important;
+}
+body.customer-theme-v2 .marketplace-page .customer-filter-toggle:hover,
+body.customer-theme-v2 .marketplace-page .customer-filter-toggle[aria-expanded="true"] { color: #fff !important; border-color: #ff6b00 !important; background: #ff6b00 !important; }
+
+body.customer-theme-v2 .marketplace-page .customer-header-actions {
+  flex: 0 1 auto;
+  gap: 1px;
+  margin-left: 0;
+}
+
+body.customer-theme-v2 .marketplace-page .customer-header-action {
+  position: relative;
+  min-height: 46px;
+  min-width: 49px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px 7px;
+  border-radius: 9px;
+  color: #cbd9e9;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+body.customer-theme-v2 .marketplace-page .customer-header-action .customer-action-icon { color: #dcecff; }
+body.customer-theme-v2 .marketplace-page .customer-header-action:hover,
+body.customer-theme-v2 .marketplace-page .customer-header-action[aria-expanded="true"] { color: #fff; background: rgba(255,255,255,.09); box-shadow: none; transform: translateY(-1px); }
+body.customer-theme-v2 .marketplace-page .customer-header-action:hover .customer-action-icon { color: #ff7a18; }
+body.customer-theme-v2 .marketplace-page .customer-header-action::after { content: ""; position: absolute; right: 11px; bottom: 2px; left: 11px; height: 2px; border-radius: 999px; background: #ff7a18; opacity: 0; transform: scaleX(.35); transition: opacity .18s ease, transform .18s ease; }
+body.customer-theme-v2 .marketplace-page .customer-header-action:hover::after { opacity: 1; transform: scaleX(1); }
+
+body.customer-theme-v2 .marketplace-page .customer-loyalty-badge {
+  min-height: 39px;
+  padding: 0 11px;
+  border: 1px solid rgba(255,174,83,.58);
+  border-radius: 999px;
+  color: #ffcc75;
+  background: rgba(255,132,21,.10);
+  box-shadow: 0 8px 18px rgba(0,0,0,.12);
+}
+body.customer-theme-v2 .marketplace-page .customer-loyalty-badge-icon { color: #ff9a39; }
+body.customer-theme-v2 .marketplace-page .customer-header-language {
+  height: 39px;
+  border-color: rgba(255,255,255,.17);
+  color: #d9e6f4;
+  background: rgba(255,255,255,.055);
+}
+body.customer-theme-v2 .marketplace-page .customer-header-language > span { color: #ff9a39; }
+body.customer-theme-v2 .marketplace-page .customer-header-language select { color: inherit; background: transparent; }
+body.customer-theme-v2 .marketplace-page .customer-profile-button {
+  min-height: 48px;
+  border-color: rgba(255,255,255,.16);
+  color: #fff;
+  background: rgba(255,255,255,.055);
+}
+body.customer-theme-v2 .marketplace-page .customer-avatar { color: #ff7a18; background: #eaf2ff; }
+body.customer-theme-v2 .marketplace-page .customer-profile-button:hover { background: rgba(255,255,255,.12); box-shadow: none; }
+body.customer-theme-v2 .marketplace-page .customer-cart-count { color: #fff; background: #ff5b23; box-shadow: 0 0 0 2px #09233d; }
+
+/* Customer footer remains data-driven, only the visual treatment changes. */
+body.customer-theme-v2 .site-footer:not(.seller) .footer-heading > svg,
+body.customer-theme-v2 .site-footer:not(.seller) .footer-group-content a > svg { color: #ff9d43; }
+body.customer-theme-v2 .site-footer:not(.seller) .footer-values svg,
+body.customer-theme-v2 .site-footer:not(.seller) .footer-follow a {
+  color: #ff9d43;
+  border-color: rgba(255,157,67,.38);
+  background: rgba(2,10,20,.72);
+}
+body.customer-theme-v2 .site-footer:not(.seller) .footer-values span:hover svg,
+body.customer-theme-v2 .site-footer:not(.seller) .footer-follow a:hover,
+body.customer-theme-v2 .site-footer:not(.seller) .footer-follow a:focus-visible {
+  color: #fff;
+  border-color: #ff7a18;
+  background: linear-gradient(135deg, #ff8516, #ff4810);
+  box-shadow: 0 8px 18px rgba(255,107,0,.24);
+}
+
+/* Dashboard: search owns a dedicated second row; the first row stays a
+   compact brand-and-actions bar at every desktop width. */
+body.customer-theme-v2 .marketplace-page .customer-header-inner {
+  flex-wrap: wrap;
+  min-height: 124px;
+  align-content: center;
+}
+body.customer-theme-v2 .marketplace-page .customer-search {
+  order: 3;
+  flex: 1 0 100%;
+  max-width: none;
+}
+body.customer-theme-v2 .marketplace-page .customer-header-actions { margin-left: auto; }
+
+/* Category row and small controls deliberately use charcoal rather than the
+   previous bright-blue icon treatment. */
+body.customer-theme-v2 .marketplace-page .marketplace-category-navigation {
+  border-block: 1px solid #e2eaf3;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 8px 18px rgba(11,31,58,.045);
+}
+body.customer-theme-v2 .marketplace-page .marketplace-category-button {
+  color: #34445d;
+  background: transparent;
+}
+body.customer-theme-v2 .marketplace-page .marketplace-category-button > span:first-child,
+body.customer-theme-v2 .marketplace-page .marketplace-category-button svg { color: #111827; }
+body.customer-theme-v2 .marketplace-page .marketplace-category-button:hover,
+body.customer-theme-v2 .marketplace-page .marketplace-category-button.active {
+  color: #fff;
+  background: #0b1f3a;
+}
+body.customer-theme-v2 .marketplace-page .marketplace-category-button:hover > span:first-child,
+body.customer-theme-v2 .marketplace-page .marketplace-category-button.active > span:first-child,
+body.customer-theme-v2 .marketplace-page .marketplace-category-button:hover svg,
+body.customer-theme-v2 .marketplace-page .marketplace-category-button.active svg { color: #ff8a1f; }
+
+/* Independent customer navbars share the same ShivHub mark and navy surface. */
+body.customer-theme-v2 :is(.cart-brand, .customer-orders-brand, .market-home-logo) > span {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 0;
+  color: #ff7a18 !important;
+  background: transparent !important;
+}
+body.customer-theme-v2 :is(.cart-brand, .customer-orders-brand, .market-home-logo) strong { color: #fff; }
+body.customer-theme-v2 .market-home-logo strong { font-size: 20px; }
+body.customer-theme-v2 .market-home-logo em { color: #ff7a18; font-style: normal; }
+body.customer-theme-v2 .market-customer-navbar {
+  padding: 11px 16px;
+  border-radius: 14px;
+  background: linear-gradient(104deg, #061321, #09233d 60%, #07182f) !important;
+  box-shadow: 0 10px 24px rgba(3,14,29,.15);
+}
+body.customer-theme-v2 .market-customer-navbar :is(nav button, .market-profile-link, .market-language, .market-language select) { color: #d7e3f2 !important; }
+body.customer-theme-v2 .market-customer-navbar nav button.active { color: #fff !important; background: rgba(255,107,0,.20) !important; }
+body.customer-theme-v2 .market-customer-navbar .market-profile-link,
+body.customer-theme-v2 .market-customer-navbar .market-language { border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.06); }
+
+@media (max-width: 1280px) {
+  body.customer-theme-v2 .marketplace-page .customer-header-inner { padding-block: 9px 12px; }
+  body.customer-theme-v2 .marketplace-page .customer-search { order: 3; flex-basis: 100%; max-width: none; }
+}
+
+@media (max-width: 1280px) {
+  body.customer-theme-v2 .marketplace-page .customer-header-inner { flex-wrap: wrap; padding-block: 9px 12px; }
+  body.customer-theme-v2 .marketplace-page .customer-search { order: 3; flex-basis: 100%; max-width: none; }
+  body.customer-theme-v2 .marketplace-page .customer-header-actions { margin-left: auto; }
+}
+
+@media (max-width: 720px) {
+  body.customer-theme-v2 .marketplace-page .customer-header-inner { width: calc(100% - 24px); gap: 8px; }
+  body.customer-theme-v2 .marketplace-page .customer-brand-name { font-size: 20px; }
+  body.customer-theme-v2 .marketplace-page .customer-header-actions { max-width: 100%; overflow-x: auto; }
+  body.customer-theme-v2 .marketplace-page .customer-header-action { min-width: 42px; padding-inline: 5px; }
+  body.customer-theme-v2 .marketplace-page .customer-header-action > span:last-child:not(.customer-cart-count) { display: none; }
+  body.customer-theme-v2 .marketplace-page .customer-loyalty-badge-label,
+  body.customer-theme-v2 .marketplace-page .customer-profile-name,
+  body.customer-theme-v2 .marketplace-page .customer-profile-arrow { display: none; }
+  body.customer-theme-v2 .marketplace-page .customer-search-submit span,
+  body.customer-theme-v2 .marketplace-page .customer-filter-toggle span { display: none; }
+  body.customer-theme-v2 .marketplace-page .customer-search-submit,
+  body.customer-theme-v2 .marketplace-page .customer-filter-toggle { min-width: 39px; padding-inline: 9px !important; }
+}
+
+/* Unified final layer for the legacy customer feature pages. */
+body.customer-theme-v2 :is(.after-sales-nav, .wishlist-nav, .profile-nav, .customer-order-nav) {
+  border: 1px solid rgba(255,255,255,.10) !important;
+  background: linear-gradient(104deg, #061321 0%, #09233d 63%, #07182f 100%) !important;
+  box-shadow: 0 10px 28px rgba(5,20,37,.18) !important;
+}
+body.customer-theme-v2 :is(.after-sales-brand, .wishlist-brand, .profile-brand, .customer-order-brand) { color: #fff !important; }
+body.customer-theme-v2 :is(.after-sales-brand, .wishlist-brand, .profile-brand, .customer-order-brand) > span {
+  display: inline-grid; place-items: center; width: 32px; height: 32px; border: 0 !important; border-radius: 0 !important;
+  color: #ff7a18 !important; background: transparent !important;
+}
+body.customer-theme-v2 :is(.after-sales-brand, .wishlist-brand, .profile-brand, .customer-order-brand) em { color: #ff7a18 !important; font-style: normal; }
+body.customer-theme-v2 :is(.after-sales-nav, .wishlist-nav, .profile-nav, .customer-order-nav) > div > button { color: #c9d8e8 !important; border-color: transparent !important; background: transparent !important; }
+body.customer-theme-v2 :is(.after-sales-nav, .wishlist-nav, .profile-nav, .customer-order-nav) > div > button:hover,
+body.customer-theme-v2 :is(.after-sales-nav, .wishlist-nav, .profile-nav, .customer-order-nav) > div > button.active {
+  color: #fff !important; border-color: transparent !important; background: rgba(255,107,0,.20) !important; box-shadow: inset 0 -2px 0 #ff7a18;
+}
+
+/* The header component is used on dashboard and catalogue routes: search is
+   deliberately its own second row, below the brand and account controls. */
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header {
+  border: 0 !important; border-bottom: 1px solid rgba(255,255,255,.10) !important;
+  background: linear-gradient(104deg, #061321 0%, #09233d 60%, #07182f 100%) !important;
+  box-shadow: 0 10px 28px rgba(3,14,29,.20) !important;
+}
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-inner { width: min(100% - 48px, 1510px); min-height: 124px; flex-wrap: wrap; align-content: center; gap: clamp(10px, 1.65vw, 26px); padding: 10px 0 12px; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-brand { flex: 0 0 auto; gap: 8px; color: #fff; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-brand-mark { width: 33px; height: 33px; border: 0; border-radius: 0; color: #ff7a18; background: transparent; box-shadow: none; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-brand-name { color: #fff; font-size: 24px; font-weight: 900; letter-spacing: -.075em; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-brand-name span { color: #ff7a18; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-search { order: 3; flex: 1 0 100%; max-width: none; min-height: 43px !important; height: 43px !important; padding: 3px 3px 3px 14px !important; border: 1px solid rgba(255,255,255,.16) !important; border-radius: 10px !important; background: #fff !important; box-shadow: 0 8px 18px rgba(0,0,0,.16) !important; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-search:focus-within { border-color: #ff8b2e !important; box-shadow: 0 0 0 3px rgba(255,107,0,.20), 0 8px 18px rgba(0,0,0,.16) !important; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-search-icon { color: #64748b; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-search input { color: #10213b !important; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-search-submit { min-height: 37px; padding-inline: 15px !important; border-radius: 8px !important; color: #fff !important; background: linear-gradient(135deg, #ff8516, #ff4810) !important; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-filter-toggle { min-height: 37px; border-color: #dce6f2 !important; border-radius: 8px !important; color: #10213b !important; background: #f8fbff !important; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-actions { flex: 0 1 auto; gap: 1px; margin-left: auto; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-action { position: relative; min-height: 46px; min-width: 49px; flex-direction: column; justify-content: center; gap: 2px; padding: 4px 7px; border-radius: 9px; color: #cbd9e9; font-size: 10px; font-weight: 750; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-action .customer-action-icon { color: #dcecff; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-action:hover { color: #fff; background: rgba(255,255,255,.09); transform: translateY(-1px); }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-action:hover .customer-action-icon { color: #ff7a18; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-loyalty-badge { min-height: 39px; border-color: rgba(255,174,83,.58); color: #ffcc75; background: rgba(255,132,21,.10); }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-loyalty-badge-icon,
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-language > span { color: #ff9a39; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) :is(.customer-header-language, .customer-profile-button) { border-color: rgba(255,255,255,.17); color: #d9e6f4; background: rgba(255,255,255,.055); }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-language select { color: inherit; background: transparent; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-avatar { color: #ff7a18; background: #eaf2ff; }
+body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-cart-count { color: #fff; background: #ff5b23; box-shadow: 0 0 0 2px #09233d; }
+
+/* Replace former feature-page blue/violet labels with a single orange accent. */
+body.customer-theme-v2 :is(.after-sales-eyebrow, .after-sales-title-row > div > p, .after-sales-section-heading > div > p, .wishlist-header > span, .wishlist-header .eyebrow, .customer-products-page .customer-products-eyebrow, .customer-products-page .customer-products-header > p, .customer-profile-card-header > span, .customer-rewards-page .eyebrow, .order-eyebrow) { color: #e85d04 !important; }
+body.customer-theme-v2 :is(.after-sales-page, .wishlist-page, .customer-products-page, .customer-profile-page, .customer-rewards-page, .customer-order-details-page, .customer-orders-page, .cart-page) :is(h1, h2, h3, h4, strong, label, th) { color: #10213b; }
+body.customer-theme-v2 :is(.after-sales-page, .wishlist-page, .customer-products-page, .customer-profile-page, .customer-rewards-page, .customer-order-details-page, .customer-orders-page, .cart-page) :is(p, small, td, dd, dt) { color: #526681; }
+body.customer-theme-v2 :is(.after-sales-page > header, .wishlist-header, .customer-products-page .customer-products-header, .customer-rewards-topbar, .order-details-header) { border-color: #ffd5b4 !important; background: linear-gradient(110deg, #fff8f2, #f5f8fc 64%, #fff0e5) !important; }
+body.customer-theme-v2 .customer-profile-hero { background: linear-gradient(120deg, #07182f, #123d70) !important; }
+body.customer-theme-v2 .customer-profile-hero :is(h1, h2, h3, strong, p, small) { color: #fff !important; }
+body.customer-theme-v2 .customer-profile-hero :is(.eyebrow, label, span) { color: #ffb55e !important; }
+body.customer-theme-v2 .customer-rewards-cards { background: transparent !important; box-shadow: none !important; }
+body.customer-theme-v2 .customer-rewards-cards article { border-color: #ffd08c !important; background: linear-gradient(135deg, #fff6df, #fffdf6) !important; }
+body.customer-theme-v2 .customer-rewards-cards :is(span, strong) { color: #6a4b12 !important; }
+body.customer-theme-v2 .customer-rewards-cards strong { color: #10213b !important; }
+body.customer-theme-v2 :is(.after-sales-card > button:not(.after-sales-view-order), .after-sales-empty button, .wishlist-card-actions button:not(.wishlist-remove), .wishlist-empty button, .customer-rewards-topbar button, .customer-rewards-pagination button:not(:disabled)) { color: #fff !important; border-color: #ff6b00 !important; background: linear-gradient(135deg, #ff8516, #ff4810) !important; box-shadow: 0 9px 18px rgba(255,107,0,.18); }
+body.customer-theme-v2 :is(.after-sales-secondary, .after-sales-view-order, .customer-rewards-pagination button:disabled) { color: #10213b !important; border-color: #dce6f2 !important; background: #fff !important; box-shadow: none !important; }
+body.customer-theme-v2 :is(.after-sales-card dl, .after-sales-history, .customer-rewards-history, .wishlist-card, .customer-products-page .customer-product-card, .customer-profile-card) { border-color: #dce6f2 !important; background-color: #fff !important; }
+body.customer-theme-v2 :is(.after-sales-card dl > div, .customer-rewards-history thead) { background: #f7fafc !important; }
+body.customer-theme-v2 :is(.after-sales-card dt, .customer-rewards-history th) { color: #5c6d83 !important; }
+body.customer-theme-v2 :is(.after-sales-card dd, .customer-rewards-history td) { color: #10213b !important; }
+body.customer-theme-v2 :is(.customer-products-page .customer-product-category, .customer-products-page .customer-products-header .eyebrow, .wishlist-page .wishlist-count, .customer-orders-page .orders-tab.active, .cart-page .cart-item-category) { color: #e85d04 !important; }
+
+@media (max-width: 720px) {
+  body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-inner { width: calc(100% - 24px); gap: 8px; }
+  body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-brand-name { font-size: 20px; }
+  body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-actions { max-width: 100%; overflow-x: auto; }
+  body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-action { min-width: 42px; padding-inline: 5px; }
+  body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-header-action > span:last-child:not(.customer-cart-count),
+  body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-loyalty-badge-label,
+  body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-profile-name,
+  body.customer-theme-v2 :is(.marketplace-page, .customer-products-page) .customer-profile-arrow { display: none; }
+}
+
+/* Header component is rendered beside (not inside) the product page, so this
+   final selector intentionally targets the shared customer header directly. */
+body.customer-theme-v2 .customer-header {
+  border: 0 !important;
+  border-bottom: 1px solid rgba(255,255,255,.10) !important;
+  background: linear-gradient(104deg, #061321 0%, #09233d 60%, #07182f 100%) !important;
+  box-shadow: 0 10px 28px rgba(3,14,29,.20) !important;
+}
+body.customer-theme-v2 .customer-header .customer-header-inner { width: min(100% - 48px, 1510px); min-height: 124px; flex-wrap: wrap; align-content: center; gap: 12px 18px; padding: 10px 0 12px; }
+body.customer-theme-v2 .customer-header .customer-brand { flex: 0 0 auto; color: #fff !important; }
+body.customer-theme-v2 .customer-header .customer-brand-mark { border: 0; border-radius: 0; color: #ff7a18; background: transparent; box-shadow: none; }
+body.customer-theme-v2 .customer-header .customer-brand-name { color: #fff !important; }
+body.customer-theme-v2 .customer-header .customer-brand-name span { color: #ff7a18 !important; }
+body.customer-theme-v2 .customer-header .customer-search { order: 3; flex: 1 0 100%; max-width: none; min-height: 43px !important; height: 43px !important; border: 1px solid rgba(255,255,255,.16) !important; background: #fff !important; }
+body.customer-theme-v2 .customer-header .customer-search input { color: #10213b !important; }
+body.customer-theme-v2 .customer-header .customer-search-submit { color: #fff !important; background: linear-gradient(135deg, #ff8516, #ff4810) !important; }
+body.customer-theme-v2 .customer-header .customer-filter-toggle { color: #10213b !important; background: #f8fbff !important; }
+body.customer-theme-v2 .customer-header .customer-header-actions { flex: 0 1 auto; gap: 3px; margin-left: auto; white-space: nowrap; }
+body.customer-theme-v2 .customer-header .customer-header-action { min-width: 52px; color: #d6e2ef !important; }
+body.customer-theme-v2 .customer-header .customer-header-action:hover { color: #fff !important; background: rgba(255,107,0,.18) !important; }
+body.customer-theme-v2 .customer-header .customer-header-action:hover .customer-action-icon { color: #ff8a1f !important; }
+body.customer-theme-v2 .customer-header :is(.customer-loyalty-badge, .customer-header-language, .customer-profile-button) { color: #d6e2ef !important; border-color: rgba(255,255,255,.17) !important; background: rgba(255,255,255,.055) !important; }
+body.customer-theme-v2 .customer-header .customer-loyalty-badge { color: #ffcc75 !important; border-color: rgba(255,174,83,.58) !important; background: rgba(255,132,21,.10) !important; }
+body.customer-theme-v2 .customer-header .customer-cart-count { color: #fff !important; background: #ff5422 !important; box-shadow: 0 0 0 2px #09233d; }
+
+/* Wider desktop rhythm: these are interactive controls, not a compressed
+   toolbar.  The search remains in its dedicated row underneath. */
+@media (min-width: 1024px) {
+  body.customer-theme-v2 .customer-header .customer-header-inner {
+    min-height: 138px;
+    gap: 14px 30px;
+    padding-block: 12px 15px;
+  }
+  body.customer-theme-v2 .customer-header .customer-header-actions { gap: 9px; }
+  body.customer-theme-v2 .customer-header .customer-header-action {
+    min-width: 64px;
+    min-height: 50px;
+    padding-inline: 9px;
+  }
+  body.customer-theme-v2 .customer-header .customer-loyalty-badge { margin-right: 6px; padding-inline: 15px; }
+  body.customer-theme-v2 .customer-header .customer-header-language { min-width: 118px; padding-inline: 12px; }
+  body.customer-theme-v2 .customer-header .customer-profile-button { min-width: 250px; padding-inline: 12px; }
+}
+
+/* Navigation brand must remain light inside navy bars; this comes after broad
+   content typography rules so it cannot be turned dark by a page stylesheet. */
+body.customer-theme-v2 :is(.after-sales-nav, .wishlist-nav, .profile-nav, .customer-order-nav, .cart-navigation, .customer-orders-nav, .market-customer-navbar) :is(strong, .cart-brand, .customer-orders-brand, .market-home-logo) { color: #fff !important; }
+body.customer-theme-v2 :is(.after-sales-nav, .wishlist-nav, .profile-nav, .customer-order-nav, .cart-navigation, .customer-orders-nav, .market-customer-navbar) em { color: #ff7a18 !important; }
+body.customer-theme-v2 :is(.after-sales-nav, .wishlist-nav, .profile-nav, .customer-order-nav, .cart-navigation, .customer-orders-nav) > div { gap: 12px !important; }
+body.customer-theme-v2 :is(.after-sales-nav, .wishlist-nav, .profile-nav, .customer-order-nav, .cart-navigation, .customer-orders-nav) > div > button { padding-inline: 14px !important; }
+
+/* Remove the remaining sky-blue / violet visual language from product,
+   wishlist and order content without changing semantic success/error states. */
+body.customer-theme-v2 .customer-products-header > div > span,
+body.customer-theme-v2 .customer-products-page .customer-products-header .eyebrow,
+body.customer-theme-v2 .wishlist-header > div > span,
+body.customer-theme-v2 .wishlist-header h1 svg,
+body.customer-theme-v2 .wishlist-count strong,
+body.customer-theme-v2 .wishlist-product-top span:first-child,
+body.customer-theme-v2 .wishlist-view-btn,
+body.customer-theme-v2 .wishlist-missing-icon,
+body.customer-theme-v2 .wishlist-empty-icon { color: #e85d04 !important; }
+body.customer-theme-v2 .wishlist-header h1 svg { fill: #fff0e5 !important; }
+body.customer-theme-v2 .wishlist-view-btn { border-color: #ffc896 !important; background: #fffaf6 !important; }
+body.customer-theme-v2 .wishlist-cart-btn,
+body.customer-theme-v2 :is(.wishlist-shop-btn, .wishlist-retry-btn, .wishlist-remove-btn) { background: linear-gradient(135deg, #ff8516, #ff4810) !important; }
+body.customer-theme-v2 .orders-hero { border-color: #ffd2ae !important; background: linear-gradient(110deg, #fff8f2, #f5f8fc 58%, #fff0e5) !important; box-shadow: 0 16px 35px rgba(255,107,0,.09) !important; }
+body.customer-theme-v2 .orders-hero > span,
+body.customer-theme-v2 .orders-hero > div > span,
+body.customer-theme-v2 .orders-hero aside svg,
+body.customer-theme-v2 .customer-order-address { color: #e85d04 !important; }
+body.customer-theme-v2 .orders-status-tabs button.active,
+body.customer-theme-v2 .orders-state button { background: linear-gradient(135deg, #ff8516, #ff4810) !important; box-shadow: 0 8px 18px rgba(255,107,0,.20) !important; }
+body.customer-theme-v2 .customer-order-card { border-left-color: #ff7a18 !important; }
+body.customer-theme-v2 .customer-order-status:not(.status-delivered):not(.status-cancelled) { color: #a84a00 !important; background: #fff0e5 !important; }
+body.customer-theme-v2 .customer-order-actions .details { border-color: #ffc896 !important; color: #b94c00 !important; background: #fff8f2 !important; }
+
+@media (max-width: 720px) {
+  body.customer-theme-v2 .customer-header .customer-header-inner { width: calc(100% - 24px); gap: 8px; }
+  body.customer-theme-v2 .customer-header .customer-header-actions { max-width: 100%; overflow-x: auto; }
+  body.customer-theme-v2 .customer-header .customer-header-action { min-width: 42px; padding-inline: 5px; }
+  body.customer-theme-v2 .customer-header .customer-header-action > span:last-child:not(.customer-cart-count),
+  body.customer-theme-v2 .customer-header .customer-loyalty-badge-label,
+  body.customer-theme-v2 .customer-header .customer-profile-name,
+  body.customer-theme-v2 .customer-header .customer-profile-arrow { display: none; }
+}
+
+/* Second-hand market and related customer discovery widgets use the same
+   ShivHub orange / navy palette as the catalogue—not the old teal/blue mix. */
+body.customer-theme-v2 .market-page { color: #10213b; background: radial-gradient(circle at 95% 0, rgba(255,107,0,.12), transparent 26rem), #f5f8fc !important; }
+body.customer-theme-v2 .market-hero { background: linear-gradient(125deg, #061321, #09233d 60%, #274b70) !important; box-shadow: 0 16px 35px rgba(11,31,58,.22) !important; }
+body.customer-theme-v2 .market-brand-mark { color: #ff6b00; background: #fff4ea; }
+body.customer-theme-v2 :is(.market-hero-copy p, .section-heading p, .market-form-title p, .market-card-category) { color: #e85d04 !important; }
+body.customer-theme-v2 .market-hero h1 em { color: #ffbd75; }
+body.customer-theme-v2 .market-primary,
+body.customer-theme-v2 .market-card-actions button,
+body.customer-theme-v2 .market-light-button,
+body.customer-theme-v2 .image-url button { color: #fff !important; background: linear-gradient(135deg, #ff8516, #ff4810) !important; box-shadow: 0 9px 18px rgba(255,107,0,.20); }
+body.customer-theme-v2 .market-primary:hover,
+body.customer-theme-v2 .market-card-actions button:hover,
+body.customer-theme-v2 .market-light-button:hover { filter: brightness(1.06); }
+body.customer-theme-v2 :is(.market-navigation button.active, .market-customer-navbar nav button.active) { color: #fff !important; background: #0b1f3a !important; box-shadow: inset 0 -2px 0 #ff7a18; }
+body.customer-theme-v2 .market-search span { color: #e85d04; }
+body.customer-theme-v2 .market-category-card:hover,
+body.customer-theme-v2 .market-category-card.selected { border-color: #ff8a1f; background: #fff7f0; }
+body.customer-theme-v2 .market-category-card span,
+body.customer-theme-v2 .market-photo { background: linear-gradient(145deg, #f7fafc, #fff0e5); }
+body.customer-theme-v2 .market-farm-banner { border-color: #ffd2ae; background: linear-gradient(105deg, #fff2e5, #fffaf1); }
+body.customer-theme-v2 :is(.market-farm-banner p, .market-farm-banner span, .market-card em) { color: #a84a00 !important; }
+body.customer-theme-v2 .market-count { color: #a84a00; background: #fff0e5; }
+body.customer-theme-v2 .market-card-actions button.quiet { color: #9f4300 !important; background: #fff1e7 !important; box-shadow: none; }
+body.customer-theme-v2 .market-form :is(input, select, textarea):focus { outline-color: rgba(255,107,0,.22); border-color: #ff8a1f; }
+
+/* Product detail compare/purchase controls and customer helper match it too. */
+body.customer-theme-v2 .shp-product-page { --orange: #ff6b00; --blue: #e85d04; --green: #138a54; }
+body.customer-theme-v2 .shp-breadcrumb a { color: #b94c00; }
+body.customer-theme-v2 .shp-actions button:first-child { background: #0b1f3a; }
+body.customer-theme-v2 :is(.shp-actions button:nth-child(2), .shp-bundle-total button, .shp-review-actions button:first-child) { color: #fff !important; background: linear-gradient(135deg, #ff8516, #ff4810) !important; }
+body.customer-theme-v2 .shp-compare-actions button:first-child { border-color: #ff9b4a; color: #b94c00; background: #fff1e7; }
+body.customer-theme-v2 .shp-compare-actions button:not(:first-child) { color: #10213b; border-color: #dce6f2; background: #fff; }
+body.customer-theme-v2 .shp-compare-actions button:not(:disabled):hover { border-color: #ff8a1f; color: #b94c00; background: #fff8f2; }
+body.customer-theme-v2 .journey-market .journey-promo-copy > p,
+body.customer-theme-v2 .journey-market .journey-secondary { color: #b94c00 !important; }
+body.customer-theme-v2 .journey-market button:not(.journey-secondary) { background: linear-gradient(135deg, #ff8516, #ff4810) !important; }
+body.customer-theme-v2 .customer-chatbot-toggle,
+body.customer-theme-v2 .customer-chatbot-panel header { background: linear-gradient(135deg, #ff8516, #e84a12) !important; }
+body.customer-theme-v2 .customer-chatbot-toggle:hover { box-shadow: 0 18px 32px rgba(255,107,0,.34); }
+body.customer-theme-v2 .customer-chatbot-message { border-color: #ffd7b8; background: #fff8f2; }
+body.customer-theme-v2 .customer-chatbot-message span { color: #e85d04; }
+
+/* Catalogue polish: sub-category row, hero and spotlight tiles retain their
+   compact layout instead of leaving an oversized blank band below search. */
+body.customer-theme-v2 .customer-header .customer-header-language,
+body.customer-theme-v2 .customer-header .customer-header-language select { color: #eef5ff !important; }
+body.customer-theme-v2 .customer-header .customer-header-language select option { color: #10213b; background: #fff; }
+body.customer-theme-v2 .customer-header .customer-header-action:has(.customer-cart-count) {
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-width: 56px;
+}
+body.customer-theme-v2 .customer-header .customer-header-action:has(.customer-cart-count) .customer-cart-count { position: absolute; top: 2px; right: 6px; flex: 0 0 auto; margin: 0; }
+body.customer-theme-v2 .customer-subcategory-nav { min-height: 52px; gap: 10px; padding: 9px 0 11px; }
+body.customer-theme-v2 .customer-subcategory-nav > span { color: #ff9a39; }
+body.customer-theme-v2 .customer-subcategory-nav button { border-color: rgba(255,157,67,.42); color: #10213b; background: #fff8f2; }
+body.customer-theme-v2 .customer-subcategory-nav button:hover,
+body.customer-theme-v2 .customer-subcategory-nav button:focus-visible { border-color: #ff6b00; color: #fff; background: #ff6b00; }
+body.customer-theme-v2 .customer-products-page { max-width: 1520px; padding: 28px 32px 56px !important; }
+body.customer-theme-v2 .customer-products-header {
+  align-items: center;
+  min-height: 138px;
+  margin-bottom: 24px;
+  padding: 24px 28px;
+  border: 1px solid #ffd5b4;
+  border-radius: 22px;
+  box-shadow: 0 12px 30px rgba(11,31,58,.07);
+}
+body.customer-theme-v2 .customer-products-header > div:first-child > span { color: #e85d04 !important; }
+body.customer-theme-v2 .customer-product-count { border-color: #ffd0a8; background: #fffaf6; box-shadow: none; }
+body.customer-theme-v2 .customer-product-count strong { color: #b94c00; }
+body.customer-theme-v2 .customer-cart-header-button { border-color: #ffc896; color: #a94400; background: #fff8f2; }
+body.customer-theme-v2 .customer-cart-header-button:hover { color: #fff; border-color: #ff6b00; background: #ff6b00; }
+body.customer-theme-v2 .category-product-showcase { padding: 22px; margin-bottom: 16px; border-color: #dce6f2; background: linear-gradient(120deg, #f8fbff, #fffaf6); }
+body.customer-theme-v2 .category-product-showcase p,
+body.customer-theme-v2 .category-trending-rail > div:first-child > span { color: #e85d04; }
+body.customer-theme-v2 .category-spotlight-rail button { min-height: 196px; border-color: #dce6f2; background: #fff; }
+body.customer-theme-v2 .category-spotlight-rail img { min-height: 104px; padding: 8px; border-radius: 10px; background: linear-gradient(145deg, #f7fafc, #fff0e5); }
+body.customer-theme-v2 .category-spotlight-rail b { color: #b94c00; }
+body.customer-theme-v2 :is(.category-filter-sidebar label > svg, .category-assurance-row svg, .category-product-specs li::marker) { color: #e85d04; }
+body.customer-theme-v2 .category-filter-sidebar button,
+body.customer-theme-v2 .customer-compare-action { border-color: #ffc896 !important; color: #a94400 !important; background: #fff3e9 !important; }
+body.customer-theme-v2 .customer-compare-action:hover { color: #fff !important; border-color: #ff6b00 !important; background: #ff6b00 !important; }
+
+@media (max-width: 720px) {
+  body.customer-theme-v2 .customer-products-page { padding: 18px 14px 44px !important; }
+  body.customer-theme-v2 .customer-products-header { align-items: flex-start; flex-direction: column; min-height: 0; padding: 20px; }
+  body.customer-theme-v2 .customer-products-header-actions { width: 100%; justify-content: space-between; }
+  body.customer-theme-v2 .customer-subcategory-nav { width: calc(100% - 24px); }
+}
+
+/* Final dashboard palette sweep: cards, rail controls, hover animation and
+   discount badges no longer retain a blue accent. */
+body.customer-theme-v2 { --cx-blue: #e85d04; --sh-blue: #e85d04; }
+body.customer-theme-v2 .site-footer:not(.seller) { --blue: #ff9a39; --cyan: #ffb45c; }
+body.customer-theme-v2 :is(.marketplace-command-heading > div > span, .marketplace-command-badge, .marketplace-command-card b, .customer-category-card i, .customer-product-rail-heading > div > span, .customer-product-rail-heading > button, .customer-rail-product-card > div > button, .customer-category-rail-arrow, .customer-product-rail-arrow) { color: #b94c00 !important; }
+body.customer-theme-v2 .marketplace-command-badge { border-color: #ffc896 !important; background: #fff1e7 !important; }
+body.customer-theme-v2 :is(.marketplace-command-icon, .customer-category-icon) { color: #e85d04 !important; background: #fff0e5 !important; }
+body.customer-theme-v2 .marketplace-command-card:nth-child(n) .marketplace-command-icon { color: #e85d04 !important; background: #fff0e5 !important; }
+body.customer-theme-v2 :is(.marketplace-command-card:hover, .customer-category-card:hover, .customer-category-card.active, .customer-rail-product-card:hover) { border-color: #ff9a4a !important; box-shadow: 0 14px 30px rgba(255,107,0,.16) !important; }
+body.customer-theme-v2 .customer-category-card.active { background: linear-gradient(145deg, #fff5eb, #fff) !important; }
+body.customer-theme-v2 :is(.customer-category-rail-arrow:hover, .customer-product-rail-arrow:hover) { border-color: #ff6b00 !important; color: #fff !important; background: #ff6b00 !important; }
+body.customer-theme-v2 :is(.customer-product-rail-heading > button:hover, .customer-rail-product-card > div > button:hover) { border-color: #ff9a4a !important; color: #a94400 !important; background: #fff3e9 !important; }
+body.customer-theme-v2 :is(.marketplace-product-badge, .marketplace-offer-badge, .customer-rail-offer, .customer-product-offer) {
+  display: inline-flex !important; align-items: center; width: max-content !important; max-width: 100%; margin: 7px 0 0 !important; padding: 5px 9px !important;
+  border: 0 !important; border-radius: 999px !important; color: #fff !important; background: linear-gradient(135deg, #ff8516, #ff5418) !important;
+  font-size: 10px !important; font-weight: 900 !important; letter-spacing: .03em; box-shadow: 0 5px 12px rgba(255,107,0,.18);
+}
+body.customer-theme-v2 :is(.marketplace-product-card, .customer-rail-product-card, .customer-product-card) { border-color: #dce6f2 !important; }
+body.customer-theme-v2 :is(.marketplace-product-card:hover, .customer-rail-product-card:hover, .customer-product-card:hover) { border-color: #ff9a4a !important; box-shadow: 0 16px 32px rgba(255,107,0,.14) !important; }
+body.customer-theme-v2 :is(.marketplace-product-info > button, .customer-view-product, .cart-view-button, .wishlist-view-btn) { border-color: #ffc896 !important; color: #a94400 !important; background: #fffaf6 !important; }
+body.customer-theme-v2 :is(.marketplace-product-info > button:hover, .customer-view-product:hover, .cart-view-button:hover, .wishlist-view-btn:hover) { border-color: #ff6b00 !important; color: #fff !important; background: #ff6b00 !important; }
+
+/* Dashboard product-card actions: compact premium navy, including disabled stock. */
+body.customer-theme-v2 .marketplace-product-info > button {
+  border-color: #16263e !important;
+  color: #14213d !important;
+  background: #fff !important;
+}
+body.customer-theme-v2 .marketplace-product-info > button:hover:not(:disabled) {
+  border-color: #0b1f3a !important;
+  color: #fff !important;
+  background: #0b1f3a !important;
+}
+body.customer-theme-v2 .marketplace-product-info .marketplace-cart-button,
+body.customer-theme-v2 .marketplace-product-info .marketplace-cart-button:disabled {
+  border-color: #0b1f3a !important;
+  color: #fff !important;
+  background: #0b1f3a !important;
+  opacity: 1 !important;
+}
+body.customer-theme-v2 .marketplace-product-info .marketplace-cart-button:not(:disabled):hover { background: #172f4c !important; }
+body.customer-theme-v2 .marketplace-product-info .marketplace-wishlist-button {
+  border-color: #16263e !important;
+  color: #14213d !important;
+  background: #fff !important;
+}
+
+/* Full-width customer workspaces and a persistent catalogue filter. */
+body.customer-theme-v2 :is(.after-sales-page, .customer-products-page, .customer-profile-page,
+  .customer-orders-page, .customer-order-details-page, .customer-rewards-page, .wishlist-page) {
+  width: 100%;
+  max-width: none !important;
+  box-sizing: border-box;
+}
+
+body.customer-theme-v2 .after-sales-page {
+  padding-inline: clamp(16px, 4.8vw, 92px) !important;
+}
+
+body.customer-theme-v2 .customer-products-page {
+  max-width: none !important;
+  padding-inline: clamp(16px, 3.2vw, 62px) !important;
+}
+
+body.customer-theme-v2 .category-filter-sidebar {
+  position: sticky;
+  top: 198px;
+  z-index: 5;
+  max-height: calc(100vh - 216px);
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+body.customer-theme-v2 .category-catalogue-results {
+  min-height: max(520px, calc(100vh - 210px));
+}
+
+body.customer-theme-v2 .category-results-workspace {
+  display: grid;
+  grid-template-columns: minmax(250px, 286px) minmax(0, 1fr);
+  align-items: start;
+  gap: 28px;
+}
+
+body.customer-theme-v2 .category-results-workspace .category-filter-sidebar {
+  float: none;
+  width: auto;
+  margin: 0;
+}
+
+body.customer-theme-v2 .category-results-workspace .category-catalogue-results { min-width: 0; }
+
+@media (max-width: 720px) {
+  body.customer-theme-v2 .after-sales-page,
+  body.customer-theme-v2 .customer-products-page { padding-inline: 14px !important; }
+  body.customer-theme-v2 .category-filter-sidebar {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+  body.customer-theme-v2 .category-results-workspace { display: block; }
+}
+
+/* Full-bleed dashboard navigation for service, matching the customer pages. */
+body.customer-theme-v2 .after-sales-nav {
+  margin-left: calc(-1 * clamp(16px, 4.8vw, 92px)) !important;
+  margin-right: calc(-1 * clamp(16px, 4.8vw, 92px)) !important;
+  padding-left: clamp(18px, 4.8vw, 92px) !important;
+  padding-right: clamp(18px, 4.8vw, 92px) !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 720px) {
+  body.customer-theme-v2 .after-sales-nav {
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+}
+
+/* One consistent, screen-wide customer navigation on dashboard pages. */
+body.customer-theme-v2 :is(.profile-nav, .wishlist-nav, .after-sales-nav, .cart-navigation,
+  .customer-orders-nav, .customer-order-nav) {
+  width: 100vw !important;
+  max-width: none !important;
+  box-sizing: border-box;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  border-right: 0 !important;
+  border-left: 0 !important;
+  border-radius: 0 !important;
+  padding-left: clamp(22px, 3.5vw, 72px) !important;
+  padding-right: clamp(22px, 3.5vw, 72px) !important;
+}
+
+body.customer-theme-v2 { overflow-x: clip; }
+
+/* Navigation must touch the top edge on every customer workspace. */
+body.customer-theme-v2 :is(.customer-profile-page, .wishlist-page, .cart-page,
+  .after-sales-page, .customer-orders-page, .customer-order-details-page) {
+  padding-top: 0 !important;
+}
+
+@media (max-width: 720px) {
+  body.customer-theme-v2 :is(.profile-nav, .wishlist-nav, .after-sales-nav, .cart-navigation,
+    .customer-orders-nav, .customer-order-nav) {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+}

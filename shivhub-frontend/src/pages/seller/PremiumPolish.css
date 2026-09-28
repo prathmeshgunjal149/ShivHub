@@ -1,0 +1,399 @@
+@keyframes shivFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shivSoftGlow {
+    0%, 100% {
+        box-shadow: 0 18px 45px rgba(15, 35, 75, 0.08);
+    }
+    50% {
+        box-shadow: 0 24px 65px rgba(38, 84, 210, 0.15);
+    }
+}
+
+@keyframes shivButtonSheen {
+    from {
+        transform: translateX(-140%) skewX(-18deg);
+    }
+    to {
+        transform: translateX(240%) skewX(-18deg);
+    }
+}
+
+@keyframes shivBorderPulse {
+    0%, 100% {
+        border-color: rgba(59, 130, 246, 0.18);
+    }
+    50% {
+        border-color: rgba(20, 184, 166, 0.42);
+    }
+}
+
+.seller-data-main,
+.offline-billing-main,
+.add-product-main,
+.seller-settings-main,
+.staff-main,
+.ca-reports-main,
+.purchase-shell,
+.payment-main,
+.accounting-main {
+    animation: shivFadeUp 0.45s ease both;
+}
+
+.seller-data-card,
+.billing-card,
+.bill-section,
+.summary-card,
+.cart-card,
+.product-card,
+.add-product-card,
+.product-form-section,
+.mobile-spec-autofill,
+.seller-settings-card,
+.settings-card,
+.staff-card,
+.staff-summary-card,
+.ca-report-card,
+.ca-filter-card,
+.ca-roadmap-card,
+.payment-card,
+.payment-panel,
+.ledger-card,
+.purchase-card,
+.purchase-panel,
+.purchase-step-panel,
+.purchase-summary,
+.recent-purchase-card {
+    border: 1px solid rgba(148, 163, 184, 0.24) !important;
+    box-shadow: 0 18px 48px rgba(15, 23, 42, 0.07);
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        border-color 0.22s ease,
+        background-color 0.22s ease;
+}
+
+.seller-data-card:hover,
+.billing-card:hover,
+.bill-section:hover,
+.summary-card:hover,
+.cart-card:hover,
+.add-product-card:hover,
+.product-form-section:hover,
+.mobile-spec-autofill:hover,
+.seller-settings-card:hover,
+.settings-card:hover,
+.staff-card:hover,
+.staff-summary-card:hover,
+.ca-report-card:hover,
+.ca-filter-card:hover,
+.payment-card:hover,
+.payment-panel:hover,
+.ledger-card:hover,
+.purchase-card:hover,
+.purchase-panel:hover,
+.purchase-step-panel:hover,
+.recent-purchase-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(37, 99, 235, 0.34) !important;
+    box-shadow: 0 26px 70px rgba(15, 23, 42, 0.12);
+}
+
+.seller-data-main header,
+.offline-billing-main header,
+.add-product-main header,
+.seller-settings-main header,
+.staff-main header,
+.ca-reports-main header,
+.purchase-hero,
+.payment-main header {
+    position: relative;
+    overflow: hidden;
+}
+
+.seller-data-main header::after,
+.offline-billing-main header::after,
+.add-product-main header::after,
+.seller-settings-main header::after,
+.staff-main header::after,
+.ca-reports-main header::after,
+.purchase-hero::after,
+.payment-main header::after {
+    content: "";
+    position: absolute;
+    inset: auto -80px -120px auto;
+    width: 260px;
+    height: 260px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.14), transparent 64%);
+    pointer-events: none;
+}
+
+.seller-data-form input,
+.seller-data-form select,
+.seller-data-form textarea,
+.offline-billing-main input,
+.offline-billing-main select,
+.offline-billing-main textarea,
+.add-product-main input,
+.add-product-main select,
+.add-product-main textarea,
+.seller-settings-main input,
+.seller-settings-main select,
+.seller-settings-main textarea,
+.staff-main input,
+.staff-main select,
+.staff-main textarea,
+.ca-reports-main input,
+.ca-reports-main select,
+.payment-main input,
+.payment-main select,
+.payment-main textarea,
+.purchase-shell input,
+.purchase-shell select,
+.purchase-shell textarea {
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background-color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.seller-data-form input:focus,
+.seller-data-form select:focus,
+.seller-data-form textarea:focus,
+.offline-billing-main input:focus,
+.offline-billing-main select:focus,
+.offline-billing-main textarea:focus,
+.add-product-main input:focus,
+.add-product-main select:focus,
+.add-product-main textarea:focus,
+.seller-settings-main input:focus,
+.seller-settings-main select:focus,
+.seller-settings-main textarea:focus,
+.staff-main input:focus,
+.staff-main select:focus,
+.staff-main textarea:focus,
+.ca-reports-main input:focus,
+.ca-reports-main select:focus,
+.payment-main input:focus,
+.payment-main select:focus,
+.payment-main textarea:focus,
+.purchase-shell input:focus,
+.purchase-shell select:focus,
+.purchase-shell textarea:focus {
+    border-color: #2563eb !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12) !important;
+    outline: none;
+}
+
+.seller-data-main button,
+.offline-billing-main button,
+.add-product-main button,
+.seller-settings-main button,
+.staff-main button,
+.ca-reports-main button,
+.payment-main button,
+.purchase-shell button {
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        filter 0.18s ease;
+}
+
+.seller-data-main button:hover,
+.offline-billing-main button:hover,
+.add-product-main button:hover,
+.seller-settings-main button:hover,
+.staff-main button:hover,
+.ca-reports-main button:hover,
+.payment-main button:hover,
+.purchase-shell button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(37, 99, 235, 0.18);
+}
+
+.seller-data-main button:active,
+.offline-billing-main button:active,
+.add-product-main button:active,
+.seller-settings-main button:active,
+.staff-main button:active,
+.ca-reports-main button:active,
+.payment-main button:active,
+.purchase-shell button:active {
+    transform: translateY(0);
+}
+
+.seller-data-main button::after,
+.offline-billing-main button::after,
+.add-product-main button::after,
+.seller-settings-main button::after,
+.staff-main button::after,
+.ca-reports-main button::after,
+.payment-main button::after,
+.purchase-shell button::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 -45%;
+    width: 32%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
+    transform: translateX(-140%) skewX(-18deg);
+    pointer-events: none;
+}
+
+.seller-data-main button:hover::after,
+.offline-billing-main button:hover::after,
+.add-product-main button:hover::after,
+.seller-settings-main button:hover::after,
+.staff-main button:hover::after,
+.ca-reports-main button:hover::after,
+.payment-main button:hover::after,
+.purchase-shell button:hover::after {
+    animation: shivButtonSheen 0.85s ease;
+}
+
+.customer-lookup-message,
+.seller-data-error,
+.seller-data-success,
+.add-product-message,
+.add-product-error,
+.staff-message,
+.staff-error,
+.ca-error,
+.purchase-message,
+.purchase-error {
+    animation: shivFadeUp 0.28s ease both;
+}
+
+.mobile-spec-options button,
+.spec-suggestion,
+.imei-chip,
+.status-pill,
+.brand-chip,
+.ca-header-actions button {
+    border-radius: 999px;
+}
+
+.purchase-step-panel,
+.mobile-spec-autofill,
+.billing-card,
+.summary-card {
+    animation: shivBorderPulse 3.2s ease-in-out infinite;
+}
+
+.seller-data-card:nth-of-type(1),
+.product-form-section:nth-of-type(1),
+.staff-card:nth-of-type(1),
+.ca-report-card:nth-of-type(1),
+.payment-card:nth-of-type(1) {
+    animation-delay: 0.03s;
+}
+
+.seller-data-card:nth-of-type(2),
+.product-form-section:nth-of-type(2),
+.staff-card:nth-of-type(2),
+.ca-report-card:nth-of-type(2),
+.payment-card:nth-of-type(2) {
+    animation-delay: 0.09s;
+}
+
+.seller-data-card:nth-of-type(3),
+.product-form-section:nth-of-type(3),
+.staff-card:nth-of-type(3),
+.ca-report-card:nth-of-type(3),
+.payment-card:nth-of-type(3) {
+    animation-delay: 0.15s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .seller-data-card:hover,
+    .billing-card:hover,
+    .bill-section:hover,
+    .summary-card:hover,
+    .cart-card:hover,
+    .add-product-card:hover,
+    .product-form-section:hover,
+    .seller-settings-card:hover,
+    .settings-card:hover,
+    .staff-card:hover,
+    .ca-report-card:hover,
+    .payment-card:hover,
+    .purchase-card:hover,
+    .purchase-panel:hover,
+    .purchase-step-panel:hover {
+        transform: none;
+    }
+}
+
+
+/* Add Product final polish */
+.add-product-card .mobile-spec-autofill {
+    margin-top: 22px;
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.10), transparent 34%),
+        linear-gradient(180deg, #f8fbff, #ffffff) !important;
+}
+
+.add-product-card .mobile-manual-grid {
+    grid-template-columns: repeat(3, minmax(180px, 1fr));
+}
+
+.add-product-card .mobile-spec-options button {
+    border-radius: 18px;
+}
+
+.add-product-card .image-slots {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.add-product-card .image-slot {
+    border-radius: 20px;
+    background:
+        linear-gradient(180deg, #ffffff, #f8fbff) !important;
+}
+
+.add-product-card .file-upload-box,
+.add-product-card .url-input-box {
+    min-height: 230px;
+    border-radius: 18px;
+}
+
+.add-product-card .image-note {
+    border-radius: 16px;
+    background:
+        linear-gradient(135deg, #eff6ff, #ecfeff) !important;
+}
+
+@media (max-width: 920px) {
+    .add-product-card .mobile-manual-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    .add-product-card .mobile-manual-grid {
+        grid-template-columns: 1fr;
+    }
+}

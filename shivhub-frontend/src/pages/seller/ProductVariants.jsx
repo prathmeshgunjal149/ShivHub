@@ -1,0 +1,12 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import api from "../../services/api";
+import VariantEditor from "../../components/products/VariantEditor";
+import { variantRequest } from "../../components/products/productCommonFields";
+import "./AddOtherProduct.css";
+export default function ProductVariants(){
+    const {id}=useParams();const [product,setProduct]=useState(null),[fields,setFields]=useState([]),[variants,setVariants]=useState([]),[error,setError]=useState(""),[notice,setNotice]=useState(""),[saving,setSaving]=useState(false);
+    useEffect(()=>{let active=true;Promise.all([api.get(`/api/seller/products/${id}/variant-configuration`),api.get(`/api/seller/products/${id}/variants`)]).then(async([details,rows])=>{if(!active)return;setProduct(details.data);setVariants(rows.data);const {data}=await api.get("/api/seller/product-specification-templates",{params:{categoryId:details.data.categoryId,subCategoryId:details.data.subCategoryId}});if(active)setFields(data.filter(field=>field.variantEnabled));}).catch(e=>{if(active)setError(e.response?.data?.message||"Unable to load variant configuration.");});return()=>{active=false;};},[id]);
+    const save=async event=>{event.preventDefault();setSaving(true);setError("");setNotice("");try{await api.put(`/api/seller/products/${id}/variants`,variants.map(variantRequest));const {data}=await api.get(`/api/seller/products/${id}/variants`);setVariants(data);setNotice("Variant prices and stock saved.");}catch(e){setError(e.response?.data?.message||"Could not save variants.");}finally{setSaving(false);}};
+    return <main className="add-other-product"><header><div><h1>{product?.name||"Product variants"}</h1><p>Price changes apply to future purchases. Existing invoices retain their original values. Reserved units cannot be removed.</p></div><Link to="/seller/products">My Products</Link></header>{error&&<p role="alert" className="form-error">{error}</p>}{notice&&<p role="status">{notice}</p>}{product&&(product.serialTrackingRequired&&!product.mobile)?<p>This serial-tracked product uses the existing dedicated serial flow.</p>:product&&<form onSubmit={save}>{fields.length?<><VariantEditor fields={fields} variants={variants} onChange={setVariants}/><button disabled={saving||!variants.length}>{saving?"Saving…":"Save variants"}</button></>:<p>Ask Admin to configure variant fields for this subcategory first.</p>}</form>}</main>;
+}

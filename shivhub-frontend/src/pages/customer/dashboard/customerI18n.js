@@ -1,0 +1,36 @@
+const messages = {
+    en: {
+        searchPlaceholder: "Search mobiles, laptops, electronics...", filters: "Filters", offers: "Offers", wishlist: "Wishlist", cart: "Cart", profile: "My Profile", orders: "My Orders", logout: "Logout",
+        language: "Language", appearance: "Appearance", light: "Ocean", dark: "Midnight", emerald: "Emerald", violet: "Violet",
+        goodMorning: "Good morning", goodAfternoon: "Good afternoon", goodEvening: "Good evening", discoverTitle: "Discover something you'll love.", heroDescription: "Explore products from verified ShivHub sellers. Fresh approved products are added regularly.", exploreProducts: "Explore Products", liveProducts: "Live Products",
+        verifiedSellers: "Verified sellers", verifiedSellersNote: "Every product is reviewed first", deliveryOffers: "Delivery offers", deliveryOffersNote: "Check eligible delivery offers at checkout", securePayments: "Secure payments", securePaymentsNote: "Protected payment options", anytimeAccess: "24×7 order access", anytimeAccessNote: "Review your orders whenever you need",
+        browseCategories: "Browse by category", categoryTitle: "Find your next favourite device", autoMove: "Moves automatically · hover to pause", explore: "Explore", liveProductsLabel: "live products", trendingEyebrow: "TRENDING IN THE CATALOGUE", trendingTitle: "Trending products", viewAll: "View all", productPicks: "picks", inStock: "In stock", outOfStock: "Out of stock", viewProduct: "View product",
+        diwaliTitle: "Celebrate Diwali with a smarter upgrade", diwaliDescription: "Discover phones, laptops and accessories from verified ShivHub sellers.", ganeshTitle: "Festival picks for every home", ganeshDescription: "Explore the latest technology and electronics for your celebration.", newYearTitle: "A fresh start deserves fresh technology", newYearDescription: "Browse live products and find the device that fits your next chapter.", eidTitle: "Make every celebration more connected", eidDescription: "Shop thoughtfully chosen electronics from approved marketplace sellers.", monsoonTitle: "Monsoon-ready electronics are here", monsoonDescription: "Stay connected with the latest devices from the live ShivHub catalogue.", shopOffer: "Shop this offer", festivalPicks: "Festive picks", ganeshFestival: "Ganesh Festival", newYearPicks: "New Year picks", eidCollection: "Eid collection", monsoonPicks: "Monsoon picks"
+    },
+    mr: {
+        searchPlaceholder: "मोबाईल, लॅपटॉप, इलेक्ट्रॉनिक्स शोधा...", filters: "फिल्टर्स", offers: "ऑफर्स", wishlist: "विशलिस्ट", cart: "कार्ट", profile: "माझे प्रोफाइल", orders: "माझ्या ऑर्डर्स", logout: "लॉगआउट",
+        language: "भाषा", appearance: "दिसणे", light: "ओशन", dark: "मिडनाईट", emerald: "एमराल्ड", violet: "व्हायोलेट",
+        goodMorning: "शुभ सकाळ", goodAfternoon: "शुभ दुपार", goodEvening: "शुभ संध्याकाळ", discoverTitle: "तुम्हाला आवडेल असे काहीतरी शोधा.", heroDescription: "विश्वासार्ह ShivHub विक्रेत्यांकडील उत्पादने पहा. नवीन मंजूर उत्पादने नियमितपणे जोडली जातात.", exploreProducts: "उत्पादने पहा", liveProducts: "लाइव्ह उत्पादने",
+        verifiedSellers: "तपासलेले विक्रेते", verifiedSellersNote: "प्रत्येक उत्पादन आधी तपासले जाते", deliveryOffers: "डिलिव्हरी ऑफर्स", deliveryOffersNote: "चेकआउटवर पात्र डिलिव्हरी ऑफर्स पहा", securePayments: "सुरक्षित पेमेंट", securePaymentsNote: "संरक्षित पेमेंट पर्याय", anytimeAccess: "24×7 ऑर्डर प्रवेश", anytimeAccessNote: "हवे तेव्हा तुमच्या ऑर्डर्स पहा",
+        browseCategories: "कॅटेगरीप्रमाणे शोधा", categoryTitle: "तुमचे आवडते डिव्हाइस शोधा", autoMove: "आपोआप पुढे जाते · थांबवण्यासाठी hover करा", explore: "पहा", liveProductsLabel: "लाइव्ह उत्पादने", trendingEyebrow: "कॅटलॉगमध्ये ट्रेंडिंग", trendingTitle: "ट्रेंडिंग उत्पादने", viewAll: "सर्व पहा", productPicks: "निवडी", inStock: "स्टॉकमध्ये", outOfStock: "स्टॉक संपला", viewProduct: "उत्पादन पहा",
+        diwaliTitle: "दिवाळीत स्मार्ट अपग्रेड करा", diwaliDescription: "विश्वासार्ह ShivHub विक्रेत्यांकडील फोन, लॅपटॉप आणि अॅक्सेसरीज शोधा.", ganeshTitle: "प्रत्येक घरासाठी सणासुदीच्या निवडी", ganeshDescription: "तुमच्या उत्सवासाठी नवीन तंत्रज्ञान आणि इलेक्ट्रॉनिक्स पहा.", newYearTitle: "नवीन सुरुवातीसाठी नवीन तंत्रज्ञान", newYearDescription: "लाइव्ह कॅटलॉगमधून तुमच्यासाठी योग्य डिव्हाइस शोधा.", eidTitle: "प्रत्येक उत्सव अधिक कनेक्टेड करा", eidDescription: "मंजूर विक्रेत्यांकडून निवडलेली इलेक्ट्रॉनिक्स खरेदी करा.", monsoonTitle: "मान्सूनसाठी योग्य इलेक्ट्रॉनिक्स येथे आहेत", monsoonDescription: "लाइव्ह ShivHub कॅटलॉगमधील नवीन डिव्हाइस पाहा.", shopOffer: "ऑफर पहा", festivalPicks: "सणासुदीच्या निवडी", ganeshFestival: "गणेशोत्सव", newYearPicks: "नवीन वर्ष निवडी", eidCollection: "ईद कलेक्शन", monsoonPicks: "मान्सून निवडी"
+    },
+    hi: {
+        searchPlaceholder: "मोबाइल, लैपटॉप, इलेक्ट्रॉनिक्स खोजें...", filters: "फ़िल्टर", offers: "ऑफ़र", wishlist: "विशलिस्ट", cart: "कार्ट", profile: "मेरी प्रोफ़ाइल", orders: "मेरे ऑर्डर", logout: "लॉग आउट",
+        language: "भाषा", appearance: "रंग रूप", light: "ओशन", dark: "मिडनाइट", emerald: "एमराल्ड", violet: "वायलेट",
+        goodMorning: "सुप्रभात", goodAfternoon: "शुभ दोपहर", goodEvening: "शुभ संध्या", discoverTitle: "अपनी पसंद की चीज़ खोजें।", heroDescription: "विश्वसनीय ShivHub विक्रेताओं के उत्पाद देखें। नए स्वीकृत उत्पाद नियमित रूप से जोड़े जाते हैं।", exploreProducts: "उत्पाद देखें", liveProducts: "लाइव उत्पाद",
+        verifiedSellers: "सत्यापित विक्रेता", verifiedSellersNote: "हर उत्पाद पहले जाँचा जाता है", deliveryOffers: "डिलीवरी ऑफ़र", deliveryOffersNote: "चेकआउट पर पात्र डिलीवरी ऑफ़र देखें", securePayments: "सुरक्षित भुगतान", securePaymentsNote: "सुरक्षित भुगतान विकल्प", anytimeAccess: "24×7 ऑर्डर एक्सेस", anytimeAccessNote: "जब चाहें अपने ऑर्डर देखें",
+        browseCategories: "श्रेणी के अनुसार खोजें", categoryTitle: "अपना पसंदीदा डिवाइस खोजें", autoMove: "अपने आप चलता है · रोकने के लिए hover करें", explore: "देखें", liveProductsLabel: "लाइव उत्पाद", trendingEyebrow: "कैटलॉग में ट्रेंडिंग", trendingTitle: "ट्रेंडिंग उत्पाद", viewAll: "सभी देखें", productPicks: "चुनिंदा उत्पाद", inStock: "स्टॉक में", outOfStock: "स्टॉक में नहीं", viewProduct: "उत्पाद देखें",
+        diwaliTitle: "दिवाली पर स्मार्ट अपग्रेड करें", diwaliDescription: "विश्वसनीय ShivHub विक्रेताओं से फोन, लैपटॉप और एक्सेसरीज़ खोजें।", ganeshTitle: "हर घर के लिए त्योहार की पसंद", ganeshDescription: "अपने उत्सव के लिए नवीनतम तकनीक और इलेक्ट्रॉनिक्स देखें।", newYearTitle: "नई शुरुआत के लिए नई तकनीक", newYearDescription: "लाइव कैटलॉग से अपने लिए सही डिवाइस खोजें।", eidTitle: "हर उत्सव को अधिक कनेक्टेड बनाएं", eidDescription: "स्वीकृत विक्रेताओं से चुने हुए इलेक्ट्रॉनिक्स खरीदें।", monsoonTitle: "मानसून के लिए इलेक्ट्रॉनिक्स यहाँ हैं", monsoonDescription: "लाइव ShivHub कैटलॉग से नए डिवाइस देखें।", shopOffer: "ऑफ़र देखें", festivalPicks: "उत्सव की पसंद", ganeshFestival: "गणेश उत्सव", newYearPicks: "नव वर्ष की पसंद", eidCollection: "ईद कलेक्शन", monsoonPicks: "मानसून की पसंद"
+    }
+};
+
+export const CUSTOMER_LANGUAGES = [
+    { code: "en", label: "English" },
+    { code: "mr", label: "मराठी" },
+    { code: "hi", label: "हिन्दी" }
+];
+
+export const CUSTOMER_THEMES = ["light", "dark", "emerald", "violet"];
+
+export const customerText = (language, key) => messages[language]?.[key] || messages.en[key] || key;

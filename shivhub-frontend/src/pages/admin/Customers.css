@@ -1,0 +1,636 @@
+/* =========================================================
+   SHIVHUB ADMIN - CUSTOMERS PAGE
+========================================================= */
+
+.customers-page {
+    min-height: 100vh;
+    padding: 34px 38px 50px;
+    background: #f5f7fb;
+    color: #172033;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.customers-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.customers-kicker {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #8a5a44;
+}
+
+.customers-header h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+}
+
+.customers-header p {
+    margin: 7px 0 0;
+    color: #727b8c;
+    font-size: 14px;
+}
+
+.refresh-customers-button {
+    border: 0;
+    padding: 11px 17px;
+    border-radius: 10px;
+    background: #172033;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.refresh-customers-button:hover {
+    transform: translateY(-1px);
+    background: #252f45;
+}
+
+.refresh-customers-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.customer-success-message,
+.customer-error-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.customer-success-message {
+    background: #edf9f1;
+    border: 1px solid #ccebd5;
+    color: #24713d;
+}
+
+.customer-error-message {
+    background: #fff1f1;
+    border: 1px solid #ffd2d2;
+    color: #b42318;
+}
+
+.customer-error-message button {
+    border: 0;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    color: inherit;
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.customer-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.customer-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 21px;
+    background: white;
+    border: 1px solid #e7eaf0;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(25, 34, 52, 0.04);
+}
+
+.customer-stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #f1e8e2;
+    color: #7d4f38;
+    font-size: 21px;
+}
+
+.customer-stat-card span {
+    display: block;
+    margin-bottom: 5px;
+    color: #7c8494;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.customer-stat-card strong {
+    display: block;
+    color: #172033;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.customer-stat-card.active .customer-stat-icon {
+    background: #eaf7ef;
+}
+
+.customer-stat-card.blocked .customer-stat-icon {
+    background: #fff0ed;
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.customers-card {
+    overflow: hidden;
+    background: white;
+    border: 1px solid #e7eaf0;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(25, 34, 52, 0.045);
+}
+
+.customers-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 24px 25px;
+}
+
+.customers-card-header h2 {
+    margin: 0;
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.customers-card-header p {
+    margin: 5px 0 0;
+    color: #7a8291;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.customer-search {
+    width: min(360px, 100%);
+    height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 0 12px;
+    border: 1px solid #dfe3ea;
+    border-radius: 10px;
+    background: #fafbfc;
+}
+
+.customer-search > span {
+    font-size: 14px;
+}
+
+.customer-search input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #172033;
+    font-size: 13px;
+}
+
+.customer-search input::placeholder {
+    color: #9ba2af;
+}
+
+.customer-search button {
+    border: 0;
+    background: transparent;
+    color: #7b8494;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.customer-tabs {
+    display: flex;
+    gap: 5px;
+    padding: 0 25px;
+    border-bottom: 1px solid #e9ecf1;
+}
+
+.customer-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 15px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: #747d8d;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.customer-tab span {
+    min-width: 22px;
+    padding: 2px 6px;
+    border-radius: 20px;
+    background: #eef1f5;
+    font-size: 11px;
+}
+
+.customer-tab.active {
+    border-bottom-color: #8a5a44;
+    color: #7a4d38;
+}
+
+.customer-tab.active span {
+    background: #f1e5dd;
+    color: #7a4d38;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.customers-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.customers-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.customers-table th {
+    padding: 14px 20px;
+    border-bottom: 1px solid #e9ecf1;
+    background: #fafbfc;
+    color: #8a92a1;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.7px;
+    text-align: left;
+}
+
+.customers-table td {
+    padding: 17px 20px;
+    border-bottom: 1px solid #eef0f4;
+    vertical-align: middle;
+}
+
+.customers-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.customers-table tbody tr:hover {
+    background: #fcfcfd;
+}
+
+
+/* =========================================================
+   CUSTOMER PROFILE CELL
+========================================================= */
+
+.customer-profile-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.customer-avatar {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eadbd2;
+    color: #704631;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.customer-profile-cell strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #172033;
+    font-size: 13px;
+}
+
+.customer-profile-cell small {
+    color: #9299a7;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   EMAIL / MOBILE
+========================================================= */
+
+.customer-email,
+.customer-mobile {
+    color: #535c6c;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.customer-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 9px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+}
+
+.customer-status i {
+    width: 6px;
+    height: 6px;
+    display: block;
+    border-radius: 50%;
+}
+
+.customer-status.active {
+    background: #eaf7ef;
+    color: #267445;
+}
+
+.customer-status.active i {
+    background: #2f9e57;
+}
+
+.customer-status.blocked {
+    background: #fff0ed;
+    color: #b44332;
+}
+
+.customer-status.blocked i {
+    background: #d85845;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.customer-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.view-customer-button,
+.block-customer-button,
+.unblock-customer-button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.view-customer-button {
+    border: 1px solid #dce1e8;
+    background: white;
+    color: #354052;
+}
+
+.view-customer-button:hover {
+    background: #f5f7fa;
+}
+
+.block-customer-button {
+    border: 1px solid #f0cfc9;
+    background: #fff6f4;
+    color: #b54836;
+}
+
+.block-customer-button:hover {
+    background: #ffebe7;
+}
+
+.unblock-customer-button {
+    border: 1px solid #cde7d5;
+    background: #f1fbf4;
+    color: #287444;
+}
+
+.unblock-customer-button:hover {
+    background: #e5f7eb;
+}
+
+.block-customer-button:disabled,
+.unblock-customer-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.customers-loading {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #7c8492;
+}
+
+.loading-spinner {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 12px;
+    border: 3px solid #e5e8ed;
+    border-top-color: #8a5a44;
+    border-radius: 50%;
+    animation: customer-spin 0.8s linear infinite;
+}
+
+.customers-loading p {
+    margin: 0;
+    font-size: 13px;
+}
+
+@keyframes customer-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.customers-empty {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-align: center;
+}
+
+.customers-empty-icon {
+    width: 62px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    border-radius: 50%;
+    background: #f3f0ee;
+    font-size: 25px;
+}
+
+.customers-empty h3 {
+    margin: 0 0 7px;
+    font-size: 17px;
+}
+
+.customers-empty p {
+    max-width: 420px;
+    margin: 0;
+    color: #858d9b;
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   INFO BOX
+========================================================= */
+
+.customers-info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    margin-top: 20px;
+    padding: 17px 19px;
+    border: 1px solid #e8e1dc;
+    border-radius: 12px;
+    background: #faf7f5;
+}
+
+.customers-info-icon {
+    font-size: 20px;
+}
+
+.customers-info-box h3 {
+    margin: 0 0 4px;
+    color: #573d30;
+    font-size: 13px;
+}
+
+.customers-info-box p {
+    margin: 0;
+    color: #7d736e;
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .customers-page {
+        padding: 25px;
+    }
+
+    .customer-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .customers-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .customer-search {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .customers-page {
+        padding: 20px 15px;
+    }
+
+    .customers-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .customers-header h1 {
+        font-size: 26px;
+    }
+
+    .customer-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+}
+
+.customer-search .admin-customer-autocomplete {
+    flex: 1 1 auto;
+    min-width: 0;
+}

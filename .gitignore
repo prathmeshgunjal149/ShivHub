@@ -1,0 +1,24 @@
+# Dependencies and builds
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+target/
+**/target/
+
+# Local tooling and generated files
+output/
+tmp/
+.vscode/
+localhost.html
+.github/modernize/
+shivhub-backend/shivhub-backend/bin/
+
+# Machine-specific credentials
+**/application-local.properties
+.env
+.env.*
+!.env.example
+*.local
+*.log
+*.pem

@@ -1,0 +1,2 @@
+package com.shivhub.backend.repository; import java.util.*; import org.springframework.data.jpa.repository.JpaRepository; import com.shivhub.backend.entity.MarketplaceListingImage;
+public interface MarketplaceListingImageRepository extends JpaRepository<MarketplaceListingImage,Long>{ List<MarketplaceListingImage> findByListingIdOrderByDisplayOrderAsc(Long listingId); void deleteByListingId(Long listingId); }

@@ -1,0 +1,289 @@
+.seller-sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 250px;
+
+    background: #ffffff;
+
+    border-right: 1px solid #e7eaf0;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+}
+
+
+/* ================================
+   BRAND
+================================ */
+
+.seller-sidebar-brand {
+
+    height: 78px;
+
+    padding: 0 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    border-bottom: 1px solid #eef0f4;
+}
+
+
+.seller-logo {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+
+    display: grid;
+    place-items: center;
+
+    background: #111827;
+
+    color: #ffffff;
+
+    font-weight: 800;
+
+    font-size: 20px;
+}
+
+
+.seller-sidebar-brand h2 {
+
+    margin: 0;
+
+    font-size: 21px;
+
+    color: #111827;
+}
+
+
+.seller-sidebar-brand h2 span {
+
+    color: #2563eb;
+}
+
+
+.seller-sidebar-brand small {
+
+    color: #7b8494;
+
+    font-size: 11px;
+}
+
+
+/* ================================
+   NAVIGATION
+================================ */
+
+.seller-sidebar-nav {
+
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 14px 10px;
+}
+
+
+.seller-nav-link {
+
+    width: 100%;
+
+    min-height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 9px 12px;
+
+    margin-bottom: 4px;
+
+    border-radius: 9px;
+
+    color: #596273;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+
+.seller-nav-link:hover {
+
+    background: #f4f6f9;
+
+    color: #111827;
+}
+
+
+.seller-nav-link.active {
+
+    background: #eef4ff;
+
+    color: #2563eb;
+}
+
+
+.seller-nav-icon {
+
+    width: 22px;
+
+    text-align: center;
+
+    font-size: 17px;
+}
+
+
+/* ================================
+   LOGOUT
+================================ */
+
+.seller-sidebar-bottom {
+
+    padding: 12px 10px 16px;
+
+    border-top: 1px solid #eef0f4;
+}
+
+.seller-nav-link.locked { color: #8b5f16; background: #fffaf0; }
+.seller-nav-link.locked:hover { background: #fff3d8; color: #8b5f16; }
+.seller-nav-lock { margin-left: auto; font-size: 12px; }
+
+.seller-sidebar-bottom .workspace-preferences { margin: 0 2px 12px; color: #64748b; }
+.seller-sidebar-bottom .workspace-preferences label { font-size: 8px; }
+.seller-sidebar-bottom .workspace-preferences select { height: 31px; color: #4b5563; background: #f8fafc; border-color: #e2e8f0; }
+body[data-seller-theme="dark"] .seller-sidebar-bottom .workspace-preferences { color: #aebed6; }
+body[data-seller-theme="dark"] .seller-sidebar-bottom .workspace-preferences select { color: #dbe8fb; background: #172840; border-color: #314563; }
+
+
+.seller-logout-link {
+
+    width: 100%;
+
+    min-height: 43px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 9px 12px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #dc2626;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+
+.seller-logout-link:hover {
+
+    background: #fff1f2;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+.seller-mobile-close {
+
+    display: none;
+
+    margin-left: auto;
+
+    border: 0;
+
+    background: transparent;
+
+    font-size: 28px;
+
+    color: #6b7280;
+
+    cursor: pointer;
+}
+
+
+.seller-sidebar-overlay {
+
+    display: none;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+
+    .seller-sidebar {
+
+        transform: translateX(-100%);
+
+        transition:
+            transform 0.2s ease;
+
+        box-shadow:
+            8px 0 30px
+            rgba(0, 0, 0, 0.12);
+    }
+
+
+    .seller-sidebar.seller-sidebar-open {
+
+        transform: translateX(0);
+    }
+
+
+    .seller-sidebar-overlay {
+
+        display: block;
+
+        position: fixed;
+
+        inset: 0;
+
+        border: 0;
+
+        background:
+            rgba(0, 0, 0, 0.35);
+
+        z-index: 999;
+    }
+
+
+    .seller-mobile-close {
+
+        display: block;
+    }
+}

@@ -1,0 +1,37 @@
+.customer-profile-content>.customer-profile-card:has(.customer-profile-summary){padding:20px 22px}.customer-profile-content>.customer-profile-card:has(.customer-profile-summary) .customer-profile-section-heading{margin-bottom:13px}.customer-profile-summary{padding:0!important}.customer-profile-summary article{display:grid!important;gap:5px;min-width:0;padding:16px 18px!important;border:1px solid #dbe8f8;border-radius:14px;background:linear-gradient(135deg,#edf5ff,#f8fbff)!important}.customer-profile-summary article span{display:block!important;color:#536a8d;font-size:12px;font-weight:750}.customer-profile-summary article strong{display:block!important;color:#2563eb;font-size:25px;line-height:1.05}.customer-profile-history{display:grid;gap:7px;padding:15px 0 0!important}.customer-profile-history p{margin:0!important;padding:10px 12px;border-left:3px solid #2563eb;border-radius:0 9px 9px 0;background:#f8fbff;color:#526786;font-size:13px;line-height:1.4}.customer-profile-history p strong{color:#14213d}@media(max-width:700px){.customer-profile-content>.customer-profile-card:has(.customer-profile-summary){padding:17px}.customer-profile-summary article{grid-template-columns:1fr auto;align-items:center}.customer-profile-summary article strong{text-align:right}}
+
+/* The profile keeps its clean no-sidebar layout; the avatar is an obvious
+   upload entry point and immediately reflects the saved customer photo. */
+.customer-profile-content{width:100%!important;max-width:none!important}
+.profile-nav{max-width:none!important}
+.customer-profile-avatar-wrap{position:relative;display:grid;place-items:center;flex:0 0 auto}
+.customer-profile-avatar-wrap .customer-profile-avatar-large{display:grid}
+.customer-profile-avatar-edit{position:absolute;right:-4px;bottom:-2px;display:grid;place-items:center;width:31px;height:31px;padding:0!important;border:3px solid #fff!important;border-radius:50%!important;color:#fff!important;background:linear-gradient(135deg,#ff8516,#ff4810)!important;box-shadow:0 8px 18px rgba(255,107,0,.3)!important;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}
+.customer-profile-avatar-edit:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 12px 22px rgba(255,107,0,.38)!important}
+.customer-profile-avatar-wrap .customer-profile-avatar-image{box-shadow:0 0 0 7px rgba(255,255,255,.22),0 12px 30px rgba(0,0,0,.22)}
+.customer-profile-photo-actions input[type="file"]{border-color:#ffb777;background:linear-gradient(135deg,#fff7ef,#fff)!important}
+@media(max-width:700px){.customer-profile-avatar-edit{right:-2px;bottom:-3px}.customer-profile-content{margin-bottom:38px!important}}
+
+/* Full-width profile dashboard: keeps the reference's hierarchy without a
+   left sidebar, and makes every primary section visibly connected. */
+body.customer-theme-v2 .customer-profile-page{padding-top:0!important}
+body.customer-theme-v2 .profile-nav{margin-bottom:0!important;padding:13px clamp(18px,3vw,54px)!important;border-radius:0!important;border-left:0!important;border-right:0!important;box-shadow:0 9px 22px rgba(3,15,31,.18)!important}
+body.customer-theme-v2 .customer-profile-content{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:18px!important;padding-top:0}
+body.customer-theme-v2 .customer-profile-hero{display:grid!important;grid-template-columns:auto minmax(0,1fr) minmax(245px,.62fr)!important;align-items:center!important;gap:24px!important;min-height:150px;padding:28px clamp(22px,3vw,46px)!important;border:1px solid rgba(255,184,99,.35)!important;border-radius:20px!important;background:linear-gradient(110deg,#06172d,#0b2d58 62%,#124c88)!important;box-shadow:0 18px 40px rgba(3,22,47,.2)!important}
+body.customer-theme-v2 .customer-profile-hero>div:nth-child(2) h2{margin:5px 0!important;font-size:clamp(25px,2.5vw,36px)!important;letter-spacing:-.035em}
+body.customer-theme-v2 .customer-profile-hero .customer-profile-optout{width:max-content;max-width:100%;margin-top:13px!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:999px!important;background:rgba(255,255,255,.1)!important;color:#dceaff!important}
+body.customer-theme-v2 .customer-profile-member-card{display:grid;grid-template-columns:auto 1fr;gap:8px 11px;align-items:center;padding:17px;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:rgba(117,177,245,.12);color:#fff;box-shadow:inset 0 1px rgba(255,255,255,.08)}
+body.customer-theme-v2 .customer-profile-member-card>span{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;color:#ffb44d;background:rgba(255,157,39,.16);font-size:23px}
+body.customer-theme-v2 .customer-profile-member-card strong,body.customer-theme-v2 .customer-profile-member-card small{display:block;color:#fff!important}
+body.customer-theme-v2 .customer-profile-member-card small{margin-top:3px;color:#c5d9ef!important;font-size:11px}
+body.customer-theme-v2 .customer-profile-member-card button{grid-column:1/-1;width:100%;margin-top:4px;padding:8px 10px;border:1px solid rgba(255,184,99,.55);border-radius:9px;color:#fff;background:rgba(255,132,21,.14);font-weight:800;cursor:pointer}
+body.customer-theme-v2 .customer-profile-member-card button:hover{background:#ff6b00}
+body.customer-theme-v2 .customer-profile-content>.customer-profile-card{border-radius:19px!important;box-shadow:0 12px 28px rgba(10,34,66,.06)!important}
+body.customer-theme-v2 .customer-profile-summary article:nth-child(1){background:linear-gradient(135deg,#fff2e7,#fffaf6)!important;border-color:#ffd4b0!important}
+body.customer-theme-v2 .customer-profile-summary article:nth-child(2){background:linear-gradient(135deg,#edf5ff,#f9fbff)!important}
+body.customer-theme-v2 .customer-profile-summary article:nth-child(3){background:linear-gradient(135deg,#ecfdf4,#f7fffb)!important;border-color:#ccefdc!important}
+body.customer-theme-v2 .customer-profile-summary article strong{color:#10213b!important}
+body.customer-theme-v2 .customer-profile-history p{border-left-color:#ff6b00!important;background:#fbfdff!important}
+body.customer-theme-v2 .customer-profile-hub{grid-template-columns:1fr 1fr!important}
+@media(max-width:900px){body.customer-theme-v2 .customer-profile-hero{grid-template-columns:auto minmax(0,1fr)!important}body.customer-theme-v2 .customer-profile-member-card{grid-column:1/-1}}
+@media(max-width:700px){body.customer-theme-v2 .profile-nav{padding:10px 14px!important}body.customer-theme-v2 .customer-profile-hero{grid-template-columns:1fr!important;justify-items:start!important;gap:15px!important}body.customer-theme-v2 .customer-profile-member-card{width:100%;box-sizing:border-box}body.customer-theme-v2 .customer-profile-hub{grid-template-columns:1fr!important}}

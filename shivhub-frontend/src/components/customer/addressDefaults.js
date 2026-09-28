@@ -1,0 +1,1 @@
+export const emptyAddress = { recipientName:"", mobileNumber:"", alternateMobileNumber:"", addressLine1:"", addressLine2:"", landmark:"", city:"", district:"", state:"Maharashtra", pincode:"", addressLabel:"HOME" };

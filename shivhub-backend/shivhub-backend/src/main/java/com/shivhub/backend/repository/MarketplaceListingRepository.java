@@ -1,0 +1,11 @@
+package com.shivhub.backend.repository; import java.time.*; import org.springframework.data.domain.*; import org.springframework.data.jpa.repository.*; import org.springframework.data.repository.query.Param; import com.shivhub.backend.entity.MarketplaceListing; import com.shivhub.backend.enums.MarketplaceListingStatus;
+public interface MarketplaceListingRepository extends JpaRepository<MarketplaceListing,Long>{
+ Page<MarketplaceListing> findByOwnerIdOrderByCreatedAtDesc(Long ownerId, Pageable pageable);
+ long countByOwnerId(Long ownerId);
+ long countByOwnerIdAndStatus(Long ownerId, MarketplaceListingStatus status);
+ @Query(value="select l.owner.id from MarketplaceListing l group by l.owner.id order by max(l.createdAt) desc", countQuery="select count(distinct l.owner.id) from MarketplaceListing l")
+ Page<Long> adminOwnerIds(Pageable pageable);
+ @Query("select l from MarketplaceListing l where l.status=:status and (:categoryId is null or l.category.id=:categoryId) and (:subCategoryId is null or l.subcategory.id=:subCategoryId) and (:condition is null or lower(coalesce(l.condition,''))=lower(:condition)) and (:city is null or lower(coalesce(l.city,'')) like lower(concat('%',:city,'%'))) and (:minPrice is null or l.price>=:minPrice) and (:maxPrice is null or l.price<=:maxPrice) and (:q='' or lower(l.title) like lower(concat('%',:q,'%')) or lower(l.description) like lower(concat('%',:q,'%'))) order by l.createdAt desc") Page<MarketplaceListing> publicSearch(@Param("status") MarketplaceListingStatus status,@Param("q") String q,@Param("categoryId") Long categoryId,@Param("subCategoryId") Long subCategoryId,@Param("condition") String condition,@Param("city") String city,@Param("minPrice") java.math.BigDecimal minPrice,@Param("maxPrice") java.math.BigDecimal maxPrice, Pageable pageable);
+ @Query("select l from MarketplaceListing l where (:status is null or l.status=:status) order by l.createdAt desc") Page<MarketplaceListing> adminSearch(@Param("status") MarketplaceListingStatus status, Pageable pageable);
+ java.util.List<MarketplaceListing> findByStatusAndExpiresAtBefore(MarketplaceListingStatus status, LocalDateTime time); java.util.List<MarketplaceListing> findByStatusAndSoldAtBefore(MarketplaceListingStatus status, LocalDateTime time);
+}

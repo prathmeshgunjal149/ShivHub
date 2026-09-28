@@ -1,0 +1,235 @@
+.workspace-preferences { display: flex; align-items: center; gap: 8px; }
+.workspace-preferences label { display: grid; gap: 3px; color: inherit; font-size: 9px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.workspace-preferences select { min-width: 88px; height: 32px; border: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 23%, transparent); border-radius: 8px; padding: 0 7px; color: inherit; background: transparent; font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
+.workspace-preferences--compact { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.workspace-preferences--compact select { width: 100%; min-width: 0; }
+
+body[data-customer-theme="dark"] { color-scheme: dark; }
+body[data-customer-theme="dark"] .checkout-page,
+body[data-customer-theme="dark"] .cart-page,
+body[data-customer-theme="dark"] .wishlist-page,
+body[data-customer-theme="dark"] .customer-profile-page,
+body[data-customer-theme="dark"] .customer-orders-page,
+body[data-customer-theme="dark"] .my-orders-page,
+body[data-customer-theme="dark"] .order-details-page,
+body[data-customer-theme="dark"] .customer-order-details-page,
+body[data-customer-theme="dark"] .referral-page { background: #09111f; color: #edf4ff; }
+body[data-customer-theme="dark"] .checkout-header,
+body[data-customer-theme="dark"] .checkout-card,
+body[data-customer-theme="dark"] .checkout-summary-card,
+body[data-customer-theme="dark"] .orders-header,
+body[data-customer-theme="dark"] .order-card,
+body[data-customer-theme="dark"] .order-details-hero,
+body[data-customer-theme="dark"] .shipping-address-card,
+body[data-customer-theme="dark"] .payment-info-card,
+body[data-customer-theme="dark"] .order-price-summary,
+body[data-customer-theme="dark"] .referral-stat-grid article,
+body[data-customer-theme="dark"] .referral-code-card,
+body[data-customer-theme="dark"] .referral-invite-card,
+body[data-customer-theme="dark"] .referral-history { color: #edf4ff; background: #111d31; border-color: #263653; }
+body[data-customer-theme="dark"] .referral-code-card { background: linear-gradient(135deg, #142746, #111d31); }
+body[data-customer-theme="dark"] .referral-invite-card { background: linear-gradient(135deg, #211a42, #111d31); }
+body[data-customer-theme="dark"] .referral-code-card input,
+body[data-customer-theme="dark"] .referral-invite-card input { color: #eaf2ff; background: #16253c; border-color: #304462; }
+body[data-customer-theme="dark"] .referral-stat-grid small,
+body[data-customer-theme="dark"] .referral-code-card > span,
+body[data-customer-theme="dark"] .referral-invite-card label,
+body[data-customer-theme="dark"] .referral-invite-card > small,
+body[data-customer-theme="dark"] .referral-how-it-works article small,
+body[data-customer-theme="dark"] .referral-list small,
+body[data-customer-theme="dark"] .referral-empty { color: #aab9d0; }
+body[data-customer-theme="dark"] .referral-how-it-works article { background: rgba(17, 29, 49, .72); }
+body[data-customer-theme="dark"] .referral-empty strong,
+body[data-customer-theme="dark"] .referral-history-heading h2,
+body[data-customer-theme="dark"] .referral-how-it-works article strong { color: #edf4ff; }
+
+/* Customer pages outside the marketplace bring their own page CSS. These
+   overrides make the saved theme visible in cart, product details, orders and
+   account pages as well, rather than only on the dashboard. */
+body[data-customer-theme="dark"] :is(.cart-page, .wishlist-page, .customer-profile-page, .customer-products-page, .customer-orders-page, .customer-order-details-page, .checkout-page, .my-orders-page, .order-details-page) { color: #edf4ff !important; background: #09111f !important; }
+body[data-customer-theme="dark"] .shp-product-page { --navy: #edf4ff; --muted: #aab9d0; --line: #2d4263; --soft: #09111f; --blue: #94b8ff; color: #edf4ff; background: radial-gradient(circle at top left, rgba(37,99,235,.2), transparent 28%), #09111f; }
+body[data-customer-theme="dark"] :is(.cart-item, .cart-summary-card, .cart-empty, .cart-error, .wishlist-card, .wishlist-empty, .wishlist-error, .customer-profile-topbar, .customer-profile-card, .customer-profile-details, .customer-products-header, .customer-product-count, .customer-product-card, .customer-empty-products, .customer-products-error, .order-details-header, .order-section, .order-details-error, .my-order-card, .my-orders-empty, .shp-gallery, .shp-product-info, .shp-purchase-panel, .shp-rec-section, .shp-bundle, .shp-specs, .shp-reviews, .shp-product-state, .shp-rec-card, .shp-review-card, .shp-empty) { color: #edf4ff !important; background: #111d31 !important; border-color: #2d4263 !important; }
+body[data-customer-theme="dark"] :is(.cart-item-image, .wishlist-image-wrapper, .customer-product-image, .order-product-icon, .shp-main-image, .shp-rec-image, .shp-spec-grid div, .shp-full-spec, .shp-thumbs button, .shp-qty button, .shp-qty strong) { background: #0d1a2d !important; border-color: #2d4263 !important; }
+body[data-customer-theme="dark"] :is(.cart-page, .wishlist-page, .customer-profile-page, .customer-products-page, .customer-orders-page, .customer-order-details-page, .checkout-page, .my-orders-page, .order-details-page, .shp-product-page) :is(h1, h2, h3, h4, strong) { color: #edf4ff; }
+body[data-customer-theme="dark"] :is(.cart-page, .wishlist-page, .customer-profile-page, .customer-products-page, .customer-orders-page, .customer-order-details-page, .checkout-page, .my-orders-page, .order-details-page, .shp-product-page) :is(input, textarea, select) { color: #edf4ff; background: #16253c; border-color: #304866; }
+body[data-customer-theme="dark"] :is(.cart-clear-button, .cart-continue-button, .wishlist-view-btn, .customer-view-product, .customer-profile-back, .customer-profile-cart, .customer-profile-edit-button, .shp-zoom-button, .shp-option-group button) { color: #e3edff; background: #172942; border-color: #36527b; }
+
+body[data-customer-theme="emerald"] :is(.cart-page, .wishlist-page, .customer-profile-page, .customer-products-page, .customer-orders-page, .customer-order-details-page, .checkout-page, .my-orders-page, .order-details-page, .shp-product-page) { background: #f1fbf7 !important; }
+body[data-customer-theme="emerald"] :is(.cart-item, .cart-summary-card, .wishlist-card, .customer-profile-topbar, .customer-profile-card, .customer-profile-details, .customer-product-count, .customer-product-card, .order-section, .shp-gallery, .shp-product-info, .shp-purchase-panel, .shp-rec-section, .shp-bundle, .shp-specs, .shp-reviews) { border-color: #b9e4d4; box-shadow: 0 12px 30px rgba(6, 78, 59, .07); }
+body[data-customer-theme="violet"] :is(.cart-page, .wishlist-page, .customer-profile-page, .customer-products-page, .customer-orders-page, .customer-order-details-page, .checkout-page, .my-orders-page, .order-details-page, .shp-product-page) { background: #faf6ff !important; }
+body[data-customer-theme="violet"] :is(.cart-item, .cart-summary-card, .wishlist-card, .customer-profile-topbar, .customer-profile-card, .customer-profile-details, .customer-product-count, .customer-product-card, .order-section, .shp-gallery, .shp-product-info, .shp-purchase-panel, .shp-rec-section, .shp-bundle, .shp-specs, .shp-reviews) { border-color: #dbc9f5; box-shadow: 0 12px 30px rgba(88, 48, 143, .07); }
+body[data-customer-theme="dark"] .checkout-field input,
+body[data-customer-theme="dark"] .checkout-field textarea { color: #edf4ff; background: #16253c; border-color: #304462; }
+body[data-customer-theme="dark"] .checkout-field label,
+body[data-customer-theme="dark"] .checkout-payment-option strong,
+body[data-customer-theme="dark"] .checkout-title span { color: #edf4ff; }
+body[data-customer-theme="dark"] .checkout-back-button,
+body[data-customer-theme="dark"] .checkout-payment-option p,
+body[data-customer-theme="dark"] .referral-page > p,
+body[data-customer-theme="dark"] .referral-list article span { color: #aab9d0; }
+
+body[data-customer-theme="emerald"] .checkout-page,
+body[data-customer-theme="emerald"] .cart-page,
+body[data-customer-theme="emerald"] .wishlist-page,
+body[data-customer-theme="emerald"] .customer-profile-page,
+body[data-customer-theme="emerald"] .customer-orders-page,
+body[data-customer-theme="emerald"] .my-orders-page,
+body[data-customer-theme="emerald"] .order-details-page,
+body[data-customer-theme="emerald"] .customer-order-details-page,
+body[data-customer-theme="emerald"] .referral-page { background: #f3fbf8; color: #073b32; }
+body[data-customer-theme="violet"] .checkout-page,
+body[data-customer-theme="violet"] .cart-page,
+body[data-customer-theme="violet"] .wishlist-page,
+body[data-customer-theme="violet"] .customer-profile-page,
+body[data-customer-theme="violet"] .customer-orders-page,
+body[data-customer-theme="violet"] .my-orders-page,
+body[data-customer-theme="violet"] .order-details-page,
+body[data-customer-theme="violet"] .customer-order-details-page,
+body[data-customer-theme="violet"] .referral-page { background: #faf7ff; color: #2c164d; }
+
+body[data-seller-theme="dark"] .seller-app,
+body[data-seller-theme="dark"] .seller-data-page,
+body[data-seller-theme="dark"] .seller-workspace-page,
+body[data-seller-theme="dark"] .seller-module-page,
+body[data-seller-theme="dark"] .seller-reports-page,
+body[data-seller-theme="dark"] .seller-customers-page { background: #0b1526; color: #eaf2ff; }
+body[data-seller-theme="dark"] .seller-sidebar,
+body[data-seller-theme="dark"] .seller-topbar { color: #eaf2ff; background: #111e33; border-color: #293a56; }
+body[data-seller-theme="dark"] .seller-sidebar-brand h2,
+body[data-seller-theme="dark"] .seller-nav-link { color: #bbc9df; }
+body[data-seller-theme="dark"] .seller-nav-link:hover { color: #fff; background: #1c2d49; }
+
+body[data-admin-theme="dark"] .admin-dashboard-v2 { color-scheme: dark; background: #0b1526; }
+body[data-admin-theme="dark"] .dashboard-topbar,
+body[data-admin-theme="dark"] .admin-console-footer { color: #eaf2ff; background: #111e33; border-color: #293a56; }
+body[data-admin-theme="dark"] .dashboard-brand,
+body[data-admin-theme="dark"] .dashboard-nav a,
+body[data-admin-theme="dark"] .dashboard-account { color: #d5e1f5; }
+body[data-admin-theme="dark"] .admin-console-footer strong,
+body[data-admin-theme="dark"] .admin-console-footer a { color: #eaf2ff; }
+body[data-admin-theme="dark"] .dashboard-global-search { background: #172840; border-color: #314563; }
+
+body[data-seller-theme="emerald"] .seller-app, body[data-seller-theme="emerald"] .seller-data-page, body[data-seller-theme="emerald"] .seller-workspace-page { background: #f2fbf7; }
+body[data-seller-theme="violet"] .seller-app, body[data-seller-theme="violet"] .seller-data-page, body[data-seller-theme="violet"] .seller-workspace-page { background: #faf7ff; }
+body[data-admin-theme="emerald"] .admin-dashboard-v2 { background: #f2fbf7; }
+body[data-admin-theme="violet"] .admin-dashboard-v2 { background: #faf7ff; }
+
+/* ================================================================
+   Workspace colour system
+
+   Many business screens pre-date the appearance switch and carry their
+   own page-level colours.  Keep the override here (instead of duplicating
+   a dark stylesheet per module) so seller, admin and customer workspaces
+   always share the same accessible surfaces, text and form controls.
+   ================================================================ */
+body[data-seller-theme="dark"],
+body[data-admin-theme="dark"],
+body[data-customer-theme="dark"] {
+    --workspace-canvas: #091322;
+    --workspace-surface: #101e33;
+    --workspace-surface-raised: #152742;
+    --workspace-surface-hover: #1b3151;
+    --workspace-ink: #f2f6ff;
+    --workspace-muted: #b6c5dc;
+    --workspace-faint: #8fa2bf;
+    --workspace-line: #2a4163;
+    --workspace-input: #0d1a2d;
+    --workspace-focus: #75a7ff;
+    --workspace-primary: #86adff;
+    --workspace-shadow: 0 18px 48px rgba(0, 0, 0, .24);
+    color-scheme: dark;
+}
+
+/* Main canvas coverage — these names are the root wrappers used by the
+   current customer, seller and admin routes. */
+body[data-seller-theme="dark"] :is(.seller-app, .seller-data-page, .seller-workspace-page, .seller-module-page, .seller-reports-page, .seller-customers-page, .seller-products-page, .seller-orders-page, .seller-settings-page, .seller-subscription-page, .seller-gst-page, .seller-return-page, .seller-billing-workspace, .seller-distributor-page),
+body[data-admin-theme="dark"] :is(.admin-dashboard-v2, .admin-tools, .admin-management, .admin-add-product-page, .admin-referrals-page, .admin-subscriptions, .after-sales-admin, .dist-admin, .market-admin, .marketplace-admin),
+body[data-customer-theme="dark"] :is(.marketplace-page, .second-hand-market, .customer-addresses-page, .after-sales-page, .customer-rewards-page, .customer-products-page, .customer-profile-page, .customer-orders-page, .customer-order-details-page, .customer-return-page) {
+    color: var(--workspace-ink) !important;
+    background: radial-gradient(circle at 8% -8%, rgba(55, 119, 255, .17), transparent 30%), var(--workspace-canvas) !important;
+}
+
+/* Shared cards, panels, report rows and dashboard surfaces.  The broad but
+   scoped selector intentionally covers modules created at different times. */
+body[data-seller-theme="dark"] :is(.seller-section, .seller-stat-card, .seller-due-card, .seller-product-card, .seller-data-card, .seller-data-list, .seller-data-state, .seller-directory-card, .seller-request-card, .seller-return-card, .seller-report-card, .seller-gst-card, .seller-orders-header, .seller-order-card, .seller-settings-card, .seller-subscription-card, .seller-module-card, .finance-management section, .finance-detail),
+body[data-admin-theme="dark"] :is(.kpi-card:not(.revenue), .attention-panel, .data-panel, .catalog-health a, .quick-action, .admin-tools .website-card, .admin-management .card, .admin-management .admin-card, .admin-management .management-card, .admin-add-product-page .admin-product-card, .admin-add-product-page .admin-form-section, .admin-subscriptions .admin-plan-builder, .admin-subscriptions .admin-plan-list, .admin-subscriptions .admin-subscription-payments, .after-sales-admin-card, .dist-admin-card, .market-admin-card, .market-admin-table, .admin-report-table-wrap, .seller-approval-section),
+body[data-customer-theme="dark"] :is(.marketplace-product-card, .marketplace-benefit-card, .marketplace-promises article, .customer-category-card, .customer-rail-product-card, .customer-chatbot-panel, .customer-profile-menu, .customer-preferences-menu, .customer-address-card, .after-sales-card, .reward-card, .second-hand-card) {
+    color: var(--workspace-ink) !important;
+    background: var(--workspace-surface) !important;
+    border-color: var(--workspace-line) !important;
+    box-shadow: var(--workspace-shadow);
+}
+
+/* Text cannot inherit light-page slate values in a dark workspace. */
+body[data-seller-theme="dark"] :is(.seller-app, .seller-data-page, .seller-workspace-page, .seller-module-page, .seller-reports-page, .seller-customers-page, .seller-products-page, .seller-orders-page, .seller-settings-page, .seller-subscription-page, .seller-gst-page, .seller-return-page, .seller-billing-workspace, .seller-distributor-page) :is(h1, h2, h3, h4, strong, label, th),
+body[data-admin-theme="dark"] :is(.admin-dashboard-v2, .admin-tools, .admin-management, .admin-add-product-page, .admin-referrals-page, .admin-subscriptions, .after-sales-admin, .dist-admin, .market-admin, .marketplace-admin) :is(h1, h2, h3, h4, strong, label, th),
+body[data-customer-theme="dark"] :is(.marketplace-page, .second-hand-market, .customer-addresses-page, .after-sales-page, .customer-rewards-page, .customer-products-page, .customer-profile-page, .customer-orders-page, .customer-order-details-page, .customer-return-page) :is(h1, h2, h3, h4, strong, label, th) {
+    color: var(--workspace-ink) !important;
+}
+
+body[data-seller-theme="dark"] :is(.seller-app, .seller-data-page, .seller-workspace-page, .seller-module-page, .seller-reports-page, .seller-customers-page, .seller-products-page, .seller-orders-page, .seller-settings-page, .seller-subscription-page, .seller-gst-page, .seller-return-page, .seller-billing-workspace, .seller-distributor-page) :is(p, small, span, td, li, .muted),
+body[data-admin-theme="dark"] :is(.admin-dashboard-v2, .admin-tools, .admin-management, .admin-add-product-page, .admin-referrals-page, .admin-subscriptions, .after-sales-admin, .dist-admin, .market-admin, .marketplace-admin) :is(p, small, span, td, li, .muted),
+body[data-customer-theme="dark"] :is(.marketplace-page, .second-hand-market, .customer-addresses-page, .after-sales-page, .customer-rewards-page, .customer-products-page, .customer-profile-page, .customer-orders-page, .customer-order-details-page, .customer-return-page) :is(p, small, span, td, li, .muted) {
+    color: var(--workspace-muted);
+}
+
+/* Inputs, selects and table rows are the most common contrast problem in
+   dark mode.  This keeps forms readable across old and new modules. */
+body[data-seller-theme="dark"] :is(.seller-app, .seller-data-page, .seller-workspace-page, .seller-module-page, .seller-reports-page, .seller-customers-page, .seller-products-page, .seller-orders-page, .seller-settings-page, .seller-subscription-page, .seller-gst-page, .seller-return-page, .seller-billing-workspace, .seller-distributor-page) :is(input, select, textarea),
+body[data-admin-theme="dark"] :is(.admin-dashboard-v2, .admin-tools, .admin-management, .admin-add-product-page, .admin-referrals-page, .admin-subscriptions, .after-sales-admin, .dist-admin, .market-admin, .marketplace-admin) :is(input, select, textarea),
+body[data-customer-theme="dark"] :is(.marketplace-page, .second-hand-market, .customer-addresses-page, .after-sales-page, .customer-rewards-page, .customer-products-page, .customer-profile-page, .customer-orders-page, .customer-order-details-page, .customer-return-page) :is(input, select, textarea) {
+    color: var(--workspace-ink) !important;
+    background: var(--workspace-input) !important;
+    border-color: var(--workspace-line) !important;
+    caret-color: var(--workspace-ink);
+}
+body[data-seller-theme="dark"] :is(input, select, textarea)::placeholder,
+body[data-admin-theme="dark"] :is(input, select, textarea)::placeholder,
+body[data-customer-theme="dark"] :is(input, select, textarea)::placeholder { color: var(--workspace-faint) !important; opacity: 1; }
+body[data-seller-theme="dark"] :is(input, select, textarea):focus,
+body[data-admin-theme="dark"] :is(input, select, textarea):focus,
+body[data-customer-theme="dark"] :is(input, select, textarea):focus { outline: 2px solid color-mix(in srgb, var(--workspace-focus) 70%, transparent); outline-offset: 1px; }
+
+body[data-seller-theme="dark"] :is(table, .seller-data-list, .seller-order-item, .seller-due-list > button, .seller-alert-list button),
+body[data-admin-theme="dark"] :is(.responsive-table, .admin-report-table-wrap, .market-admin-table, .after-sales-admin-table-wrap, .approval-list, .customer-list),
+body[data-customer-theme="dark"] :is(.marketplace-product-info, .customer-product-rail) { border-color: var(--workspace-line) !important; }
+body[data-seller-theme="dark"] :is(tr, .seller-order-item, .seller-due-list > button, .seller-alert-list button),
+body[data-admin-theme="dark"] :is(.responsive-table tr, .market-admin-table tr, .after-sales-admin-table tr, .approval-row, .customer-row),
+body[data-customer-theme="dark"] :is(.marketplace-product-card, .customer-rail-product-card) { border-color: var(--workspace-line) !important; }
+body[data-seller-theme="dark"] :is(.seller-due-list > button, .seller-alert-list button):hover,
+body[data-admin-theme="dark"] :is(.approval-row, .customer-row, .dashboard-search-results button):hover,
+body[data-customer-theme="dark"] :is(.marketplace-product-card, .customer-rail-product-card):hover { background: var(--workspace-surface-hover) !important; }
+
+/* Dashboard-specific polish and contrast. */
+body[data-seller-theme="dark"] .seller-topbar,
+body[data-admin-theme="dark"] .dashboard-topbar { background: rgba(16, 30, 51, .94) !important; border-color: var(--workspace-line) !important; }
+body[data-seller-theme="dark"] :is(.seller-ghost-button, .seller-quick-grid button),
+body[data-admin-theme="dark"] :is(.logout-link, .dashboard-global-search, .dashboard-search-results, .dashboard-search-results button) { color: var(--workspace-ink) !important; background: var(--workspace-surface-raised) !important; border-color: var(--workspace-line) !important; }
+body[data-seller-theme="dark"] .seller-quick-grid button:hover { background: var(--workspace-surface-hover) !important; border-color: #5279aa !important; }
+body[data-admin-theme="dark"] .dashboard-nav a { color: var(--workspace-muted) !important; }
+body[data-admin-theme="dark"] .dashboard-nav a:hover,
+body[data-admin-theme="dark"] .dashboard-nav a.active { color: #fff !important; background: #254a85 !important; }
+body[data-admin-theme="dark"] .dashboard-global-search input { color: var(--workspace-ink) !important; }
+body[data-admin-theme="dark"] .dashboard-search-results small,
+body[data-admin-theme="dark"] .account-copy span { color: var(--workspace-muted) !important; }
+
+/* Customer marketplace uses its own palette variables.  Override those once
+   so every card, navigation rail and modal follows the selected dark theme. */
+body[data-customer-theme="dark"] .marketplace-page--dark {
+    --surface-card: #101e33;
+    --surface-soft: #152742;
+    --text-primary: #f2f6ff;
+    --text-secondary: #b6c5dc;
+    --border-soft: #2a4163;
+    --brand-accent: #86adff;
+}
+body[data-customer-theme="dark"] :is(.customer-header, .marketplace-category-navigation) { border-color: var(--workspace-line) !important; background: rgba(16, 30, 51, .94) !important; }
+body[data-customer-theme="dark"] :is(.customer-profile-button, .customer-header-action, .customer-header-language, .customer-filter-toggle, .marketplace-refresh) { color: var(--workspace-ink) !important; border-color: var(--workspace-line) !important; background: var(--workspace-surface-raised) !important; }
+
+@media (max-width: 760px) {
+    body[data-seller-theme="dark"] :is(.seller-app, .seller-data-page, .seller-workspace-page, .seller-module-page, .seller-reports-page, .seller-customers-page, .seller-products-page, .seller-orders-page, .seller-settings-page, .seller-subscription-page, .seller-gst-page, .seller-return-page, .seller-billing-workspace, .seller-distributor-page),
+    body[data-admin-theme="dark"] :is(.admin-dashboard-v2, .admin-tools, .admin-management, .admin-add-product-page, .admin-referrals-page, .admin-subscriptions, .after-sales-admin, .dist-admin, .market-admin, .marketplace-admin),
+    body[data-customer-theme="dark"] :is(.marketplace-page, .second-hand-market, .customer-addresses-page, .after-sales-page, .customer-rewards-page, .customer-products-page, .customer-profile-page, .customer-orders-page, .customer-order-details-page, .customer-return-page) { background-attachment: fixed !important; }
+}
+
+@media (max-width: 680px) { .workspace-preferences:not(.workspace-preferences--compact) { width: 100%; justify-content: flex-end; } .workspace-preferences label span { display: none; } }
