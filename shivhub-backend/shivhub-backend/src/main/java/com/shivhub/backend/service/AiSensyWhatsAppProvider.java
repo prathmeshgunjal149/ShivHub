@@ -120,6 +120,7 @@ public class AiSensyWhatsAppProvider {
     private String clean(String value) { return value == null ? "" : value.trim(); }
     private String safe(String value) {
         String text = value == null || value.isBlank() ? "Provider request failed" : value;
+        if (!apiKey.isBlank()) text = text.replace(apiKey, "[redacted]");
         text = text.replaceAll("(?i)apiKey[\\\"=: ]+[A-Za-z0-9._-]+", "apiKey=[redacted]");
         return text.substring(0, Math.min(text.length(), 500));
     }

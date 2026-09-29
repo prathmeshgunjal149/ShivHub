@@ -57,6 +57,7 @@ public class EmailService {
      */
 
     private final JavaMailSender mailSender;
+    private final AdminIntegrationCredentialService integrationCredentials;
     private final WhatsAppNotificationService whatsappNotifications;
     /** Public API base is used only to turn an uploaded /uploads/... banner into an email-safe absolute URL. */
     private final String publicApiUrl;
@@ -70,12 +71,18 @@ public class EmailService {
 
     public EmailService(
             JavaMailSender mailSender,
+            AdminIntegrationCredentialService integrationCredentials,
             WhatsAppNotificationService whatsappNotifications,
             @Value("${shivhub.public-api-url:http://localhost:8081}") String publicApiUrl) {
 
         this.mailSender = mailSender;
+        this.integrationCredentials = integrationCredentials;
         this.whatsappNotifications = whatsappNotifications;
         this.publicApiUrl = publicApiUrl == null ? "" : publicApiUrl.replaceAll("/+$", "");
+    }
+
+    private JavaMailSender activeMailSender() {
+        return integrationCredentials.mailSender(mailSender);
     }
 
 
@@ -125,7 +132,7 @@ public class EmailService {
                 + "ShivHub Team"
         );
 
-        mailSender.send(message);
+        activeMailSender().send(message);
         sendUserWhatsApp(sellerEmail, WhatsAppNotificationEvent.SELLER_PRODUCT_APPROVED, null, productName,
                 java.util.List.of(safeText(productName), safeText(reviewMessage)));
     }
@@ -161,7 +168,7 @@ public class EmailService {
                 + "Do not share this code with anyone."
         );
 
-        mailSender.send(message);
+        activeMailSender().send(message);
         sendCustomerWhatsApp(recipientEmail, WhatsAppNotificationEvent.OTP_LOGIN, "Customer", "login-otp",
                 java.util.List.of(otp));
     }
@@ -197,7 +204,7 @@ public class EmailService {
                 + "ShivHub Team"
         );
 
-        mailSender.send(message);
+        activeMailSender().send(message);
     }
 
 
@@ -231,7 +238,7 @@ public class EmailService {
                 java.util.List.of(safeText(subject), safeText(message)));
     }
 
-    /** Consolidated seller-only due report. Email credentials stay in Spring environment configuration. */
+    /** Consolidated seller-only due report. SMTP settings resolve securely from Admin or the environment fallback. */
     public void sendSellerDailyPaymentReminder(String email, String shopName, String report) {
         if (email == null || email.isBlank()) return;
         send(email, "ShivHub - Daily payment reminder", "Hello " + shopName + ",\n\n" + report
@@ -384,7 +391,7 @@ public class EmailService {
                 + "ShivHub Team"
         );
 
-        mailSender.send(message);
+        activeMailSender().send(message);
         sendUserWhatsApp(sellerEmail, WhatsAppNotificationEvent.SELLER_PRODUCT_REJECTED, null, productName,
                 java.util.List.of(safeText(productName), safeText(rejectionReason)));
     }
@@ -488,12 +495,12 @@ public class EmailService {
     }
 
     private void sendHtml(String recipient, String subject, String html) throws MessagingException {
-        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessage message = activeMailSender().createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, false, StandardCharsets.UTF_8.name());
         helper.setTo(recipient);
         helper.setSubject(subject);
         helper.setText(html, true);
-        mailSender.send(message);
+        activeMailSender().send(message);
         whatsappNotifications.mirrorCustomerEmail(recipient, subject, html);
     }
 
@@ -564,7 +571,7 @@ public class EmailService {
 
     /** Existing email remains authoritative; WhatsApp is a best-effort secondary channel. */
     private void sendMessage(SimpleMailMessage message) {
-        mailSender.send(message);
+        activeMailSender().send(message);
         if (message.getTo() == null) return;
         String subject = message.getSubject() == null ? "ShivHub update" : message.getSubject();
         String body = message.getText() == null ? "" : message.getText();
@@ -1307,7 +1314,7 @@ public void sendReferralInvitation(String email, String code) {
              */
 
             MimeMessage message =
-                    mailSender.createMimeMessage();
+                    activeMailSender().createMimeMessage();
 
 
             /*
@@ -1377,7 +1384,7 @@ public void sendReferralInvitation(String email, String code) {
             );
 
 
-            mailSender.send(message);
+            activeMailSender().send(message);
             whatsappNotifications.mirrorCustomerEmail(to, subject, body);
 
 
@@ -1556,7 +1563,7 @@ public void sendOfflineBillEmail(
          */
 
         MimeMessage message =
-                mailSender.createMimeMessage();
+                activeMailSender().createMimeMessage();
 
 
         /*
@@ -1668,7 +1675,7 @@ public void sendOfflineBillEmail(
          * =================================================
          */
 
-        mailSender.send(
+        activeMailSender().send(
                 message
         );
 
@@ -1820,7 +1827,7 @@ public void sendPurchasePaymentEmail(
     );
 
 
-    mailSender.send(message);
+    activeMailSender().send(message);
     sendUserWhatsApp(sellerEmail, WhatsAppNotificationEvent.SELLER_PURCHASE_PAYMENT, sellerName, invoiceNumber,
             java.util.List.of(safeText(invoiceNumber), safeText(distributorName),
                     paymentAmount == null ? "" : paymentAmount.toPlainString(),
@@ -1838,7 +1845,7 @@ public void sendPurchaseCreatedEmail(String sellerEmail, String sellerName, Stri
             + "Invoice: " + invoiceNumber + "\nDistributor: " + distributorName + "\n"
             + "Items received: " + itemCount + "\nTotal bill: Rs. " + grandTotal + "\n\n"
             + "Use ShivHub Purchase History to record paid and remaining amounts.\n\nRegards,\nShivHub Team");
-    mailSender.send(message);
+    activeMailSender().send(message);
     sendUserWhatsApp(sellerEmail, WhatsAppNotificationEvent.SELLER_PURCHASE_INVOICE, sellerName, invoiceNumber,
             java.util.List.of(safeText(invoiceNumber), safeText(distributorName),
                     grandTotal == null ? "" : grandTotal.toPlainString(), String.valueOf(itemCount)));
@@ -1850,7 +1857,7 @@ public void sendLowStockAlertEmail(String sellerEmail, String sellerName, String
     message.setSubject("ShivHub low stock alert: " + productName);
     message.setText("Hello " + (sellerName == null ? "Seller" : sellerName) + ",\n\n"
             + productName + " has only " + stock + " unit(s) left. Please add a new purchase before it runs out.\n\nRegards,\nShivHub Team");
-    mailSender.send(message);
+    activeMailSender().send(message);
     sendUserWhatsApp(sellerEmail, WhatsAppNotificationEvent.SELLER_LOW_STOCK, sellerName, productName,
             java.util.List.of(safeText(productName), String.valueOf(stock)));
 }
@@ -1869,7 +1876,7 @@ public void sendExpenseCreatedEmail(String sellerEmail, String sellerName, Strin
             + "Payment: " + (paymentMethod == null ? "-" : paymentMethod) + "\n"
             + "Notes: " + (notes == null || notes.isBlank() ? "-" : notes) + "\n\n"
             + "Regards,\nShivHub Team");
-    mailSender.send(message);
+    activeMailSender().send(message);
     sendUserWhatsApp(sellerEmail, WhatsAppNotificationEvent.SELLER_EXPENSE_RECORDED, sellerName, category,
             java.util.List.of(safeText(category), safeText(description),
                     amount == null ? "" : amount.toPlainString(), safeText(String.valueOf(expenseDate))));
@@ -1885,7 +1892,7 @@ public void sendDistributorPaymentEmail(String distributorEmail, String invoiceN
             + " recorded a payment against invoice " + invoiceNumber + ".\n\n"
             + "Payment received: Rs. " + paymentAmount + "\nTotal paid: Rs. " + totalPaid
             + "\nRemaining balance: Rs. " + remainingAmount + "\n\nRegards,\nShivHub Team");
-    mailSender.send(message);
+    activeMailSender().send(message);
     sendUserWhatsApp(distributorEmail, WhatsAppNotificationEvent.DISTRIBUTOR_PAYMENT_RECORDED, null, invoiceNumber,
             java.util.List.of(safeText(invoiceNumber), safeText(sellerName),
                     paymentAmount == null ? "" : paymentAmount.toPlainString(),

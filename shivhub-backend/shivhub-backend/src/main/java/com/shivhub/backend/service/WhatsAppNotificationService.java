@@ -102,6 +102,7 @@ public class WhatsAppNotificationService {
         mapping.setEventKey(event.configKey());
         mapping.setTemplateName(templateName);
         mapping.setCampaignName(campaignName);
+        mapping.setTemplateParameterCount(request.templateParameterCount());
         mapping.setEnabled(request.enabled());
         return eventConfiguration(event, campaignMappings.save(mapping));
     }
@@ -202,14 +203,28 @@ public class WhatsAppNotificationService {
     private boolean sendAiSensy(String mobile, WhatsAppNotificationEvent event, String userName,
             String reference, List<String> templateParams, String imageUrl) {
         String campaign = campaignFor(event);
-        String eventKey = sha256(mobile + "|AISENSY|" + event.name() + "|" + safe(reference) + "|" + String.valueOf(templateParams) + (imageUrl == null ? "" : "|" + imageUrl));
+        List<String> suppliedParameters = templateParams == null ? List.of() : templateParams;
+        Integer expectedParameterCount = configuredParameterCount(event);
+        String parameterError = expectedParameterCount != null && (expectedParameterCount < 0 || expectedParameterCount > 20)
+                ? "AiSensy body parameter count must be between 0 and 20"
+                : expectedParameterCount != null && suppliedParameters.size() < expectedParameterCount
+                ? "AiSensy campaign expects " + expectedParameterCount + " body parameters, but this event supplied only " + suppliedParameters.size()
+                : "";
+        List<String> parameters = expectedParameterCount == null || !parameterError.isBlank() ? suppliedParameters
+                : suppliedParameters.subList(0, Math.min(expectedParameterCount, suppliedParameters.size()));
+        String eventKey = sha256(mobile + "|AISENSY|" + event.name() + "|" + campaign + "|" + safe(reference) + "|" + String.valueOf(parameters) + (imageUrl == null ? "" : "|" + imageUrl));
         WhatsAppDeliveryLog prior = logs.findTopByRecipientAndEventKeyOrderByCreatedAtDesc(mobile, eventKey).orElse(null);
-        if (prior != null && "SENT".equals(prior.getStatus())) return true;
+        if (!campaign.isBlank() && parameterError.isBlank() && prior != null && "SENT".equals(prior.getStatus())) return true;
         WhatsAppDeliveryLog log = prior == null ? new WhatsAppDeliveryLog() : prior;
         log.setRecipient(mobile); log.setEventKey(eventKey); log.setEventType(event.configKey()); log.setStatus("PENDING"); log.setFailureReason(null); logs.save(log);
-        List<String> parameters = templateParams == null ? List.of() : templateParams;
+        if (campaign.isBlank()) {
+            log.setStatus("SKIPPED"); log.setFailureReason("An exact enabled Live AiSensy campaign mapping is required for " + event.configKey()); logs.save(log); return false;
+        }
+        if (!parameterError.isBlank()) {
+            log.setStatus("SKIPPED"); log.setFailureReason(parameterError); logs.save(log); return false;
+        }
         List<String> buttons = event == WhatsAppNotificationEvent.OTP_REGISTRATION || event == WhatsAppNotificationEvent.OTP_LOGIN
-                ? parameters : List.of();
+                ? suppliedParameters : List.of();
         AiSensyWhatsAppProvider.ProviderResult result = aiSensy.send(campaign, mobile, userName, parameters, buttons, imageUrl);
         if (result.accepted()) {
             log.setStatus("SENT"); log.setProviderStatus(result.detail()); log.setSentAt(LocalDateTime.now()); logs.save(log); return true;
@@ -299,7 +314,14 @@ public class WhatsAppNotificationService {
         boolean enabled = mapping == null || mapping.isEnabled();
         boolean configured = isAiSensy() ? enabled && !campaignName.isBlank() : isConfigured();
         return new EventConfiguration(event.configKey(), configured, templateName, campaignName, enabled,
-                mapping == null ? "ENVIRONMENT" : "ADMIN");
+                mapping == null ? "ENVIRONMENT" : "ADMIN",
+                mapping == null ? null : mapping.getTemplateParameterCount());
+    }
+
+    private Integer configuredParameterCount(WhatsAppNotificationEvent event) {
+        return campaignMappings.findByEventKey(event.configKey())
+                .map(WhatsAppCampaignMapping::getTemplateParameterCount)
+                .orElse(null);
     }
 
     private String campaignFor(WhatsAppNotificationEvent event) {
@@ -324,5 +346,5 @@ public class WhatsAppNotificationService {
     private String sha256(String value) { try { return java.util.HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(value.getBytes(StandardCharsets.UTF_8))); } catch (Exception error) { throw new IllegalStateException("Unable to create notification key", error); } }
 
     public record EventConfiguration(String key, boolean campaignConfigured, String templateName,
-            String campaignName, boolean enabled, String source) { }
+            String campaignName, boolean enabled, String source, Integer templateParameterCount) { }
 }

@@ -22,3 +22,9 @@ export const getWhatsAppDiagnostics = () => unwrap(api.get("/api/admin/whatsapp/
 export const getWhatsAppEvents = () => unwrap(api.get("/api/admin/whatsapp/events"));
 export const updateWhatsAppCampaignMapping = (eventKey, mapping) => unwrap(api.put(`/api/admin/whatsapp/campaign-mappings/${eventKey}`, mapping));
 export const getWhatsAppDeliveryLogs = (page = 0, size = 30) => unwrap(api.get("/api/admin/whatsapp/delivery-logs", { params: { page, size } }));
+export const getAdminIntegrationCredentials = () => unwrap(api.get("/api/admin/integration-credentials"));
+export const updateAdminSmtpCredentials = payload => unwrap(api.put("/api/admin/integration-credentials/smtp", payload));
+export const updateAdminRazorpayCredentials = payload => unwrap(api.put("/api/admin/integration-credentials/razorpay", payload));
+export const getAdminSocialLoginConfiguration = () => unwrap(api.get("/api/admin/social-login"));
+export const updateAdminGoogleClientId = payload => unwrap(api.put("/api/admin/social-login/google", payload));
+export const updateAdminFacebookAppId = payload => unwrap(api.put("/api/admin/social-login/facebook", payload));

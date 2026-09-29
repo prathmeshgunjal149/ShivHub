@@ -22,7 +22,9 @@ import com.shivhub.backend.dto.VerifyLoginOtpRequest;
 import com.shivhub.backend.dto.VerifySellerRegistrationOtpRequest;
 import com.shivhub.backend.dto.WhatsAppOtpRequest;
 import com.shivhub.backend.dto.VerifyWhatsAppOtpRequest;
+import com.shivhub.backend.dto.PublicSocialLoginConfigurationResponse;
 import com.shivhub.backend.service.AuthService;
+import com.shivhub.backend.service.SocialLoginConfigurationService;
 
 import jakarta.validation.Valid;
 
@@ -73,6 +75,7 @@ public class AuthController {
      */
 
     private final AuthService authService;
+    private final SocialLoginConfigurationService socialLoginConfiguration;
 
 
     /*
@@ -81,9 +84,10 @@ public class AuthController {
      * =========================================================
      */
 
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, SocialLoginConfigurationService socialLoginConfiguration) {
 
         this.authService = authService;
+        this.socialLoginConfiguration = socialLoginConfiguration;
     }
 
 
@@ -305,6 +309,12 @@ public class AuthController {
     public ResponseEntity<LoginResponse> socialLogin(
             @Valid @RequestBody SocialLoginRequest request) {
         return ResponseEntity.ok(authService.socialLogin(request));
+    }
+
+    /** OAuth client/app IDs are public values required by the browser to start sign-in. */
+    @org.springframework.web.bind.annotation.GetMapping("/social-login/config")
+    public ResponseEntity<PublicSocialLoginConfigurationResponse> socialLoginConfiguration() {
+        return ResponseEntity.ok(socialLoginConfiguration.publicConfiguration());
     }
 
     @PostMapping("/forgot-password")

@@ -100,16 +100,10 @@ public class AuthService {
     private final ObjectMapper objectMapper;
     private final CustomerProfileRepository customerProfiles;
     private final WhatsAppOtpService whatsAppOtpService;
+    private final SocialLoginConfigurationService socialLoginConfiguration;
 
     @Value("${shivhub.frontend-url:http://localhost:5173}")
     private String frontendUrl;
-
-    @Value("${shivhub.oauth.google.client-id:}")
-    private String googleClientId;
-
-    @Value("${shivhub.oauth.facebook.app-id:}")
-    private String facebookAppId;
-
     // Changed: cryptographically secure OTP generation for email verification.
     private final SecureRandom secureRandom = new SecureRandom();
 
@@ -129,7 +123,8 @@ public class AuthService {
             ReferralService referralService,
             ObjectMapper objectMapper,
             CustomerProfileRepository customerProfiles,
-            WhatsAppOtpService whatsAppOtpService) {
+            WhatsAppOtpService whatsAppOtpService,
+            SocialLoginConfigurationService socialLoginConfiguration) {
 
         this.userRepository = userRepository;
 
@@ -143,6 +138,7 @@ public class AuthService {
         this.objectMapper = objectMapper;
         this.customerProfiles = customerProfiles;
         this.whatsAppOtpService = whatsAppOtpService;
+        this.socialLoginConfiguration = socialLoginConfiguration;
     }
 
 
@@ -864,8 +860,8 @@ public class AuthService {
             if (!"true".equalsIgnoreCase(data.path("email_verified").asText())) {
                 throw new RuntimeException("Google email is not verified");
             }
-            if (googleClientId != null && !googleClientId.isBlank()
-                    && !googleClientId.equals(data.path("aud").asText())) {
+            String googleClientId = socialLoginConfiguration.googleClientId();
+            if (googleClientId.isBlank() || !googleClientId.equals(data.path("aud").asText())) {
                 throw new RuntimeException("Google token audience mismatch");
             }
             return new SocialProfile("GOOGLE", data.path("sub").asText(), data.path("email").asText(),

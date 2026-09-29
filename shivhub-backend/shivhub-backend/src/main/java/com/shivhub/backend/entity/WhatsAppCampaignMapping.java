@@ -32,6 +32,10 @@ public class WhatsAppCampaignMapping {
     @Column(name = "campaign_name", length = 200)
     private String campaignName;
 
+    /** Number of AiSensy body variables expected by the selected live campaign. */
+    @Column(name = "template_parameter_count")
+    private Integer templateParameterCount;
+
     /** Enabled only after Meta has approved the template and AiSensy campaign is Live. */
     @Column(nullable = false)
     private boolean enabled;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import api from "../../services/api";
@@ -17,8 +17,24 @@ const Login = () => {
     const [otpRequired, setOtpRequired] = useState(false);
     const [otp, setOtp] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || "";
-    const facebookAppId = import.meta.env.VITE_FACEBOOK_APP_ID || "";
+    const [socialConfiguration, setSocialConfiguration] = useState(() => ({
+        googleClientId: import.meta.env.VITE_GOOGLE_CLIENT_ID || "",
+        facebookAppId: import.meta.env.VITE_FACEBOOK_APP_ID || ""
+    }));
+    const googleClientId = socialConfiguration.googleClientId;
+    const facebookAppId = socialConfiguration.facebookAppId;
+
+    useEffect(() => {
+        let active = true;
+        api.get("/api/auth/social-login/config").then(({ data }) => {
+            if (!active) return;
+            setSocialConfiguration(() => ({
+                googleClientId: data?.googleClientId || "",
+                facebookAppId: data?.facebookAppId || ""
+            }));
+        }).catch(() => { /* Legacy VITE values remain available if the server is temporarily unreachable. */ });
+        return () => { active = false; };
+    }, []);
 
     const handleChange = event => {
         const { name, value } = event.target;
@@ -138,7 +154,7 @@ const Login = () => {
 
     const handleGoogleLogin = async () => {
         if (!googleClientId) {
-            setError("Google login is not configured. Add VITE_GOOGLE_CLIENT_ID.");
+            setError("Google login is not configured. Ask an administrator to save the Google OAuth client ID.");
             return;
         }
         try {
@@ -159,7 +175,7 @@ const Login = () => {
 
     const handleFacebookLogin = async () => {
         if (!facebookAppId) {
-            setError("Facebook login is not configured. Add VITE_FACEBOOK_APP_ID.");
+            setError("Facebook login is not configured. Ask an administrator to save the Facebook App ID.");
             return;
         }
         try {
