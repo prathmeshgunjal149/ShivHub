@@ -73,6 +73,9 @@ const authService = {
     logout: () => {
 
         localStorage.removeItem("shivhub_token");
+        localStorage.removeItem("token");
+        localStorage.removeItem("jwtToken");
+        localStorage.removeItem("accessToken");
         localStorage.removeItem("shivhub_user");
     }
 };
