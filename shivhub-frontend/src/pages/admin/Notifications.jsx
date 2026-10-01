@@ -88,40 +88,54 @@ export default function Notifications() {
   const load = useCallback(async (requestedPage = 0, eventKey = "") => {
     setLoading(true);
     setError("");
-    try {
-      const [provider, configuredEvents, deliveryLogs, savedCredentials, savedSocialLogin] = await Promise.all([
-        getWhatsAppDiagnostics(),
-        getWhatsAppEvents(),
-        getWhatsAppDeliveryLogs(requestedPage, 30),
-        getAdminIntegrationCredentials(),
-        getAdminSocialLoginConfiguration(),
-      ]);
-      setDiagnostics(provider);
-      setEvents(configuredEvents || []);
-      setLogs(deliveryLogs || { content: [] });
-      setIntegrationCredentials(savedCredentials || null);
-      setSmtpDraft(current => ({ ...current, username: savedCredentials?.mailUsername || "" }));
-      setRazorpayDraft(current => ({ ...current, keyId: savedCredentials?.razorpayKeyId || "" }));
-      setSocialLoginConfiguration(savedSocialLogin || null);
-      setGoogleClientIdDraft(savedSocialLogin?.googleClientId || "");
-      setFacebookAppIdDraft(savedSocialLogin?.facebookAppId || "");
-      setPage(deliveryLogs?.number ?? requestedPage);
-      const availableEvents = configuredEvents || [];
-      const currentEvent = availableEvents.find(item => item.key === eventKey) || availableEvents[0];
-      if (currentEvent) {
-        setSelectedEventKey(currentEvent.key);
-        setMappingDraft({
-          templateName: currentEvent.templateName || "",
-          campaignName: currentEvent.campaignName || "",
-          templateParameterCount: currentEvent.templateParameterCount ?? "",
-          enabled: Boolean(currentEvent.enabled),
-        });
-      }
-    } catch (requestError) {
-      setError(requestError.response?.data?.message || "WhatsApp operations could not be loaded.");
-    } finally {
-      setLoading(false);
-    }
+    const sections = [
+      ["WhatsApp provider", getWhatsAppDiagnostics, data => setDiagnostics(data)],
+      ["Campaign mappings", getWhatsAppEvents, data => {
+        const availableEvents = data || [];
+        setEvents(availableEvents);
+        const currentEvent = availableEvents.find(item => item.key === eventKey) || availableEvents[0];
+        if (currentEvent) {
+          setSelectedEventKey(currentEvent.key);
+          setMappingDraft({
+            templateName: currentEvent.templateName || "",
+            campaignName: currentEvent.campaignName || "",
+            templateParameterCount: currentEvent.templateParameterCount ?? "",
+            enabled: Boolean(currentEvent.enabled),
+          });
+        }
+      }],
+      ["Delivery logs", () => getWhatsAppDeliveryLogs(requestedPage, 30), data => {
+        setLogs(data || { content: [] });
+        setPage(data?.number ?? requestedPage);
+      }],
+      ["Email/payment settings", getAdminIntegrationCredentials, data => {
+        setIntegrationCredentials(data || null);
+        setSmtpDraft(current => ({ ...current, username: data?.mailUsername || "" }));
+        setRazorpayDraft(current => ({ ...current, keyId: data?.razorpayKeyId || "" }));
+      }],
+      ["Social login settings", getAdminSocialLoginConfiguration, data => {
+        setSocialLoginConfiguration(data || null);
+        setGoogleClientIdDraft(data?.googleClientId || "");
+        setFacebookAppIdDraft(data?.facebookAppId || "");
+      }],
+    ];
+    const results = await Promise.allSettled(sections.map(async ([, request, apply]) => {
+      const data = await request();
+      apply(data);
+    }));
+    const failures = results.flatMap((result, index) => {
+      if (result.status === "fulfilled") return [];
+      const status = result.reason?.response?.status;
+      const detail = status === 401 || status === 403
+        ? "Access denied. Sign in again as an administrator; if this persists, restart the updated backend."
+        : status === 404
+          ? "Endpoint unavailable. Restart the updated backend."
+          : status ? "Server returned HTTP " + status + ". Check backend logs."
+            : "Cannot reach the backend. Check that it is running and retry.";
+      return [sections[index][0] + ": " + detail];
+    });
+    setError(failures.join(" "));
+    setLoading(false);
   }, []);
 
   useEffect(() => { void load(0); }, [load]);
@@ -288,6 +302,7 @@ export default function Notifications() {
         </div>
         {socialNotice && <p className="integration-credentials-notice" role="status">{socialNotice}</p>}
       </section>
+      {error && <p className="growth-error" role="alert">{error}</p>}
       <section className="metric-grid whatsapp-metrics" aria-label="WhatsApp status">
         <article>
           <span>Provider</span>
@@ -296,7 +311,7 @@ export default function Notifications() {
         </article>
         <article>
           <span>Connection</span>
-          <strong className={diagnostics?.configured ? "metric-ok" : "metric-warn"}>{diagnostics?.configured ? "Ready" : "Not ready"}</strong>
+          <strong className={diagnostics?.configured ? "metric-ok" : "metric-warn"}>{diagnostics == null ? (loading ? "Checking?" : "Unavailable") : diagnostics.configured ? "Ready" : "Not ready"}</strong>
           <small>API key and provider status are never shown here</small>
         </article>
         <article>
@@ -311,7 +326,7 @@ export default function Notifications() {
         </article>
       </section>
 
-      {!diagnostics?.configured && !loading && (
+      {diagnostics?.configured === false && !loading && (
         <section className="whatsapp-callout warning">
           <AlertTriangle size={20} aria-hidden="true" />
           <div><strong>Provider connection is not ready.</strong><span>Set the provider configuration only in the server environment. Do not place the AiSensy API key in this screen or frontend code.</span></div>

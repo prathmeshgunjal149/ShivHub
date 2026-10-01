@@ -18,13 +18,13 @@ export const getAdminCategories = () => unwrap(api.get("/api/admin/categories"))
 export const createAdminCategory = (name) => unwrap(api.post("/api/admin/categories", { name }));
 export const updateAdminCategory = (id, changes) => unwrap(api.put(`/api/admin/categories/${id}`, changes));
 export const downloadAdminInvoice = (id) => api.get(`/api/admin/orders/${id}/invoice`, { responseType: "blob" });
-export const getWhatsAppDiagnostics = () => unwrap(api.get("/api/admin/whatsapp/diagnostics"));
-export const getWhatsAppEvents = () => unwrap(api.get("/api/admin/whatsapp/events"));
+export const getWhatsAppDiagnostics = () => unwrap(api.get("/api/admin/whatsapp/diagnostics", { timeout: 15000 }));
+export const getWhatsAppEvents = () => unwrap(api.get("/api/admin/whatsapp/events", { timeout: 15000 }));
 export const updateWhatsAppCampaignMapping = (eventKey, mapping) => unwrap(api.put(`/api/admin/whatsapp/campaign-mappings/${eventKey}`, mapping));
-export const getWhatsAppDeliveryLogs = (page = 0, size = 30) => unwrap(api.get("/api/admin/whatsapp/delivery-logs", { params: { page, size } }));
-export const getAdminIntegrationCredentials = () => unwrap(api.get("/api/admin/integration-credentials"));
+export const getWhatsAppDeliveryLogs = (page = 0, size = 30) => unwrap(api.get("/api/admin/whatsapp/delivery-logs", { params: { page, size }, timeout: 15000 }));
+export const getAdminIntegrationCredentials = () => unwrap(api.get("/api/admin/integration-credentials", { timeout: 15000 }));
 export const updateAdminSmtpCredentials = payload => unwrap(api.put("/api/admin/integration-credentials/smtp", payload));
 export const updateAdminRazorpayCredentials = payload => unwrap(api.put("/api/admin/integration-credentials/razorpay", payload));
-export const getAdminSocialLoginConfiguration = () => unwrap(api.get("/api/admin/social-login"));
+export const getAdminSocialLoginConfiguration = () => unwrap(api.get("/api/admin/social-login", { timeout: 15000 }));
 export const updateAdminGoogleClientId = payload => unwrap(api.put("/api/admin/social-login/google", payload));
 export const updateAdminFacebookAppId = payload => unwrap(api.put("/api/admin/social-login/facebook", payload));
