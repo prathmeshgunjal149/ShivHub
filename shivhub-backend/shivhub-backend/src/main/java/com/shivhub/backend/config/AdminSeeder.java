@@ -1,6 +1,7 @@
 package com.shivhub.backend.config;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +33,8 @@ public class AdminSeeder {
     @Bean
     CommandLineRunner createAdmin(
             UserRepository userRepository,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder,
+            @Value("${SHIVHUB_ADMIN_BOOTSTRAP_PASSWORD:}") String bootstrapPassword) {
 
         return args -> {
 
@@ -47,7 +49,7 @@ public class AdminSeeder {
                     userRepository
                             .findByEmailIgnoreCase("shivhub007@gmail.com")
                             .or(() -> userRepository.findByEmailIgnoreCase("admin@shivhub.com"))
-                            .orElseGet(User::new);
+                            .orElse(null);
 
                 /*
                  * Create/update the fixed primary admin user.
@@ -56,19 +58,24 @@ public class AdminSeeder {
                  * local database resets or test-data cleanup.
                  */
 
-                admin.setName("ShivHub Admin");
+                if (admin == null) {
+                    if (bootstrapPassword == null || bootstrapPassword.isBlank()) {
+                        return;
+                    }
+                    admin = new User();
+                    admin.setName("ShivHub Admin");
+                    admin.setEmail("shivhub007@gmail.com");
+                    admin.setPassword(passwordEncoder.encode(bootstrapPassword));
+                }
 
                 admin.setEmail("shivhub007@gmail.com");
 
-                /*
-                 * IMPORTANT:
-                 *
-                 * Password is stored as BCrypt hash.
-                 */
-
-                admin.setPassword(
-                        passwordEncoder.encode("Admin@123")
-                );
+                /* A populated Railway environment variable is an explicit,
+                 * one-time password reset. Leaving it empty preserves the
+                 * existing BCrypt password on every normal restart. */
+                if (bootstrapPassword != null && !bootstrapPassword.isBlank()) {
+                    admin.setPassword(passwordEncoder.encode(bootstrapPassword));
+                }
 
                 admin.setRole(Role.ADMIN);
 
