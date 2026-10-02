@@ -1,6 +1,6 @@
 [build]
 builder = "RAILPACK"
-buildCommand = "./mvnw -DskipTests package"
+buildCommand = "sh ./mvnw -DskipTests package"
 
 [deploy]
 startCommand = "java -jar .shivhub-build/shivhub-backend-0.0.1-SNAPSHOT.jar"
