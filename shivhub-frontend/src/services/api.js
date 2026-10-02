@@ -89,7 +89,11 @@ api.interceptors.request.use(
         }
 
 
-        if (token) {
+        // Public authentication endpoints must not inherit a stale token from
+        // local storage; sign-in and social configuration work anonymously.
+        const isPublicAuthRequest = String(config.url || "").startsWith("/api/auth/");
+
+        if (token && !isPublicAuthRequest) {
 
             config.headers =
                 config.headers || {};
